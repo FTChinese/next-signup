@@ -1,0 +1,345 @@
+@import "o-grid/main";
+
+@import "o-colors/main";
+@import "o-forms/main";
+@import "o-buttons/main";
+
+body {
+	margin: 0;
+	padding: 0;
+	@include oColorsFor(page);
+}
+
+.o-forms-container {
+	@include oGridContainer;
+	h2 {
+		margin: 0 0 oGridGutter() 0;
+		padding: oGridGutter();
+		padding-bottom: 0;
+		border-bottom: 7px solid #E9DECF;
+	}
+}
+.o-forms {
+	position: relative;
+	margin: 0 0 20px;
+	padding: 0;
+	border: 0;
+	padding-right:oGridGutter();
+	padding-left:oGridGutter();
+	
+	&[aria-hidden=true] {
+		display: none;
+	}
+	&--submit {
+		text-align: center;
+	}
+}
+
+.o-forms__message {
+	display: none;
+	&.o-forms__message--error {
+		display: block;
+	}
+}
+
+.o-forms__text {
+	box-sizing: border-box;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	width: 100%;
+	height: 38px;
+	margin: 0;
+	padding: 10px 5px 10px;
+	border: 1px solid oColorsGetPaletteColor('pink-tint3');
+	border-radius: 2px;
+	background-color: oColorsGetPaletteColor('white');
+	background-clip: padding-box;
+	color: oColorsGetPaletteColor('grey-tint5');
+	font-size: 14px;
+	outline: none;
+	// transition: 0.15s box-shadow ease-in;
+	&:focus {
+		border: 1px solid oColorsGetPaletteColor('pink-tint4');
+		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('teal-2'), 0.7);
+	}
+	
+	&:disabled {
+		border: 1px oColorsGetPaletteColor('pink-tint2');
+		cursor: default;
+		color: #afafaf;
+	}
+	&[readonly] {
+		cursor: pointer;
+		color: #333;
+	    background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrows-up-down?source=o-icons&tint=%23333333&format=svg);
+	    background-position: right center;
+	    background-repeat: no-repeat;
+	    background-origin: border-box;
+	    background-size: 28px;
+	    padding-right: 28px;
+	    padding-top: 8px;
+	    line-height: 110%;
+	    text-indent: .01px;
+	    transition: unset;
+	}
+	&[readonly]:focus {
+		box-shadow: none;
+	}
+
+
+}
+
+.o-forms--error .o-forms__text {
+	color: oColorsGetPaletteColor('red');
+	border: oColorsGetPaletteColor('red');
+	background-color: oColorsGetPaletteColor('white');
+	&:focus {
+		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('red'), 0.3);
+	}
+}
+
+.o-forms__label {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 600;
+	p {
+		margin-top: 0;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.o-form__additional-info {
+	display: block;
+	margin-top: -2px;
+	margin-bottom: 4px;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.o-forms__errortext {
+	display: none;
+}
+
+.o-forms--error .o-forms__errortext {
+	clear: both;
+	display: block;
+	margin-top: -1px;
+	padding: 3px 0;
+	font-size: 14px;
+	color: oColorsGetPaletteColor('grey-tint5');
+}
+
+.o-forms__checkbox,
+.o-forms__radio {
+	position: absolute;
+	opacity: 0;
+
+	& + .o-forms__label {
+		display: inline-block;
+		margin-top: 4px;
+		margin-right: 15px;
+		padding-left: 14px + 5px;
+		position: relative;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 14px + 1px;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+
+	& + .o-forms__label::before {
+		position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 14px;
+	    height: 14px;
+	    border: 1px solid #cec6b9;
+	    box-sizing: border-box;
+	    content: '';
+	    background-color: #fff;
+	    transition: all .1s ease-in;		
+	}
+
+	& + .o-forms__label::after {
+		content: '';
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: 0.1s opacity ease-in;		
+	}
+
+	&:focus + .o-forms__label::before {
+		border: 1px oColorsGetPaletteColor('pink-tint4');
+		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('teal-2'), 0.7);		
+	}
+
+	&:checked + .o-forms__label::after {
+		opacity: 1;
+	}	
+}
+
+.o-forms__checkbox {
+	& + .o-forms__label::before,
+	& + .o-forms__label::after {
+		border-radius: 3px;
+	}
+
+	& + .o-forms__label::after {
+		background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?source=o-icons&tint=%23333333&format=svg);
+		background-repeat: no-repeat;
+		height: 14px;
+		width: 14px;
+		background-size: 14px;
+		background-position: 50% 50%;
+	}
+}
+
+.o-forms__radio {
+	& + .o-forms__label::before {
+		border-radius: 9999px;
+	}
+	& + .o-forms__label::after {
+		background-color: oColorsGetPaletteColor('grey-tint4');
+		border-radius: 50%;
+		height: 6px;
+		width: 6px;
+		left: (14px - 6px) / 2;
+		top: (14px - 6px) / 2;
+	}
+}
+
+.o-forms__button,
+.o-forms__submit {
+	display: inline-block;
+	box-sizing: border-box;
+	vertical-align: middle;
+	margin: 0;
+	outline: 0;
+	border-style: solid;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 600;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: 0.3s background-color, 0.15s color ease-out, 0.15s border-color ease-out;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	user-select: none;
+	background-clip: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	$vertical-padding: 1/2 * (36px - 18px) - 1px;
+	background-size: 18px;
+	font-size: 18px;
+	min-height: 38px;
+	min-width: 38px;
+	// padding: $vertical-padding 18px $vertical-padding 18px;
+	line-height: 36px - 1px * 2 - $vertical-padding * 2;
+	border-width: 1px;
+
+	color: oColorsGetColorFor(o-buttons-standout-normal, text);
+	color: oColorsGetPaletteColor('white');
+	background-color:oColorsGetPaletteColor('teal-1');
+	border-color: oColorsGetPaletteColor('teal-1');
+}
+#display-pw {
+	font-size: 14px;
+}
+.o-forms__submit {
+	min-width: 280px;
+    max-width: 100%;
+}
+
+.o-forms__text-wrapper {
+	position: relative;
+
+	.o-forms__button {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+	}
+}
+
+.o-forms__button {
+	.hide {
+		display: none;
+	}
+
+	&[aria-expanded=true] {
+		.show {
+			display: none;
+		}
+		.hide {
+			display: inline-block;
+		}
+	}
+}
+
+.o-dropdown__menu {
+	&[aria-hidden=true] {
+		display: none;
+	}
+	
+	&[aria-hidden=false] {
+		display: block;
+	}
+	ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		cursor: pointer;
+	}
+	li > ul {
+		display: none;
+		padding-left: 2em;
+	}
+
+	li.on > ul {
+		display: block;
+	}
+}
+
+#chatbox {
+	display: none;
+	&[data-n-chatbox--js] {
+		display: block;
+	}
+}
+[data-n-chatbox--js] {
+	.o-forms {
+		display: none;
+
+		&--active {
+			display: block;
+		}
+	}
+}
+#signup-complete {
+	text-align: center;
+	a {
+		color: #2e6e9e;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+	&[aria-hidden=true] {
+		display: none;
+	}
+	&[aria-hidden=false] {
+		display: block;
+	}
+}
+#create-account {
+	&[aria-hidden="true"] {
+		display: none;
+	}
+}

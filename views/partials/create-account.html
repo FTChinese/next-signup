@@ -1,0 +1,45 @@
+<div class="o-forms-container">
+	<h2>创建账户</h2>
+	<form novalidate id="create-account" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+		<div class="o-forms" id="email-container">
+			<label class="o-forms__label" for="email">电子邮箱：</label>
+			<small class="o-forms__additional-info">用于登陆FT中文网、找回您遗忘的密码，请正确填写</small>
+			<input class="o-forms__text" id="email" type="email" name="email" placeholder="username@example.org" pattern="required,email" data-checkurl="/check">
+			<div class="o-forms__errortext">此邮箱已经注册，您可以<a href="http://user.ftchinese.com/login">登录</a>或<a href="http://www.ftchinese.com/users/findpassword">找回密码</a></div>
+		</div>
+
+		<div class="o-forms" id="pw-container">
+			<label class="o-forms__label" for="password">登陆密码：</label>
+			<small class="o-forms__additional-info">6-20位英文字母和数字</small>
+			<div class="o-forms__text-wrapper">
+				<input class="o-forms__text" type="password" name="password" id="password" maxlength="20" minlength="6" pattern="required,password">
+				<button class="o-forms__button" id="display-pw" type="button">
+					<span class="show">显示</span><span class="hide">隐藏</span>
+				</button>
+			</div>
+			<div class="o-forms__errortext"></div>		
+		</div>
+		<div class="o-forms__message">
+			<p>数据提交失败，请重试</p>
+		</div>
+		<div class="o-forms o-forms--submit" id="n-signup-submit">
+			<button class="o-forms__submit" type="submit">提交</button>
+		</div>
+	</form>
+
+	<div class="o-forms" id="chatbox">
+		<label class="o-forms__label"></label>
+		<small class="o-forms__additional-info"></small>
+		<div class="o-forms__errortext"></div>
+		<div class="o-forms__text-wrapper">
+			<input class="o-forms__text" type="hidden" name="" pattern="">
+			<button class="o-forms__button" type="button"><span>OK</span></button>
+		</div>
+			
+	</div>
+
+	<div id="signup-complete" aria-hidden="true">恭喜您，注册完成！现在您可以返回<a href="/">FT中文网首页</a>或继续<a href="/profile">完善信息</a>。</div>	
+</div>
+
+
+<script type="text/javascript" src="/scripts/main-account.js"></script>

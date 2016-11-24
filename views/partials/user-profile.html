@@ -1,0 +1,132 @@
+<div class="o-forms-container">
+	<form novalidate id="profile-basic" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+		<div class="o-forms" data-o-component="o-forms">
+			<label class="o-forms__label">称谓：</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__radio" id="gender1" type="radio" name="gender" value="M">
+			<label class="o-forms__label" for="gender1">先生</label>
+			<input class="o-forms__radio" id="gender2" type="radio" name="gender" value="F">
+			<label class="o-forms__label" for="gender2">女士</label>
+			<div class="o-forms__errortext"></div>
+		</div>
+
+		<div class="o-forms" data-o-component="o-forms">
+			<label class="o-forms__label" for="nickname">用户名：</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" id="nickname" type="text" name="nickname">
+			<div class="o-forms__errortext"></div>
+		</div>
+
+		<div class="o-forms" data-o-component="o-forms">
+			<label class="o-forms__label" for="surname">姓：</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" id="surname" type="text" name="surname">
+			<div class="o-forms__errortext"></div>
+		</div>
+
+		<div class="o-forms" data-o-component="o-forms">
+			<label class="o-forms__label" for="givenname">名：</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" id="givenname" type="text" name="givenname">
+			<div class="o-forms__errortext"></div>
+		</div>
+		<div class="o-forms__message">
+			<p>保存失败，请重试</p>
+		</div>
+		<div class="o-forms o-forms--submit" id="">
+			<button class="o-forms__submit" type="submit">确认</button>
+		</div>	
+	</form>		
+</div>
+
+<div class="o-forms-container">
+	<form novalidate id="profile-select" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+		<div class="o-forms" data-o-component="o-dropdown">
+			<label class="o-forms__label" for="location">居住地</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" type="text" name="location" id="location" maxlength="20" value="中国大陆 北京" readonly>
+			
+			<div class="o-dropdown__menu"></div>
+
+			<div class="o-forms__errortext"></div>
+		</div>	
+		<div class="o-forms" data-o-component="o-dropdown">
+			<label class="o-forms__label" for="sector">所处行业</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" type="text" name="sector" id="sector" maxlength="20" value="" readonly>
+
+			<div class="o-dropdown__menu"></div>
+
+			<div class="o-forms__errortext"></div>
+		</div>
+
+		<div class="o-forms" data-o-component="o-dropdown">
+			<label class="o-forms__label" for="department">工作范畴</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" type="text" name="department" id="department" maxlength="20" value="" readonly>
+			
+			<div class="o-dropdown__menu"></div>
+			<div class="o-forms__errortext"></div>
+		</div>
+
+		<div class="o-forms" data-o-component="o-dropdown">
+			<label class="o-forms__label" for="post">您的职位</label>
+			<small class="o-forms__additional-info"></small>
+			<input class="o-forms__text" type="text" name="post" id="post" maxlength="20" value="" readonly>
+
+			<div class="o-dropdown__menu"></div>
+			<div class="o-forms__errortext"></div>
+			</div>
+		</div>
+		<div class="o-forms__message">
+			<p>保存失败，请重试</p>
+		</div>
+		<div class="o-forms o-forms--submit" id="">
+			<button class="o-forms__submit" type="submit">确认</button>
+		</div>	
+	</form>	
+	
+</div>
+
+<div class="o-forms-container">
+	<h2>电邮订阅</h2>
+	<form novalidate id="subscription" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+		<div class="o-forms">
+			<input class="o-forms__checkbox" id="subscipt-1" type="checkbox" name="mail_today_focus" checked="checked">
+			<label for="subscipt-1" class="o-forms__label">《今日焦点》邮件</label>
+		</div>
+		<div class="o-forms">
+			<input class="o-forms__checkbox" id="subscipt-2" type="checkbox" name="mail_week_selects" checked="checked">
+			<label for="subscipt-2" class="o-forms__label">《一周精选》邮件</label>	
+		</div>
+		<div class="o-forms">
+			<input class="o-forms__checkbox" id="subscipt-3" type="checkbox" name="mail_afternoon_express" checked="checked">
+			<label for="subscipt-3" class="o-forms__label">《午后速递》邮件</label>	
+		</div>
+		<div class="o-forms__message">
+			<p>保存失败，请重试</p>
+		</div>	
+		<div class="o-forms o-forms--submit" id="">
+			<button class="o-forms__submit" type="submit">完成</button>
+		</div>	
+	</form>	
+</div>
+
+<!-- 	<div class="o-forms o-forms--privacy">
+		<ul>
+			<li>
+				<input class="o-forms__checkbox" id="privacy-1" type="checkbox" checked="checked" name="service_acceptance"><label class="o-forms__label" for="privacy-1">我愿意接受FT中文网新服务和产品的通知</a>中的条款以及FT中文网向您提供的各项产品服务。</label>
+			</li>
+			<li>
+				<input class="o-forms__checkbox" id="privacy-2" type="checkbox" checked="checked" name="auth_email_sub"><label class="o-forms__label" for="privacy-2">FT中文网及其慎重选择的第三方公司可以向我发送电子邮件</label>
+			</li>
+			<li>
+				<input class="o-forms__checkbox" id="privacy-3" type="checkbox" checked="checked" name="auth_letter_sub"><label class="o-forms__label" for="privacy-3">FT中文网及其慎重选择的第三方公司可以向我寄送信件</label>
+			</li>
+			<li id="agreement-container">
+				<input class="o-forms__checkbox" id="agreement" type="checkbox" checked="checked" name="service" pattern="checked"><label class="o-forms__label" for="agreement">我已阅读并同意FT中文网<a href="http://www.ftchinese.com/m/corp/service.html" target="_blank">用户注册协议</a>和<a href="http://www.ftchinese.com/m/corp/service.html#privacy" target="_blank">隐私权保护政策</a></label>
+				<div class="o-forms__errortext">您需要同意我们的条款和政策才能创建账号</div>
+			</li>
+		</ul>
+	</div> -->
+<script type="text/javascript" src="/scripts/main-profile.js"></script>
