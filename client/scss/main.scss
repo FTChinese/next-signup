@@ -265,9 +265,19 @@ input:focus{
 	width:40px;
 	height: 40px;
 	background-color: #23767c;
-	&:before {
-		content: '',
-		background-image: ;
+	&[aria-expanded=false]:before {
+		content: '';
+		background-image: url('pic/eye-open.png');
+		background-repeat: no-repeat;
+		display: inline-block;
+		width:20px;
+		height: 20px;
+		
+	}
+
+	&[aria-expanded=true]:before {
+		content: '';
+		background-image: url('pic/eye-open.png');
 		background-repeat: no-repeat;
 		display: inline-block;
 		width:20px;
@@ -310,26 +320,9 @@ input:focus{
 	padding-right:60px;
 }
 .o-forms__button {
-	&[aria-expanded=false]:before {
-		content: '';
-		background-image: url('pic/eye-open.png');
-		background-repeat: no-repeat;
-		display: inline-block;
-		width:20px;
-		height: 20px;
-		
-	}
-		
+	
 
-	&[aria-expanded=true]:before {
-		content: '';
-		background-image: url('pic/eye-open.png');
-		background-repeat: no-repeat;
-		display: inline-block;
-		width:20px;
-		height: 20px;
-	}
-		
+
 }
 
 .o-dropdown__menu {
