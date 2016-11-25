@@ -21,6 +21,8 @@ class Dropdown extends Toggle {
 			target: menuEl
 		});
 
+		this.inputEl = toggleEl;
+		this.name = this.inputEl.name;
 		this.error = new ErrorMessage(rootEl);
 // a flag to indicate whether the nested data reaches end.
 // Initailly it should be true. If user switched off the dropdown menu while selection does not reach the end, it is false and prevents submit.
@@ -41,47 +43,51 @@ class Dropdown extends Toggle {
 		super.toggle(e);
 // If data search reaches the end, remove any `data-error` attributes, else add `data-error=imcomplete`.
 		if (this.complete) {
-			this.toggleEl.removeAttribute('aria-invalid');
-		} else {
-			this.toggleEl.setAttribute('aria-invalid', 'true');
+			this.setValid();
+			return;
 		}
 
-// this.state = true if menu opens
-// If menu opens, or selection complete, hide error.
-		if (this.state || this.complete) {	
+		this.setInvalid();
+		this.error.setErrorText('complete');
+// this.state inherited from Toggle.
+// this.state = true if menu opens. Whatever error message visible should be hidden.
+		if (this.state) {			
 			this.error.clear();
-		} else {
-			this.error.setErrorText('complete');
-			this.error.show();
+			return;		
 		}
+// Only when not complete and dropdown is not open should you proceed here.
+		this.error.show();
 	}
 
 	select(e) {
-		
-		if (e.target.hasAttribute('data-order')) {
-			const target = e.target;
-			const order = target.getAttribute('data-order').split('-');
-
-			const value = search(this.data, order);
-			console.log(value);
-			this.toggleEl.value = value.history.join(' ');
-			if (value.children) {
-				console.log('selection not complete');
-				this.complete = false;
-				this.toggleSubmenu(target, order);
-			} else {
-				console.log('selection complete');
-				// selection complete, trigger toggle();
-				this.complete = true;
-				this.toggle(e);
-				this.closeSubmenu();
-			}
+		if (!e.target.hasAttribute('data-order')) {
+			return;
 		}
+
+		const target = e.target;
+		const order = target.getAttribute('data-order').split('-');
+
+		const value = search(this.data, order);
+
+		this.toggleEl.value = value.history.join(',');
+		if (value.children) {
+			console.log('selection not complete');
+			this.complete = false;
+			this.toggleSubmenu(target, order);
+			return;
+		}
+		console.log('selection complete');
+// select complete, record data.				
+		localStorage.setItem(this.name, this.inputEl.value);
+		this.complete = true;
+// selection complete, trigger toggle();		
+		this.toggle(e);
+		this.closeSubmenu();
 	}
 
 	toggleSubmenu(target, order) {
 		const index = order.length - 1;
-	//remove all element in traverseTree after `index`, and remove theire class name `on`
+	//remove all element in traverseTree after `index`, and remove their class name `on`
 		for (let i = this.traverseTree.length; i > order.length ; i--) {
 			const onEl = this.traverseTree.pop();
 			onEl.classList.remove('on');
@@ -102,6 +108,14 @@ class Dropdown extends Toggle {
 			onEl.classList.remove('on');
 		}			
 	}
+
+	setInvalid() {
+		this.inputEl.setAttribute('aria-invalid', 'true');
+	}
+
+	setValid() {
+		this.inputEl.setAttribute('aria-invalid', 'false');
+	}	
 
 	static init(el, dataArr) {
 		const dropdowns = [];

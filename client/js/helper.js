@@ -30,7 +30,8 @@ const errorText = {
 	'checked': '此项为必选项',
 	'nummber': '只能输入数字',
 	'no_match': '不匹配',
-	'complete': "输入不完整"
+	'complete': "输入不完整",
+	'max': '字符过长'
 };
 
 function buildList(data, prefix) {

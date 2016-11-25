@@ -18,7 +18,7 @@ class Submit {
 		this.action = this.formEl.action;
 
 		if (config) {
-			this.required = config.required || [];
+			this.required = config.required;
 		}
 
 		if (config && config.callback) {
@@ -31,37 +31,41 @@ class Submit {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		if (this.checkValidity()) {
-			const formData = serialize(e.currentTarget, {
-				hash: true,
-				empty: true
-			});	
-			formData.id = this.formEl.id;
-
-			ajax()
-				.post(this.action, formData)
-				.then((response) => {
-					console.log(response);
-		// if response succeed, then hide the form.
-					if (response.status === 'ok') {
-						this.callback && this.callback(this.formEl);
-					} else {
-						this.formErrorEl.classList.add('o-forms__message--error');
-					}
-				});					
-		} else {
+		if (!this.checkValidity()) {
 			console.log('Failed validation.');
+			return;
 		}
-	
+
+		const formData = serialize(e.currentTarget, {
+			hash: true,
+			empty: true
+		});	
+		formData.id = this.formEl.id;
+
+		ajax()
+			.post(this.action, formData)
+			.then((response) => {
+				console.log(response);
+	// if response succeed, then hide the form.
+				if (response.status === 'ok') {
+					this.callback && this.callback(this.formEl);
+					return;
+				} 
+				this.formErrorEl.classList.add('o-forms__message--error');
+			});
 	}
 
 	checkValidity() {
+// when required elements's aria-invalid === false, it should pass.	
 		if (this.required) {
 			return this.required.every((el) => {
 				return el.inputEl.getAttribute('aria-invalid') === 'false';
 			});
 		}
-		return true;
+// When every elements's aria-invalid === null or false, it should pass.
+		return Array.prototype.every.call(this.formEl.elements, (el) => {
+			return el.getAttribute('aria-invalid') !== 'true';
+		});
 	}
 }
 

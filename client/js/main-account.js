@@ -36,5 +36,3 @@ new Submit(accountForm, {
 		completeEl.setAttribute('aria-hidden', 'false');
 	}
 });
-
-

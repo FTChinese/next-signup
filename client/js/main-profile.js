@@ -1,5 +1,6 @@
 import Checked from './checked.js';
 import Dropdown from './dropdown.js';
+import Validate from './validate.js';
 import Submit from './submit.js';
 
 import regions from './data/regions.js';
@@ -8,6 +9,8 @@ import departments from './data/departments.js';
 import posts from './data/posts.js';
 
 // const checked = new Checked('#agreement-container');
+Validate.init();
+
 Dropdown.init('#profile-select', [regions, sectors, departments, posts]);
 
 new Submit('#profile-basic', {
