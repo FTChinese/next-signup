@@ -11,4 +11,4 @@ gulp serve
 ```
 
 ## Liverealod
-Use `livereload` to refesh static assets.
+Use [livereload](http://feedback.livereload.com/knowledgebase/articles/67441-how-do-i-start-using-livereload-) to refesh static assets.
