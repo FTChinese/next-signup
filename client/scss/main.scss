@@ -260,28 +260,34 @@ input:focus{
 #display-pw {
 	position: absolute;
 	right: 65px;
-	top: 3.5px;
+	top: 1px;
 	bottom: 0;
-	width:40px;
-	height: 40px;
+	width:38px;
+	height: 38px;
 	background-color: #23767c;
+	vertical-align:middle;
 	&[aria-expanded=false]:before {
 		content: '';
-		background-image: url('pic/eye-open.png');
+		background-image: url('/pic/eye-open.png');
 		background-repeat: no-repeat;
+		background-position: center center;
 		display: inline-block;
-		width:20px;
+		background-size:contain;
+		width: 20px;
 		height: 20px;
-		
 	}
 
 	&[aria-expanded=true]:before {
 		content: '';
-		background-image: url('pic/eye-open.png');
+		background-image: url('/pic/eye-close.png');
 		background-repeat: no-repeat;
+		background-position: center center;
+
 		display: inline-block;
-		width:20px;
+		background-size:contain;
+		width: 20px;
 		height: 20px;
+
 	}
 	
 /* 	span{
