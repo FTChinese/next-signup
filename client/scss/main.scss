@@ -89,15 +89,6 @@ body {
 
 }
 
-.o-forms--error .o-forms__text {
-	color: oColorsGetPaletteColor('red');
-	border: oColorsGetPaletteColor('red');
-	background-color: oColorsGetPaletteColor('white');
-	&:focus {
-		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('red'), 0.3);
-	}
-}
-
 .o-forms__label {
 	display: block;
 	margin-bottom: 4px;
@@ -120,6 +111,15 @@ body {
 	line-height: 18px;
 }
 
+.o-forms--error .o-forms__text {
+	color: oColorsGetPaletteColor('red');
+	border: oColorsGetPaletteColor('red');
+	background-color: oColorsGetPaletteColor('white');
+	&:focus {
+		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('red'), 0.3);
+	}
+}
+
 .o-forms__errortext {
 	display: none;
 }
@@ -130,7 +130,7 @@ body {
 	margin-top: -1px;
 	padding: 3px 0;
 	font-size: 14px;
-	color: oColorsGetPaletteColor('grey-tint5');
+	color: #c00;
 }
 
 .o-forms__checkbox,
