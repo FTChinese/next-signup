@@ -51,7 +51,8 @@ class Dropdown extends Toggle {
 		if (this.state || this.complete) {	
 			this.error.clear();
 		} else {
-			this.error.show('complete');
+			this.error.setErrorText('complete');
+			this.error.show();
 		}
 	}
 
@@ -84,8 +85,6 @@ class Dropdown extends Toggle {
 		for (let i = this.traverseTree.length; i > order.length ; i--) {
 			const onEl = this.traverseTree.pop();
 			onEl.classList.remove('on');
-			console.log('pop eleemnt');
-			console.log(onEl);
 		}
 	// If clicked on the same element, toggle class name, else add `on` on target and replace element on the same index.
 		if (this.traverseTree[index] !== target) {

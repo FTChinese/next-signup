@@ -14,7 +14,9 @@ class Submit {
 			formEl = document.querySelector(formEl);
 		}
 		this.formEl = formEl;
-		this.formErrorEl = formEl.querySelector('o-forms__message');
+		this.formErrorEl = this.formEl.querySelector('o-forms__message');
+		this.action = this.formEl.action;
+
 		if (config) {
 			this.required = config.required || [];
 		}
@@ -37,7 +39,7 @@ class Submit {
 			formData.id = this.formEl.id;
 
 			ajax()
-				.post('/signup', formData)
+				.post(this.action, formData)
 				.then((response) => {
 					console.log(response);
 		// if response succeed, then hide the form.

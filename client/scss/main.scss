@@ -1,8 +1,5 @@
 @import "o-grid/main";
-
 @import "o-colors/main";
-@import "o-forms/main";
-@import "o-buttons/main";
 
 body {
 	margin: 0;
@@ -244,7 +241,6 @@ body {
 	line-height: 36px - 1px * 2 - $vertical-padding * 2;
 	border-width: 1px;
 
-	color: oColorsGetColorFor(o-buttons-standout-normal, text);
 	color: oColorsGetPaletteColor('white');
 	background-color:oColorsGetPaletteColor('teal-1');
 	border-color: oColorsGetPaletteColor('teal-1');

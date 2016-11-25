@@ -45,22 +45,17 @@ class Baseform {
 	validate(e) {
 		const valid = this.checkPattern();
 		if (!valid) {
-			console.log('not valid')
 			this.stop();
 			return;
 		}
 
 		if (!this.unique) {
-			console.log('no need for ajax check');
 			this.advance();
 			return;
 		}
 
-		console.log('local validated, checking remote...');
 		const data = {};
 		data[this.name] = this.inputEl.value;
-		console.log('the data to be checked:');
-		console.log(data);
 		this.checkUnique(data);
 	}
 
@@ -69,12 +64,9 @@ class Baseform {
 			.post(this.unique, data)
 			.then((response) => {
 				if (response.available) {
-					console.log('email available');
 					this.advance();
 				} else {
-					console.log('email taken');
 					this.error.setErrorText();
-					console.log(this.error);
 					this.stop();
 				}
 			});

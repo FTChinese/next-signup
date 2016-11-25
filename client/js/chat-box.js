@@ -60,7 +60,6 @@ class ChatBox extends Baseform {
 		this.inputEl.value = '';		
 // Increment `progress` before comparison.
 		if (++this.progress < this.steps.length) {
-			console.log('advance to: ', this.progress);
 			this.currentStep = this.steps[this.progress];
 			this.changeText();
 		} else {
