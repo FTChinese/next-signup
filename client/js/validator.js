@@ -12,9 +12,22 @@ const validators = {
 	'password': function (value) {
 
 		const pattern = /^[A-Za-z0-9\\-]+$/;
-		const lengthOk = value.length >= 6 && value.length <= 50;
+		const lengthOk = value.length >= 6 && value.length <= 20;
 
 		return pattern.test(value) && lengthOk;
+	},
+
+	'length': function (value, input) {
+
+		if(!value) {
+			return true;
+		}
+
+		const min = parseInt(input.getAttribute('minlength') || 0, 10);
+		const max = parseInt(input.getAttribute('maxlength'), 10);
+
+		const lengthOk = value.length >= min && value.length <= max;
+		return lengthOk;
 	},
 
 	'checked': function (value, input) {

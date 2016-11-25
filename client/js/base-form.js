@@ -15,16 +15,14 @@ class Baseform {
 		this.inputEl = null;
 
 		this.name = null;
-		this.patterns = null;
-		this.unique = null;
+		this.pattern = null;
+		this.checkurl = null;
+		this.required = null;
 
 		this.error = null;
 /**/
 		this.handleFocus = this.handleFocus.bind(this);
 		this.validate = this.validate.bind(this);
-		
-		// this.inputEl.addEventListener('focus', this.handleFocus);
-		// this.inputEl.addEventListener('blur', this.validate);
 	}
 
 	handleFocus(e) {
@@ -43,17 +41,23 @@ class Baseform {
 	}
 
 	validate(e) {
-		const valid = this.checkPattern();
-		if (!valid) {
+		if (this.required) {
+			if (!this.checkRequired()) {
+				this.stop();
+				return;
+			}
+		}
+// If input value failed regex test, then stop and return.	
+		if (!this.checkPattern()) {
 			this.stop();
 			return;
 		}
-
-		if (!this.unique) {
+// If this.checkurl does not exist, it means this input does not need remote validation.
+		if (!this.checkurl) {
 			this.advance();
 			return;
 		}
-
+// If input value passed regex test, and it has a remote url, then collect the input value and  request to server for check.
 		const data = {};
 		data[this.name] = this.inputEl.value;
 		this.checkUnique(data);
@@ -61,9 +65,10 @@ class Baseform {
 
 	checkUnique(data) {
 		ajax()
-			.post(this.unique, data)
+			.post(this.checkurl, data)
 			.then((response) => {
 				if (response.available) {
+// If server responsed with ok, then advance to next step					
 					this.advance();
 				} else {
 					this.error.setErrorText();
@@ -73,22 +78,26 @@ class Baseform {
 	}
 
 	checkPattern() {
+		const validity = validators[this.pattern](this.inputEl.value, this.inputEl);
+		if (!validity) {
+			this.error.setErrorText(this.pattern);
+		}
 
-		const inputValue = this.inputEl.value;
-		var validity;
-		for (let i = 0; i < this.patterns.length; i++) {
-			const pattern = this.patterns[i];
-			validity = validators[pattern](inputValue);
+		return validity;
+	}
 
-			if (!validity) {
-				this.error.setErrorText(pattern);
-				break;
-			}
+	checkRequired() {
+		const validity = validators.required(this.inputEl.value);
+		if (!validity) {
+			this.error.setErrorText('required');
 		}
 		return validity;
 	}
 
 	advance() {
+// Record data when everythin is valid and could proceed to the next step.	
+		console.log('Advance to next step. Recording data. Set valid status. Clear error msg.');
+		localStorage.setItem(this.name, this.inputEl.value);
 		this.setValid();
 		this.error.clear();
 	}
