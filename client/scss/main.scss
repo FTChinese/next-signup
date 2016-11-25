@@ -18,17 +18,15 @@ body {
 }
 .o-forms {
 	position: relative;
-	margin: 0 0 20px;
-	padding: 0;
+	margin: 0 20px 20px;
 	border: 0;
-	padding-right:oGridGutter();
-	padding-left:oGridGutter();
 	
 	&[aria-hidden=true] {
 		display: none;
 	}
 	&--submit {
 		text-align: center;
+		margin:40px;
 	}
 }
 
@@ -38,26 +36,26 @@ body {
 		display: block;
 	}
 }
-
+input:focus{
+	font-size:14px;
+}
 .o-forms__text {
 	box-sizing: border-box;
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	width: 100%;
-	height: 38px;
+	height: 40px;
 	margin: 0;
 	padding: 10px 5px 10px;
 	border: 1px solid oColorsGetPaletteColor('pink-tint3');
-	border-radius: 2px;
+	border-radius: 5px;
 	background-color: oColorsGetPaletteColor('white');
 	background-clip: padding-box;
 	color: oColorsGetPaletteColor('grey-tint5');
 	font-size: 14px;
 	outline: none;
-	// transition: 0.15s box-shadow ease-in;
 	&:focus {
-		border: 1px solid oColorsGetPaletteColor('pink-tint4');
-		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('teal-2'), 0.7);
+		outline: none;
 	}
 	
 	&:disabled {
@@ -89,9 +87,13 @@ body {
 .o-forms__label {
 	display: block;
 	margin-bottom: 4px;
+	margin-right:60px;
 	font-size: 18px;
-	line-height: 22px;
+	line-height: 40px;
 	font-weight: 600;
+	height:40px;
+	padding-left:5px;
+	border-radius:5px;
 	p {
 		margin-top: 0;
 		&:last-child {
@@ -218,36 +220,75 @@ body {
 	box-sizing: border-box;
 	vertical-align: middle;
 	margin: 0;
+	padding:0;
 	outline: 0;
 	border-style: solid;
 	text-align: center;
 	text-decoration: none;
 	font-weight: 600;
-	border-radius: 3px;
+	border-radius: 5px;
 	cursor: pointer;
-	transition: 0.3s background-color, 0.15s color ease-out, 0.15s border-color ease-out;
+	//transition: 0.3s background-color, 0.15s color ease-out, 0.15s border-color ease-out;
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	user-select: none;
 	background-clip: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	$vertical-padding: 1/2 * (36px - 18px) - 1px;
 	background-size: 18px;
 	font-size: 18px;
-	min-height: 38px;
-	min-width: 38px;
+	height: 40px;
+	width: 55px;
 	// padding: $vertical-padding 18px $vertical-padding 18px;
-	line-height: 36px - 1px * 2 - $vertical-padding * 2;
-	border-width: 1px;
+	line-height: 40px;
+	color: #000;
+	background-color:#ffcc9a;
+	border-width:0;
+	//border-color: oColorsGetPaletteColor('teal-1');
+}
+.edit {
+	position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 40px;
+    width: 43px;
+    background-image: url('/pic/edit.png');
+}
 
-	color: oColorsGetPaletteColor('white');
-	background-color:oColorsGetPaletteColor('teal-1');
-	border-color: oColorsGetPaletteColor('teal-1');
-}
+
 #display-pw {
-	font-size: 14px;
+	position: absolute;
+	right: 65px;
+	top: 3.5px;
+	bottom: 0;
+	width:40px;
+	height: 40px;
+	background-color: #23767c;
+	&:before {
+		content: '',
+		background-image: ;
+		background-repeat: no-repeat;
+		display: inline-block;
+		width:20px;
+		height: 20px;
+	}
+	
+/* 	span{
+		width:40px;
+		height: 40px;
+		background-position:center center; 
+		background-repeat: no-repeat;
+		&.show{
+			background-image: url('/pic/eye-close.png');
+		}
+		&.hide{
+			background-image: url('/pic/eye-open.png');
+		}
+	} */
+
 }
+
 .o-forms__submit {
 	min-width: 280px;
     max-width: 100%;
@@ -255,28 +296,40 @@ body {
 
 .o-forms__text-wrapper {
 	position: relative;
-
 	.o-forms__button {
 		position: absolute;
 		right: 0;
 		top: 0;
 		bottom: 0;
 	}
+
 }
-
+.o-forms__input-wrapper {
+	margin: 0;
+	padding: 0;
+	padding-right:60px;
+}
 .o-forms__button {
-	.hide {
-		display: none;
+	&[aria-expanded=false]:before {
+		content: '';
+		background-image: url('pic/eye-open.png');
+		background-repeat: no-repeat;
+		display: inline-block;
+		width:20px;
+		height: 20px;
+		
 	}
+		
 
-	&[aria-expanded=true] {
-		.show {
-			display: none;
-		}
-		.hide {
-			display: inline-block;
-		}
+	&[aria-expanded=true]:before {
+		content: '';
+		background-image: url('pic/eye-open.png');
+		background-repeat: no-repeat;
+		display: inline-block;
+		width:20px;
+		height: 20px;
 	}
+		
 }
 
 .o-dropdown__menu {
@@ -307,10 +360,21 @@ body {
 
 #chatbox {
 	display: none;
+	.o-forms__label {
+		//background: #ffcc9a;
+	}
+	.o-forms__button {
+		background: #23767c;
+		color:#fff;
+	}
 	&[data-n-chatbox--js] {
 		display: block;
+		
+
 	}
 }
+
+
 [data-n-chatbox--js] {
 	.o-forms {
 		display: none;
@@ -338,4 +402,9 @@ body {
 	&[aria-hidden="true"] {
 		display: none;
 	}
+	.o-forms__text {
+		background-color:#23767c;
+		color:#fff;
+	}
+	
 }
