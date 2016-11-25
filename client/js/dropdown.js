@@ -69,7 +69,7 @@ class Dropdown extends Toggle {
 
 		const value = search(this.data, order);
 
-		this.toggleEl.value = value.history.join(',');
+		this.inputEl.value = value.history.join(',');
 		if (value.children) {
 			console.log('selection not complete');
 			this.complete = false;
@@ -79,6 +79,9 @@ class Dropdown extends Toggle {
 		console.log('selection complete');
 // select complete, record data.				
 		localStorage.setItem(this.name, this.inputEl.value);
+		console.log('recorded data:');
+		console.log(localStorage.getItem(this.name));
+
 		this.complete = true;
 // selection complete, trigger toggle();		
 		this.toggle(e);

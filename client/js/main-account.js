@@ -24,10 +24,10 @@ const email = new Validate('#email-container');
 
 const pw = new Validate('#pw-container');
 
-new ChatBox('#chatbox', {
-	form: accountForm,
-	source: [email, pw]
-});
+// new ChatBox('#chatbox', {
+// 	form: accountForm,
+// 	source: [email, pw]
+// });
 
 new Submit(accountForm, {
 	required: [email, pw],
@@ -36,3 +36,8 @@ new Submit(accountForm, {
 		completeEl.setAttribute('aria-hidden', 'false');
 	}
 });
+
+localStorage.setItem('chatbox_progress', 0);
+if (localStorage.getItem('chatbox_progress')) {
+	console.log(localStorage.getItem('chatbox_progress'));
+}

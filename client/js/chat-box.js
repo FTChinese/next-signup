@@ -38,7 +38,8 @@ class ChatBox extends Baseform {
 
 		this.error = new ErrorMessage(this.rootEl);
 
-		this.progress = 0;
+		this.progress =  0;
+
 		this.steps = config.source;
 		this.currentStep = this.steps[this.progress];
 
@@ -59,7 +60,11 @@ class ChatBox extends Baseform {
 // Trigger currentStep's advance.		
 		this.currentStep.advance();
 // Clear Chatbox's input
-		this.inputEl.value = '';		
+		this.inputEl.value = '';
+		this.inputEl.click();
+		console.log('trigger click');
+		this.inputEl.focus();
+		console.log('trigger focus');
 // Increment `progress` before comparison.
 		if (++this.progress < this.steps.length) {
 			this.currentStep = this.steps[this.progress];

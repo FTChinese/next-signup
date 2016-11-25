@@ -30,3 +30,45 @@ new Submit('#subscription', {
 		console.log('subscription submitted');
 	}
 });
+
+function populate(formEl) {
+	const elements = formEl.elements
+	for (let i = 0; i < elements.length; i++) {
+		const element = elements[i];
+		const key = element.name;
+		if (localStorage.getItem(key)) {
+			switch (element.type) {
+				case 'radio':
+					if (element.value === localStorage.getItem(key)) {
+						element.checked = true;
+					}
+					break;
+
+				default:
+					element.value = localStorage.getItem(key);
+			}
+			
+			console.log(key, localStorage.getItem(key));
+		}
+	}
+}
+
+populate(document.getElementById('profile-basic'));
+populate(document.getElementById('profile-select'));
+populate(document.getElementById('subscription'));
+
+const radioButton = document.getElementById('gender-m');
+console.log(radioButton);
+radioButton.addEventListener('change', (e) => {
+	console.log(e.target.checked);
+	if (e.target.checked) {
+		localStorage.setItem(e.target.name, e.target.value);
+	}
+});
+const checkbox = document.getElementById('subscipt-1');
+checkbox.addEventListener('change', (e) => {
+	console.log(e.target.checked);
+	if (e.target.checked) {
+		localStorage.setItem(e.target.name, e.target.value);
+	}
+});
