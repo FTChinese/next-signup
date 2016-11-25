@@ -1,6 +1,6 @@
 <div class="o-forms-container">
 	<form novalidate id="profile-basic" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
-		<div class="o-forms" data-o-component="o-forms">
+		<div class="o-forms">
 			<label class="o-forms__label">称谓：</label>
 			<small class="o-forms__additional-info"></small>
 			<input class="o-forms__radio" id="gender1" type="radio" name="gender" value="M">
@@ -10,24 +10,24 @@
 			<div class="o-forms__errortext"></div>
 		</div>
 
-		<div class="o-forms" data-o-component="o-forms">
+		<div class="o-forms" data-o-component="o-validate">
 			<label class="o-forms__label" for="nickname">用户名：</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" id="nickname" type="text" name="nickname" maxlength="10">
+			<small class="o-forms__additional-info">10个字符以内</small>
+			<input class="o-forms__text" id="nickname" type="text" name="nickname" maxlength="10" pattern="length">
 			<div class="o-forms__errortext"></div>
 		</div>
 
-		<div class="o-forms" data-o-component="o-forms">
+		<div class="o-forms" data-o-component="o-validate">
 			<label class="o-forms__label" for="surname">姓：</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" id="surname" type="text" name="surname" maxlength="2">
+			<small class="o-forms__additional-info">10个字符以内</small>
+			<input class="o-forms__text" id="surname" type="text" name="surname" maxlength="10" pattern="length">
 			<div class="o-forms__errortext"></div>
 		</div>
 
-		<div class="o-forms" data-o-component="o-forms">
+		<div class="o-forms" data-o-component="o-validate">
 			<label class="o-forms__label" for="givenname">名：</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" id="givenname" type="text" name="givenname" maxlength="3">
+			<small class="o-forms__additional-info">10个字符以内</small>
+			<input class="o-forms__text" id="givenname" type="text" name="givenname" maxlength="10" pattern="length">
 			<div class="o-forms__errortext"></div>
 		</div>
 		<div class="o-forms__message">
