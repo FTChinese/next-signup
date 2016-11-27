@@ -1,0 +1,12 @@
+.su-form {
+	> *:not(:last-child) {
+		margin-bottom: 36px;
+	}
+	position: relative;
+	margin-bottom:20px;
+	border: 0;
+
+	&[aria-hidden=true] {
+		display: none;
+	}
+}

@@ -11,9 +11,9 @@ router.post('/', function *(next) {
 	this.set('Content-Type', 'application/json');
 
 	if (body.email === 'test@example.org') {
-		this.body = {available: false};
+		this.body = {emailExists: true};
 	} else {
-		this.body = {available: true};
+		this.body = {emailExists: false};
 	}
 });
 

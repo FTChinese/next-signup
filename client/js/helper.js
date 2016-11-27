@@ -19,21 +19,6 @@ function createElement(name, attributes) {
 	return node;
 }
 
-const errorText = {
-	'invalid': '输入的格式不符',
-	'required': '必填项，不能为空',
-	'email': '邮箱格式不合法',
-	'email_taken': '该邮箱已经注册',
-	'name': '用户名格式不合法',
-	'name_taken': '用户名不可用',
-	'password': '密码格式不合法',
-	'checked': '此项为必选项',
-	'nummber': '只能输入数字',
-	'no_match': '不匹配',
-	'complete': "输入不完整",
-	'max': '字符过长'
-};
-
 function buildList(data, prefix) {
 	const ulEl = document.createElement('ul');
 
@@ -91,4 +76,4 @@ function search(data, depth) {
 	return Object.assign({history: history}, result);
 }
 
-export {createElement, errorText, buildList, search};
+export {createElement, buildList, search};

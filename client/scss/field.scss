@@ -1,0 +1,205 @@
+$color-text: #4a4a4a;
+$color-border: #c0b0a4;
+
+
+.su-field {
+	margin: 0;
+	padding: 0;
+
+	.registrationFields > & {
+		margin-top: 20px;
+	}
+}
+
+.su-field__label {
+	display: block;
+	margin-bottom: 4px;
+	margin-right:10px;
+	font-size: 18px;
+	// line-height: 40px;
+	font-weight: 600;
+	// height:40px;
+	padding-left:5px;
+	// border-radius:5px;
+	position: relative;
+}
+
+[data-validate*="required"] {
+	.su-field__label {
+		&::after {
+			display: inline-block;
+			content: ' *';
+			font-size: 12px;
+			// position: absolute;
+			// top: 3px;
+			padding-left: 4px;
+		}
+	}
+}
+
+.su-field__input {
+	box-sizing: border-box;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	width: 100%;
+	height: 40px;
+	margin: 0;
+	padding: 10px 5px 10px;
+	border: 1px solid oColorsGetPaletteColor('pink-tint3');
+
+	border-radius: $border-radius;
+	background-color: oColorsGetPaletteColor('white');
+	background-clip: padding-box;
+	color: oColorsGetPaletteColor('grey-tint5');
+	font-size: 14px;
+	outline: none;
+	&:focus {
+		outline: none;
+	}
+	&:disabled {
+		border: 1px oColorsGetPaletteColor('pink-tint2');
+		cursor: default;
+		color: #afafaf;
+	}
+	&[readonly] {
+		cursor: pointer;
+		color: #333;
+	    background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:arrows-up-down?source=o-icons&tint=%23333333&format=svg);
+	    background-position: right center;
+	    background-repeat: no-repeat;
+	    background-origin: border-box;
+	    background-size: 28px;
+	    padding-right: 28px;
+	    padding-top: 8px;
+	    line-height: 110%;
+	    text-indent: .01px;
+	    transition: unset;
+	}
+	&[readonly]:focus {
+		box-shadow: none;
+	}
+}
+// .o-forms-affix-wrapper
+.o-forms-affix-wrapper {
+	display: table;
+	width: 100%;
+	box-sizing: border-box;
+	.su-field__input {
+		display: table-cell;
+		border-top-left-radius: $border-radius;
+		border-bottom-left-radius: $border-radius;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		
+	}
+
+	.su-field__suffix {
+		border-top-right-radius: $border-radius;
+		border-bottom-right-radius: $border-radius;
+	}
+
+	.o-forms-checkbox {
+		position: absolute;
+		opacity: 0;
+	}
+}
+
+.su-field__instructions,
+.su-field__additional-info {
+	display: block;
+	// margin-top: -2px;
+	// margin-bottom: 4px;
+	font-size: 14px;
+	// line-height: 14px;
+
+	color: oColorsGetPaletteColor('grey-tint5');
+}
+
+.su-field__suffix {
+	border-right: 1px solid #cec6b9;
+	border-left: 0;
+
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 1%;
+    white-space: nowrap;
+    border-top: 1px solid #cec6b9;
+    border-bottom: 1px solid #cec6b9;
+    padding: 9px 5px 8px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #f7e9d9;
+    color: #333;
+    button {
+    	border-width: 0;
+    	border-top-left-radius: 0;
+    	border-bottom-left-radius: 0;
+    	border-top-right-radius: $border-radius;
+		border-bottom-right-radius: $border-radius;
+    }
+}
+
+.su-field__suffix-label {
+	color: #27747a;
+	font-size: 12px;
+	font-weight: 300;
+}
+
+.su-field__error {
+	display: none;
+}
+
+.o-forms--error {
+	.su-field__label,
+	.su-field__instructions,
+	.su-field__additional-info {
+		color: oColorsGetPaletteColor('red');
+	}
+
+	.su-field__input {
+		border: oColorsGetPaletteColor('red');
+		background-color: oColorsGetPaletteColor('white');
+
+		border-color: $su-color--error;
+
+		&:focus {
+			box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('red'), 0.3);
+		}
+	}
+
+	.su-field__suffix {
+		background-color: $su-color--error;
+
+		.su-field__suffix-label {
+			color: white;
+		}
+	}
+
+	.su-field__error {
+		clear: both;
+		display: block;
+		margin-top: -1px;
+		padding: 3px 0;
+		font-size: 14px;
+		color: #c00;
+	}
+}
+
+.o-forms-label.su-field__label--terms { // To increase the specificity
+	font-size: 13px;
+	font-weight: 300;
+	color: getColor('grey-tint5');
+}
+
+.o-forms-message {
+	display: none;
+	&.o-forms-message--error {
+		display: block;
+	}
+}
+
+.su-field__input--inline {
+	display: inline-block;
+	width: auto;
+}

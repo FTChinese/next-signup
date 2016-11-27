@@ -4,8 +4,8 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		account: './client/js/main-account.js',
-		profile: './client/js/main-profile.js'
+		account: './client/main-account.js'/*,
+		profile: './client/main-profile.js'*/
 	},
 	output: {
 		path: path.join(__dirname, 'public/scripts'),
@@ -19,7 +19,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				include: [
-					path.resolve(__dirname, 'client/js'),
+					path.resolve(__dirname, 'client'),
 					path.resolve(__dirname, 'bower_components')
 				],
 				loader: 'babel',

@@ -1,0 +1,64 @@
+.su-text {
+	font-weight: 300;
+	// line-height: 18px;
+}
+
+.su-text--h1 {
+	font-weight: 400;
+	font-size: 20px;
+	margin: 0;
+}
+
+.su-text--h2 {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.su-text--horizontally-padded {
+	padding: 0 24px;
+}
+
+.su-text--small {
+	font-size: 15px;
+}
+
+.su-text--smaller {
+	font-size: 13px;
+}
+
+
+.su-text--tiny {
+	font-size: 11px;
+}
+
+.su-text--tiniest {
+	font-size: 10px;
+}
+
+.su-text--light {
+	color: oColorsGetPaletteColor('grey-tint2');
+}
+
+.su-text--thin {
+	font-weight: 300;
+}
+
+.su-text--strong {
+	font-weight: 500;
+}
+
+.su-text--centered {
+	text-align: center;
+}
+
+.su-text--aligned-right {
+	text-align: right;
+}
+
+.su-text--red {
+	color: oColorsGetPaletteColor('claret');
+}
+
+.su-text--noclick {
+	pointer-events: none;
+}

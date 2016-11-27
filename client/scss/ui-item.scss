@@ -1,0 +1,38 @@
+.su-item--with-centered-contents {
+	text-align: center;
+}
+
+.su-item--with-right-contents {
+	text-align: right;
+}
+
+.su-item--full-width {
+	width: 100%;
+}
+
+.su-item--vertically-centered {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.su-item--compact {
+	padding: 0;
+	margin: 0;
+}
+
+.su-item--not-displayed {
+	display: none;
+}
+
+.su-item--invisible {
+	visibility: hidden;
+}
+
+.su-item--visible {
+	visibility: visible;
+}
+
+.su-item--capitalised {
+	text-transform: capitalize;
+}

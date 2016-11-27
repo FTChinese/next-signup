@@ -1,56 +1,64 @@
-<div class="o-forms-container">
+<div id="site-content" data-o-grid-colspan="12 S10 M8 L6 XL5 center">
 	<h2>创建账户</h2>
-	<form novalidate id="create-account" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
-		<div class="o-forms" id="email-container">
-			<label class="o-forms__label" for="email">电子邮箱：</label>
-			<small class="o-forms__additional-info">用于登陆FT中文网、找回您遗忘的密码，请正确填写</small>
+	<form novalidate id="signupForm" class="su-form su-panel__contents js-validate-form" data-component="singnup-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
 
-			<div class="o-forms__text-wrapper">
-				<p class="o-forms__input-wrapper">
-					<input class="o-forms__text" id="email" type="email" name="email" placeholder="username@example.org" required pattern="email" data-checkurl="/check">
-				</p>
-				<span class="edit"></span>		
+		<div id="emailField" class="o-forms-group su-field js-field" data-validate="required,email">
+			<div class="o-grid-row">
+				<label class="su-field__label" for="email">电子邮箱</label>
+				<div class="su-field__instructions su-text">用于登陆FT中文网、找回您遗忘的密码，请正确填写</div>
 			</div>
+			
+			<input id="email" type="text" name="email" class="o-forms-text su-field__input js-field__input js-item__value"  placeholder="请输入电子邮件地址" data-checkurl="/check">
 
-			<div class="o-forms__errortext">此邮箱已经注册，您可以<a href="http://user.ftchinese.com/login">登录</a>或<a href="http://www.ftchinese.com/users/findpassword">找回密码</a></div>
+			<div class="su-field__additional-info su-field__error">请输入有效的邮箱</div>
 		</div>
 
-		<div class="o-forms" id="pw-container">
-			<label class="o-forms__label" for="password">登陆密码：</label>
-			<small class="o-forms__additional-info">6-20位英文字母和数字</small>
-			<div class="o-forms__text-wrapper">
-				<p class="o-forms__input-wrapper">
-					<input class="o-forms__text" type="password" name="password" id="password" maxlength="20" minlength="6" required pattern="password">
-					<button class="o-forms__button" id="display-pw" type="button">
-						<!--<span class="show"></span><span class="hide"></span>-->
-					</button>
-				</p>
-				<span class="edit"></span>
-
+		<div id="emailExistsStatusBox" class="su-field su-status-box su-item--not-displayed">
+			<div class="su-status-box__description" data-o-grid-colspan="7">
+				此邮箱已经注册，您可以<a href="http://user.ftchinese.com/login">登录</a>或<a href="http://www.ftchinese.com/users/findpassword">找回密码</a>
 			</div>
-			<div class="o-forms__errortext"></div>		
 		</div>
-		<div class="o-forms__message">
-			<p>数据提交失败，请重试</p>
+
+		<div class="registrationFields">
+			<div id="passwordField" class="o-forms-group su-field js-field" data-validate="required,password">
+				<div class="o-grid-row">
+					<label for="password" class="su-field__label" >登陆密码</label>
+					<div class="su-field__instructions su-text">6-20位英文字母和数字组合</div>
+				</div>
+				
+				<div class="o-forms-affix-wrapper js-show-password">
+					<input type="password" id="password" name="password" class="o-forms-text su-field__input o-forms-text--suffixed js-field__input js-show-password__password-input js-item__value" placeholder="请输入密码">
+					<span class="o-forms-suffix su-field__suffix">
+						<input type="checkbox" id="showPassword" name="showPassword" class="o-forms-checkbox o-forms-checkbox--small js-show-password__checkbox">
+						<label for="showPassword" class="o-forms-label su-field__suffix-label">显示密码</label>
+					</span>
+				</div>
+				<div class="su-field__additional-info su-field__error">请输入有效的密码</div>		
+			</div>	
 		</div>
-		<div class="o-forms o-forms--submit" id="n-signup-submit">
-			<button class="o-forms__submit" type="submit">提交</button>
-		</div>
+
+		<div id="generalStatusBox" class="o-forms-message js-item__label">数据提交失败，请重试</div>
+
+		<button id="signUpSubmitButton" class="su-btn su-btn--primary su-item--full-width js-form__submit-button" type="submit"><span class="qa-submit-btn-label js-item__label">完成</span></button>
 	</form>
 
-	<div class="o-forms" id="chatbox">
-		<label class="o-forms__label"></label>
-		<small class="o-forms__additional-info"></small>
-		<div class="o-forms__errortext"></div>
-		<div class="o-forms__text-wrapper">
-			<div class="o-forms__input-wrapper">
-				<input class="o-forms__text" type="hidden">
-			</div>		
-			<button class="o-forms__button" type="button">发送</button>	
+	<div id="unityInput" class="o-forms-group su-field js-field">
+		<div class="o-grid-row">
+			<label class="su-field__label"></label>
+		</div>
+		
+		<div class="su-field__additional-info"></div>
+
+		<div class="o-forms-affix-wrapper">
+			<input class="o-forms-text su-field__input o-forms-text--suffixed js-field__input" type="hidden">
+			
+			<span class="o-forms-suffix su-field__suffix">
+				<button class="su-btn" type="button">发送</button>	
+			</span>			
 		</div>
 	</div>
 
-	<div id="signup-complete" aria-hidden="true">恭喜您，注册完成！现在您可以返回<a href="/">FT中文网首页</a>或继续<a href="/profile">完善信息</a>。</div>	
+	<div id="thankYou" aria-hidden="true">感谢您注册FT中文网！现在您可以返回<a href="/">FT中文网首页</a>或继续<a href="/profile">完善信息</a>。</div>	
 </div>
 
 

@@ -1,0 +1,35 @@
+// $o-grid-is-silent: false;
+@import "o-grid/main";
+@import "o-colors/main";
+
+body {
+	margin: 0;
+	padding: 0;
+	@include oColorsFor(page);
+}
+
+#site-content {
+	@include oGridContainer;
+	margin: 0 auto;	
+	h2 {
+		margin: 0 0 oGridGutter() 0;
+		padding: oGridGutter();
+		padding-bottom: 0;
+		border-bottom: 7px solid #E9DECF;
+	}	
+}
+
+$su-border-color: #efdaca;
+$su-border-color--darker: #c0b0a4;
+$su-color--error: #d0021b;
+$su-color--success: #64ac11;
+$border-radius: 3px;
+
+@import "scss/btn";
+@import "scss/form";
+@import "scss/field";
+@import "scss/panel";
+@import "scss/status-box";
+@import "scss/ui-item";
+@import "scss/text";
+@import "scss/unity-input";

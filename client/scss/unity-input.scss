@@ -1,0 +1,53 @@
+#unityInput {
+	display: none;
+	.su-field__label {
+		//background: #ffcc9a;
+	}
+	.su-field__suffix {
+		border: 0;
+		padding: 0;
+	}
+	.su-btn {
+		background: #23767c;
+		color:#fff;
+	}
+	&[data-unity-input--js] {
+		display: block;	
+	}
+	&[aria-hidden="true"] {
+		display: none;
+	}
+	.o-forms-text {
+		background-color:#23767c;
+		color:#fff;
+	}
+}
+
+#signupForm[data-unity-input--js] {
+	.o-forms-group {
+		display: none;
+	}
+
+	.o-forms--active {
+		display: block;
+	}
+
+	.su-btn {
+		display: none;
+	}
+}
+
+#thankYou {
+	text-align: center;
+	a {
+		color: #2e6e9e;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+	&[aria-hidden=true] {
+		display: none;
+	}
+	&[aria-hidden=false] {
+		display: block;
+	}
+}

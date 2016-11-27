@@ -8,7 +8,7 @@ const webpackConfig = require('./webpack.config.js');
 gulp.task('styles', function styles() {
   const DEST = 'public/styles';
 
-  return gulp.src('client/scss/*.scss')
+  return gulp.src('client/main.scss')
     .pipe($.changed(DEST))
     .pipe($.plumber())
     .pipe($.sourcemaps.init({loadMaps:true}))
@@ -25,7 +25,7 @@ gulp.task('styles', function styles() {
       })
     ]))
     .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest(DEST))
+    .pipe(gulp.dest(DEST));
 });
 
 gulp.task('webpack', (done) => {
@@ -46,5 +46,5 @@ gulp.task('webpack', (done) => {
 });
 
 gulp.task('serve', gulp.parallel('styles', 'webpack', () => {
-  gulp.watch('client/scss/**/*.scss', gulp.parallel('styles'));
+  gulp.watch('client/**/*.scss', gulp.parallel('styles'));
 }));
