@@ -7,6 +7,7 @@ function collectElements(rootEl) {
 
 		let labelText = rootEl.querySelector('.su-field__label').textContent;
 		let errorText = rootEl.querySelector('.su-field__error').textContent;
+		let instructionText = rootEl.querySelector('.su-field__instructions').textContent;
 
 		let inputEl = rootEl.querySelector('.su-field__input');
 		let name = inputEl.name;
@@ -18,6 +19,7 @@ function collectElements(rootEl) {
 			rootEl: rootEl,
 			labelText: labelText,
 			errorText: errorText,
+			instructionText: instructionText,
 			inputEl: inputEl,
 			name: name,
 			checkurl: checkurl,

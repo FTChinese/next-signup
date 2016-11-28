@@ -12,6 +12,7 @@ router.post('/', function *(next) {
 
 	if (body.email === 'test@example.org') {
 		this.body = {emailExists: true};
+		console.log(this.body);
 	} else {
 		this.body = {emailExists: false};
 	}
