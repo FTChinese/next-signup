@@ -7,7 +7,22 @@ body {
 	padding: 0;
 	@include oColorsFor(page);
 }
-
+.o-header {
+	height: 44px;
+	text-align: center;
+	background-color: #fff1e0;
+    color: #505050;
+    box-shadow: 0 1px 3px rgba(80, 80, 80, 0.2), 0 6px 10px rgba(80, 80, 80, 0.15);
+	&__logo {
+		padding: 11.5px 0;
+	}
+	span {
+		display: none;
+	}
+	img {
+		height: 21px;
+	}
+}
 #site-content {
 	@include oGridContainer;
 	margin: 0 auto;	
