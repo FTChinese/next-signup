@@ -56,8 +56,9 @@ class SignupForm {
 		this.emailExistsStatusBox.removeFromDisplay();
 
 			if(this.emailIsValid()) {
+				const url = this.email.input.getAttribute('data-checkurl');
 				console.log('checking remote');
-				postData('/check', {email: this.email.value})
+				postData(url, {email: this.email.value})
 				.then((response) => {
 					console.log(response);
 					if (response.emailExists) {
@@ -103,7 +104,8 @@ class SignupForm {
 		}
 
 		function ensureThatEmailDoesNotAlreadyExist () {
-			return postData('/check', {
+			const url = self.email.input.getAttribute('data-checkurl');
+			return postData(url, {
 					email: self.email.value
 				})
 				.then(response => {
@@ -126,9 +128,10 @@ class SignupForm {
 				hash: true,
 				empty: true
 			});
+			const url = self.form.action;
 			formData.id = self.form.id;
 
-			return postData('/signup', formData);
+			return postData(url, formData);
 		}
 
 		function showThankYou() {
