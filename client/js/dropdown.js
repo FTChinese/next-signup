@@ -43,7 +43,6 @@ class Dropdown extends Toggle {
 
 		this.traverseTree = [];
 		this.rootEl.setAttribute('data-dropdown--js', 'true');
-		console.log(this.rootEl);
 	}
 
 	toggle(e) {

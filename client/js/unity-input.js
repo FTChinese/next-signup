@@ -1,21 +1,5 @@
-import ajax from 'ajax';
 import validators from './validator.js';
 import getUnityComponents from './collect-components.js';
-/*
-Instance of Validate.
-config.source = 
-[
-	{
- 		labelText: form.labelEl.textContent,
- 		infoText: form.infoEl.textContent,
- 		rootEl: form.rootEl,
- 		inputEl: form.inputEl,
- 		name: form.name,
- 		type: form.type,
- 		checkurl: form.checkurl	
-	}
-]
-*/
 
 class UnityInput {
 	constructor(rootEl, config) {
@@ -51,18 +35,16 @@ class UnityInput {
 
 		this.changeText();
 
-		this.validate = this.validate.bind(this);
-		this.buttonEl.addEventListener('click', this.validate);
+		this.handleClick = this.handleClick.bind(this);
+		this.buttonEl.addEventListener('click', this.handleClick);
 		
 		this.formEl.setAttribute('data-unity-input--js', 'true');
 		this.rootEl.setAttribute('data-unity-input--js', 'true');
 	}
 
-	validate(e) {	
-		if (!this.checkPattern()) {
+	handleClick() {	
+		if (!this.validate()) {
 			console.log('invalid pattern');
-			this.setErrorMsg();
-			this.flagAsInvalid();
 
 			return;
 		}
@@ -74,32 +56,49 @@ class UnityInput {
 // If input value passed regex test, and it has a remote url, then collect the input value and  request to server for check.
 		const data = {};
 		data[this.name] = this.inputEl.value;
-		this.checkUnique(data);
+		this.onEnteringEmail(data);
 	}
 
-	checkUnique(data) {
-		ajax()
-			.post(this.checkurl, data)
-			.then((response) => {
-				console.log(response);
-				if (response.emailExists) {
-// If server responsed with ok, then advance to next step			
-					const emailExistsStatusBox = document.getElementById('emailExistsStatusBox');
+	onEnteringEmail(data) {
+		return	fetch(this.checkurl, {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+		.catch(error => {
+			return false;
+		})
+		.then((response) => {
+			console.log('Getting response from server');
+			return response.json();
+		})
+		.then((json) => {
+			if (json.emailExists) {
+				const emailExistsStatusBox = document.getElementById('emailExistsStatusBox');
 
-					this.flagAsInvalid();
-					this.setErrorMsg(emailExistsStatusBox.innerHTML);
-					console.log('email taken');
-				} else {
-					this.advance();
-				}
-			});
+				this.flagAsInvalid(emailExistsStatusBox.innerHTML);
+				console.log('email taken');
+			} else {
+				this.advance();
+			}
+		})
+		.catch(error => {
+			console.log(error);
+			return false;
+		});
 	}
 
-	checkPattern() {
+	validate() {
 		let isValid = false;
 		const self = this;
 		validateInput();
-		// isValid ? this.flagAsValid() : this.flagAsInvalid;
+
+		isValid ? this.flagAsValid() : this.flagAsInvalid();
+
+		return isValid;
 
 		function validateInput() {
 			isValid = true;
@@ -112,7 +111,7 @@ class UnityInput {
 				}
 			}			
 		}
-		return isValid;
+		
 	}
 
 	advance() {
@@ -123,10 +122,6 @@ class UnityInput {
 
 // Clear Chatbox's input
 		this.inputEl.value = '';
-		this.inputEl.click();
-		console.log('trigger click');
-		this.inputEl.focus();
-		console.log('trigger focus');
 // Increment `progress` before comparison.
 		if (++this.progress < this.steps.length) {
 			this.currentStep = this.steps[this.progress];
@@ -151,24 +146,23 @@ class UnityInput {
 		console.log(this.patterns);
 	}
 
-	flagAsInvalid () {
+	flagAsInvalid (msg) {
 		console.log('flag as invalid');
 		this.rootEl.classList.add('o-forms--error');
 		this.rootEl.classList.remove('o-forms--valid');
-	}
-
-	flagAsValid () {
-		this.rootEl.classList.add('o-forms--valid');
-		this.rootEl.classList.remove('o-forms--error');
-	}
-
-	setErrorMsg(msg) {
+		
 		if (!msg) {
 			this.errorEl.innerHTML = this.currentStep.errorText;
 			console.log(this.errorEl.textContent);
 		} else {
 			this.errorEl.innerHTML = msg;
 		}
+
+	}
+
+	flagAsValid () {
+		this.rootEl.classList.add('o-forms--valid');
+		this.rootEl.classList.remove('o-forms--error');
 	}
 
 	destroy() {
