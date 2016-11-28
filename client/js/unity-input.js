@@ -38,9 +38,9 @@ class UnityInput {
 		this.inputEl = this.rootEl.querySelector('.su-field__input');
 
 		this.labelEl = this.rootEl.querySelector('.su-field__label');
-		this.errorEl = this.rootEl.querySelector('.su-field__additional-info');
-
+		this.errorEl = this.rootEl.querySelector('.su-field__error');
 		this.buttonEl = this.rootEl.querySelector('.su-btn');
+		this.instructionEl = this.rootEl.querySelector('.su-field__instructions');
 
 		this.progress =  0;
 
@@ -60,7 +60,10 @@ class UnityInput {
 
 	validate(e) {	
 		if (!this.checkPattern()) {
-			this.stop();
+			console.log('invalid pattern');
+			this.setErrorMsg();
+			this.flagAsInvalid();
+
 			return;
 		}
 // If this.checkurl does not exist, it means this input does not need remote validation.
@@ -78,11 +81,12 @@ class UnityInput {
 		ajax()
 			.post(this.checkurl, data)
 			.then((response) => {
+				console.log(response);
 				if (response.emailExists) {
-// If server responsed with ok, then advance to next step	
-					this.flagAsInvalid;
+// If server responsed with ok, then advance to next step			
+					this.flagAsInvalid();
 					this.setErrorMsg('邮箱已经注册');
-					this.stop();			
+					console.log('email taken');
 				} else {
 					this.advance();
 				}
@@ -93,8 +97,7 @@ class UnityInput {
 		let isValid = false;
 		const self = this;
 		validateInput();
-
-		isValid ? this.flagAsValid() : this.flagAsInvalid;
+		// isValid ? this.flagAsValid() : this.flagAsInvalid;
 
 		function validateInput() {
 			isValid = true;
@@ -102,6 +105,7 @@ class UnityInput {
 				const pattern = self.patterns[i];
 				if (!validators[pattern](self.inputEl.value)) {
 					isValid = false;
+					console.log(isValid, ' for ', pattern);
 					break;
 				}
 			}			
@@ -111,6 +115,7 @@ class UnityInput {
 
 	advance() {
 // Proceed to here after regex test and remote validation
+		this.flagAsValid();
 		this.currentStep.rootEl.classList.add('o-forms--active');
 		this.currentStep.inputEl.value = this.inputEl.value;		
 
@@ -130,17 +135,10 @@ class UnityInput {
 		}
 	}
 
-	stop() {
-		this.flagAsInvalid();
-		this.error.show();
-	}
-
 	changeText() {
-		console.log('change text');
 		this.labelEl.textContent = this.currentStep.labelText;
-		console.log(this.labelEl);
-		console.log(this.currentStep.labelText);
-		this.errorEl.textContent = this.currentStep.errorEl;
+		this.errorEl.textContent = this.currentStep.errorText;
+		this.instructionEl.textContent = this.currentStep.instructionText;
 
 		clearAttributes(this.inputEl);
 		copyAttributes(this.currentStep.inputEl, this.inputEl);
@@ -148,11 +146,11 @@ class UnityInput {
 		this.patterns = this.currentStep.patterns;
 		this.checkurl = this.currentStep.checkurl;
 		this.name = this.currentStep.name;
-
-		console.log(this);
+		console.log(this.patterns);
 	}
 
 	flagAsInvalid () {
+		console.log('flag as invalid');
 		this.rootEl.classList.add('o-forms--error');
 		this.rootEl.classList.remove('o-forms--valid');
 	}
@@ -160,20 +158,15 @@ class UnityInput {
 	flagAsValid () {
 		this.rootEl.classList.add('o-forms--valid');
 		this.rootEl.classList.remove('o-forms--error');
-		this.hideErrorMsg();
 	}
 
 	setErrorMsg(msg) {
-		this.errorEl.classList.add('su-field__error');
 		if (!msg) {
-			this.errorEl.textContent = this.currentStep.errotText;
+			this.errorEl.textContent = this.currentStep.errorText;
+			console.log(this.errorEl.textContent);
 		} else {
 			this.errorEl.textContent = msg;
 		}
-	}
-
-	hideErrorMsg() {
-		this.errorEl.classList.remove('su-field__error');
 	}
 
 	destroy() {
