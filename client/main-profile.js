@@ -1,14 +1,12 @@
-// import Dropdown from './js/dropdown.js';
-import FormValidator from './js/form-validator.js';
+import Dropdown from './js/dropdown.js';
 
 import regions from './js/data/regions.js';
 import sectors from './js/data/sectors.js';
 import departments from './js/data/departments.js';
 import posts from './js/data/posts.js';
 
-FormValidator.init();
 
-// Dropdown.init('#profile-select', [regions, sectors, departments, posts]);
+Dropdown.init([regions, sectors, departments, posts]);
 
 function populate(formEl) {
 	const elements = formEl.elements

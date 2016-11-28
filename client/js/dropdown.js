@@ -1,12 +1,15 @@
+import setDefault from './set-default.js';
 import Toggle from 'ftc-toggle';
-import ErrorMessage from './error-message.js';
 import {buildList, search} from './helper.js'
 
 class Dropdown extends Toggle {
-	constructor(rootEl, data, config={
-		toggle: '.o-forms__text',
-		menu: '.o-dropdown__menu'
-	}) {
+	constructor(rootEl, data, settings={}) {
+		setDefault(settings).to({
+			fieldInputClass: 'js-field__input',
+			dropdownClass: 'js-field__dropdown',
+			invalidClass: 'o-forms--error'
+		});
+
 		if (!rootEl) {
 			console.log('No root element!');
 			return;
@@ -14,49 +17,52 @@ class Dropdown extends Toggle {
 			rootEl = document.querySelector(rootEl);
 		}
 
-		const toggleEl = (config.toggle instanceof HTMLElement) ? config.toggle : rootEl.querySelector(config.toggle);
-		const menuEl = (config.menu instanceof HTMLElement) ? config.menu : rootEl.querySelector(config.menu);
+		const inputEl = rootEl.querySelector(`.${settings.fieldInputClass}`);
+		const dropdownEl = rootEl.querySelector(`.${settings.dropdownClass}`);
 
-		super(toggleEl, {
-			target: menuEl
+		super(inputEl, {
+			target: dropdownEl
 		});
+		this.rootEl = rootEl;
+		this.settings = settings;
+		this.inputEl = inputEl;
+		this.dropdownEl = dropdownEl;
 
-		this.inputEl = toggleEl;
 		this.name = this.inputEl.name;
-		this.error = new ErrorMessage(rootEl);
+		
 // a flag to indicate whether the nested data reaches end.
 // Initailly it should be true. If user switched off the dropdown menu while selection does not reach the end, it is false and prevents submit.
 		this.complete = true;
 		this.data = data;
 
 		const list = buildList(this.data, null);
-		this.targetEl.appendChild(list);
+		this.dropdownEl.appendChild(list);
 
 		this.select = this.select.bind(this);
 		this.targetEl.addEventListener('click', this.select);
 
 		this.traverseTree = [];
-		rootEl.setAttribute('data-o-dropdown--js', 'true');
+		this.rootEl.setAttribute('data-dropdown--js', 'true');
+		console.log(this.rootEl);
 	}
 
 	toggle(e) {
 		super.toggle(e);
 // If data search reaches the end, remove any `data-error` attributes, else add `data-error=imcomplete`.
 		if (this.complete) {
-			this.setValid();
+			this.flagAsValid();
 			return;
 		}
 
-		this.setInvalid();
-		this.error.setErrorText('complete');
 // this.state inherited from Toggle.
 // this.state = true if menu opens. Whatever error message visible should be hidden.
 		if (this.state) {			
-			this.error.clear();
+			this.removeValidityFlag();
 			return;		
 		}
 // Only when not complete and dropdown is not open should you proceed here.
-		this.error.show();
+
+		this.flagAsInvalid();
 	}
 
 	select(e) {
@@ -112,26 +118,35 @@ class Dropdown extends Toggle {
 		}			
 	}
 
-	setInvalid() {
-		this.inputEl.setAttribute('aria-invalid', 'true');
+	flagAsValid () {
+		this.rootEl.classList.add(this.settings.validClass);
+		this.rootEl.classList.remove(this.settings.invalidClass);
 	}
 
-	setValid() {
-		this.inputEl.setAttribute('aria-invalid', 'false');
-	}	
+	flagAsInvalid () {
+		this.rootEl.classList.add(this.settings.invalidClass);
+		this.rootEl.classList.remove(this.settings.validClass);
+	}
 
-	static init(el, dataArr) {
+	removeValidityFlag() {
+		this.rootEl.classList.remove(this.settings.invalidClass);
+		this.rootEl.classList.remove(this.settings.validClass);
+	}
+
+	static validateCompletion() {
+
+	}
+
+	static init(dataArr, el=document.body) {
 		const dropdowns = [];
-		if (!el) {
-			el = document.body
-		} else if (!(el instanceof HTMLElement)) {
+		if (!(el instanceof HTMLElement)) {
 			el = document.querySelector(el);
 		}
 
-		const dropdownEls = el.querySelectorAll('[data-o-component="o-dropdown"]');
+		const dropdownEls = el.querySelectorAll('[data-component="dropdown"]');
 
 		for (let i = 0; i < dropdownEls.length; i++) {
-			if (!dropdownEls[i].hasAttribute('data-o-dropdown--js')) {
+			if (!dropdownEls[i].hasAttribute('data-dropdown--js')) {
 				dropdowns.push(new Dropdown(dropdownEls[i], dataArr[i]));
 			}
 		}
