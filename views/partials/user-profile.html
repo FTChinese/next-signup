@@ -1,115 +1,119 @@
-<div class="o-forms-container">
-	<form novalidate id="profile-basic" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
-		<div class="o-forms">
-			<label class="o-forms__label">称谓：</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__radio" id="gender-m" type="radio" name="gender" value="M">
-			<label class="o-forms__label" for="gender-m">先生</label>
-			<input class="o-forms__radio" id="gender-f" type="radio" name="gender" value="F">
-			<label class="o-forms__label" for="gender-f">女士</label>
-			<div class="o-forms__errortext"></div>
-		</div>
-
-		<div class="o-forms" data-o-component="o-validate">
-			<label class="o-forms__label" for="nickname">用户名：</label>
-			<small class="o-forms__additional-info">10个字符以内</small>
-			<input class="o-forms__text" id="nickname" type="text" name="nickname" maxlength="10" pattern="length">
-			<div class="o-forms__errortext"></div>
-		</div>
-
-		<div class="o-forms" data-o-component="o-validate">
-			<label class="o-forms__label" for="surname">姓：</label>
-			<small class="o-forms__additional-info">10个字符以内</small>
-			<input class="o-forms__text" id="surname" type="text" name="surname" maxlength="10" pattern="length">
-			<div class="o-forms__errortext"></div>
-		</div>
-
-		<div class="o-forms" data-o-component="o-validate">
-			<label class="o-forms__label" for="givenname">名：</label>
-			<small class="o-forms__additional-info">10个字符以内</small>
-			<input class="o-forms__text" id="givenname" type="text" name="givenname" maxlength="10" pattern="length">
-			<div class="o-forms__errortext"></div>
-		</div>
-		<div class="o-forms__message">
-			<p>保存失败，请重试</p>
-		</div>
-		<div class="o-forms o-forms--submit" id="">
-			<button class="o-forms__submit" type="submit">确认</button>
-		</div>	
-	</form>		
-</div>
-
-<div class="o-forms-container">
-	<form novalidate id="profile-select" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
-		<div class="o-forms" data-o-component="o-dropdown">
-			<label class="o-forms__label" for="location">居住地</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" type="text" name="location" id="location" maxlength="20" value="中国大陆,北京" readonly>
-			
-			<div class="o-dropdown__menu"></div>
-
-			<div class="o-forms__errortext"></div>
-		</div>	
-		<div class="o-forms" data-o-component="o-dropdown">
-			<label class="o-forms__label" for="industry">所处行业</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" type="text" name="industry" id="industry" maxlength="20" value="" readonly>
-
-			<div class="o-dropdown__menu"></div>
-
-			<div class="o-forms__errortext"></div>
-		</div>
-
-		<div class="o-forms" data-o-component="o-dropdown">
-			<label class="o-forms__label" for="responsibility">工作范畴</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" type="text" name="responsibility" id="responsibility" maxlength="20" value="" readonly>
-			
-			<div class="o-dropdown__menu"></div>
-			<div class="o-forms__errortext"></div>
-		</div>
-
-		<div class="o-forms" data-o-component="o-dropdown">
-			<label class="o-forms__label" for="position">您的职位</label>
-			<small class="o-forms__additional-info"></small>
-			<input class="o-forms__text" type="text" name="position" id="position" maxlength="20" value="" readonly>
-
-			<div class="o-dropdown__menu"></div>
-			<div class="o-forms__errortext"></div>
+<div id="site-content">
+	<form novalidate id="profileForm" class="su-form su-panel__contents js-validate-form" data-component="profile-form" action="/profile" method="post" enctype="application/x-www-form-urlencoded">
+		<div class="su-header">
+			<!-- <h2 class="su-header__title">Customise your experience</h2> -->
+			<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
 			</div>
 		</div>
-		<div class="o-forms__message">
-			<p>保存失败，请重试</p>
-		</div>
-		<div class="o-forms o-forms--submit" id="">
-			<button class="o-forms__submit" type="submit">确认</button>
-		</div>	
-	</form>	
-	
-</div>
+		<fieldset name="" class="su-form__fieldset">
+			<legend class="su-form__header"><span>基本信息</span></legend>
+			<div class="su-field">
+				<label class="su-field__label">称谓：</label>
+				<div class="o-grid-row o-grid-row--compact su-two-column-spacing">
+					<div data-o-grid-colspan="one-half">
+						<input id="gender-m" type="radio" name="gender" class="o-forms-radio js-item__value js-field__input" value="M">
+						<label class="su-field__label" for="gender-m">先生</label>
+					</div>
+					<div data-o-grid-colspan="one-half">
+						<input id="gender-f" type="radio" name="gender" class="o-forms-radio  js-item__value js-field__input"  value="F">
+						<label class="su-field__label" for="gender-f">女士</label>
+					</div>
+				</div>
+			</div>
 
-<div class="o-forms-container">
-	<h2>电邮订阅</h2>
-	<form novalidate id="subscription" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
-		<div class="o-forms">
-			<input class="o-forms__checkbox" id="subscipt-1" type="checkbox" name="mail_today_focus" checked="checked">
-			<label for="subscipt-1" class="o-forms__label">《今日焦点》邮件</label>
-		</div>
-		<div class="o-forms">
-			<input class="o-forms__checkbox" id="subscipt-2" type="checkbox" name="mail_week_selects" checked="checked">
-			<label for="subscipt-2" class="o-forms__label">《一周精选》邮件</label>	
-		</div>
-		<div class="o-forms">
-			<input class="o-forms__checkbox" id="subscipt-3" type="checkbox" name="mail_afternoon_express" checked="checked">
-			<label for="subscipt-3" class="o-forms__label">《午后速递》邮件</label>	
-		</div>
-		<div class="o-forms__message">
-			<p>保存失败，请重试</p>
-		</div>	
-		<div class="o-forms o-forms--submit" id="">
-			<button class="o-forms__submit" type="submit">完成</button>
-		</div>	
-	</form>	
+			<div id="nickNameField" class="o-forms-group su-field js-field">
+				<div class="o-grid-row">
+					<label class="su-field__label" for="nickname">用户名：</label>
+					<div class="su-field__instructions su-text">10个字符以内</div>
+				</div>
+				
+				<input id="nickName" name="nickName" class="o-forms-text su-field__input js-field__input js-item__value" type="text">
+				<div class="su-field__additional-info su-field__error"></div>
+			</div>
+
+			<div class="su-field">
+				<div class="o-grid-row o-grid-row--compact su-two-column-spacing">
+					<div data-o-grid-colspan="one-half">
+						<div id="firstNameField" class="o-forms-group su-field js-field">
+							<label for="firstName" class="su-field__label">姓：</label>
+							<input type="text" id="firstName" name="firstName" class="o-forms-text su-field__input js-field__input js-item__value" placeholder="姓">
+							<div class="su-field__additional-info su-field__error"></div>
+						</div>
+					</div>
+
+					<div data-o-grid-colspan="one-half">
+						<div id="lastNameField" class="o-forms-group su-field js-field">
+							<label for="lastName" class="su-field__label">名：</label>
+							<input type="text" id="lastName" name="lastName" class="o-forms-text su-field__input js-field__input js-item__value" placeholder="名">
+							<div class="su-field__additional-info su-field__error"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="locationField" class="o-forms-group su-field js-field" data-component="dropdown">
+				<div class="o-grid-row">
+					<label class="su-field__label" for="location">居住地</label>
+					<div class="su-field__instructions su-text"></div>	
+				</div>
+				
+				<input id="location" name="location" class="o-forms-text su-field__input js-field__input js-item__value" type="text" value="中国大陆,北京" readonly>
+				
+				<div class="o-dropdown__menu"></div>
+
+				<div class="su-field__additional-info su-field__error">选择不完整</div>
+			</div>			
+		</fieldset>
+		
+		<fieldset name="professional" class="su-form__fieldset">
+			<legend class="su-form__header"><span>职业信息</span></legend>
+			<div id="industryField" class="o-forms-group su-field js-field" data-component="dropdown">
+
+				<label class="su-field__label" for="industry">所处行业</label>
+				
+				<input id="industry" name="industry" type="text" class="o-forms-text su-field__input js-field__input js-item__value" readonly value="" >
+
+				<div class="o-dropdown__menu"></div>
+
+				<div class="su-field__additional-info su-field__error">选择不完整</div>
+			</div>
+
+			<div id="responsibilityField" class="o-forms-group su-field js-field" data-component="dropdown">
+				<label class="o-forms__label" for="responsibility">工作范畴</label>
+				
+				<input id="responsibility" type="text" name="responsibility" class="o-forms-text su-field__input js-field__input js-item__value" value="" readonly>
+				
+				<div class="o-dropdown__menu"></div>
+				<div class="su-field__additional-info su-field__error">选择不完整</div>
+			</div>
+
+			<div id="positionField" class="o-forms-group su-field js-field" data-component="dropdown">
+				<label class="o-forms__label" for="position">您的职位</label>
+				
+				<input id="position" type="text" name="position" class="o-forms__text su-field__input js-field__input js-item__value" value="" readonly>
+
+				<div class="o-dropdown__menu"></div>
+				<div class="su-field__additional-info su-field__error">选择不完整</div>
+			</div>			
+		</fieldset>
+
+
+		<fieldset name="subscription" class="su-form__fieldset">
+			<legend class="su-form__header"><span>电邮订阅</span></legend>
+			<div class="o-forms-group">
+				<input id="subscipt-1" type="checkbox" name="mail_today_focus" class="o-forms-checkbox js-item__value js-field__input" checked="checked">
+				<label for="subscipt-1" class="o-forms-label su-field__label">《今日焦点》邮件</label>
+			</div>
+			<div class="o-forms-group">
+				<input id="subscipt-2" type="checkbox" name="mail_week_selects" class="o-forms-checkbox js-item__value js-field__input" checked="checked">
+				<label for="subscipt-2" class="o-forms-label su-field__label">《一周精选》邮件</label>	
+			</div>
+			<div class="o-forms">
+				<input id="subscipt-3" type="checkbox" name="mail_afternoon_express" class="o-forms-checkbox js-item__value js-field__input" checked="checked">
+				<label for="subscipt-3" class="o-forms-label su-field__label">《午后速递》邮件</label>	
+			</div>			
+		</fieldset>
+	</form>		
 </div>
 
 <!-- 	<div class="o-forms o-forms--privacy">

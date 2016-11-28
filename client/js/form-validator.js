@@ -161,9 +161,12 @@ class FormValidator {
 	static getValidatorsFor (field) {
 		const result = [];
 		const validatorNames = FormValidator.validatorNamesOf(field);
-		for (let i = 0; i < validatorNames.length; i++) {
-			result.push(validators[validatorNames[i]]);
+		if (validatorNames) {
+			for (let i = 0; i < validatorNames.length; i++) {
+				result.push(validators[validatorNames[i]]);
+			}
 		}
+		
 		return result;
 	}
 

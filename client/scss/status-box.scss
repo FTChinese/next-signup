@@ -5,6 +5,7 @@
 	border-radius: 3px;
 	padding: 12px;
 	background-color: oColorsGetPaletteColor('warm-2');
+
 }
 
 .su-status-box__title {
@@ -17,6 +18,12 @@
 .su-status-box__description {
 	font-size: 15px;
 	font-weight: 300;
+	a {
+		text-decoration: none;
+		color: #27757b;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
 }
 
 .su-status-box__btn {

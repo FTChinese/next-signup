@@ -4,8 +4,8 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		account: ['fetch', './client/main-account.js']/*,
-		profile: ['fetch', './client/main-profile.js']*/
+		account: ['fetch', './client/main-account.js'],
+		profile: ['fetch', './client/main-profile.js']
 	},
 	output: {
 		path: path.join(__dirname, 'public/scripts'),

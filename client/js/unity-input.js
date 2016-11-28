@@ -84,8 +84,10 @@ class UnityInput {
 				console.log(response);
 				if (response.emailExists) {
 // If server responsed with ok, then advance to next step			
+					const emailExistsStatusBox = document.getElementById('emailExistsStatusBox');
+
 					this.flagAsInvalid();
-					this.setErrorMsg('邮箱已经注册');
+					this.setErrorMsg(emailExistsStatusBox.innerHTML);
 					console.log('email taken');
 				} else {
 					this.advance();
@@ -162,10 +164,10 @@ class UnityInput {
 
 	setErrorMsg(msg) {
 		if (!msg) {
-			this.errorEl.textContent = this.currentStep.errorText;
+			this.errorEl.innerHTML = this.currentStep.errorText;
 			console.log(this.errorEl.textContent);
 		} else {
-			this.errorEl.textContent = msg;
+			this.errorEl.innerHTML = msg;
 		}
 	}
 

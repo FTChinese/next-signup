@@ -1,35 +1,14 @@
-import Checked from './checked.js';
-import Dropdown from './dropdown.js';
-import Validate from './validate.js';
-import Submit from './submit.js';
+// import Dropdown from './js/dropdown.js';
+import FormValidator from './js/form-validator.js';
 
-import regions from './data/regions.js';
-import sectors from './data/sectors.js';
-import departments from './data/departments.js';
-import posts from './data/posts.js';
+import regions from './js/data/regions.js';
+import sectors from './js/data/sectors.js';
+import departments from './js/data/departments.js';
+import posts from './js/data/posts.js';
 
-// const checked = new Checked('#agreement-container');
-Validate.init();
+FormValidator.init();
 
-Dropdown.init('#profile-select', [regions, sectors, departments, posts]);
-
-new Submit('#profile-basic', {
-	callback: function(formEl) {
-		console.log('profile-basic submitted');
-	}
-});
-
-new Submit('#profile-select', {
-	callback: function(formEl) {
-		console.log('profile-select submitted');
-	}
-});
-
-new Submit('#subscription', {
-	callback: function(formEl) {
-		console.log('subscription submitted');
-	}
-});
+// Dropdown.init('#profile-select', [regions, sectors, departments, posts]);
 
 function populate(formEl) {
 	const elements = formEl.elements
@@ -52,10 +31,6 @@ function populate(formEl) {
 		}
 	}
 }
-
-populate(document.getElementById('profile-basic'));
-populate(document.getElementById('profile-select'));
-populate(document.getElementById('subscription'));
 
 const radioButton = document.getElementById('gender-m');
 console.log(radioButton);

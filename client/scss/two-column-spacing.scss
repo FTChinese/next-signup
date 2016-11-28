@@ -1,0 +1,29 @@
+.su-two-column-spacing {
+	> *:first-child {
+		padding-right: 7px;
+	}
+
+	> *:last-child {
+		padding-left: 7px;
+	}
+	// @include oGridRowCompact;
+	@include oGridRow;
+	margin-left: 0;
+}
+
+[data-o-grid-colspan="one-half"] {
+	// @include oGridColspan(6);
+	display: inline-block;
+	box-sizing: border-box;
+	width: 50%;
+	// padding-left: 0;
+}
+.su-two-column-spacing--small {
+	> *:first-child {
+		padding-right: 4px;
+	}
+
+	> *:last-child {
+		padding-left: 4px;
+	}
+}

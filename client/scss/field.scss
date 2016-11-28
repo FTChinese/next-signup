@@ -9,6 +9,10 @@ $color-border: #c0b0a4;
 	.registrationFields > & {
 		margin-top: 20px;
 	}
+
+	.su-form__fieldset > & {
+		margin-bottom: 20px;
+	}
 }
 
 .su-field__label {
@@ -19,7 +23,7 @@ $color-border: #c0b0a4;
 	// line-height: 40px;
 	font-weight: 600;
 	// height:40px;
-	padding-left:5px;
+	// padding-left:5px;
 	// border-radius:5px;
 	position: relative;
 }
@@ -45,7 +49,7 @@ $color-border: #c0b0a4;
 	height: 40px;
 	margin: 0;
 	padding: 10px 5px 10px;
-	border: 1px solid oColorsGetPaletteColor('pink-tint3');
+	border: 1px solid #cec6b9;
 
 	border-radius: $border-radius;
 	background-color: oColorsGetPaletteColor('white');
@@ -79,31 +83,6 @@ $color-border: #c0b0a4;
 		box-shadow: none;
 	}
 }
-// .o-forms-affix-wrapper
-.o-forms-affix-wrapper {
-	display: table;
-	width: 100%;
-	box-sizing: border-box;
-	.su-field__input {
-		display: table-cell;
-		border-top-left-radius: $border-radius;
-		border-bottom-left-radius: $border-radius;
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		
-	}
-
-	.su-field__suffix {
-		border-top-right-radius: $border-radius;
-		border-bottom-right-radius: $border-radius;
-	}
-
-	.o-forms-checkbox {
-		position: absolute;
-		opacity: 0;
-	}
-
-}	
 
 // wyc add
 #showPassword {
@@ -126,8 +105,30 @@ $color-border: #c0b0a4;
 	color: oColorsGetPaletteColor('grey-tint5');
 }
 
+// .o-forms-affix-wrapper
+.o-forms-affix-wrapper {
+	display: table;
+	width: 100%;
+	box-sizing: border-box;
+	.su-field__input {
+		display: table-cell;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+
+	.o-forms-checkbox {
+		position: absolute;
+		opacity: 0;
+	}
+
+}	
+
+
+
 .su-field__suffix {
-	border-right: 1px solid #cec6b9;
+	border-top-right-radius: $border-radius;
+	border-bottom-right-radius: $border-radius;
+	border: 1px solid #cec6b9;
 	border-left: 0;
 
     display: table-cell;
@@ -135,8 +136,7 @@ $color-border: #c0b0a4;
     box-sizing: border-box;
     width: 1%;
     white-space: nowrap;
-    border-top: 1px solid #cec6b9;
-    border-bottom: 1px solid #cec6b9;
+
     padding: 9px 5px 9px;//wyc modify
     font-size: 14px;
     text-align: center;
@@ -162,17 +162,16 @@ $color-border: #c0b0a4;
 }
 
 .o-forms--error {
-	.su-field__label,
-	.su-field__instructions,
+	// .su-field__label,
+	// .su-field__instructions,
 	.su-field__additional-info {
 		color: oColorsGetPaletteColor('red');
 	}
 
 	.su-field__input {
-		border: oColorsGetPaletteColor('red');
-		background-color: oColorsGetPaletteColor('white');
-
-		border-color: $su-color--error;
+		background-color: #fff;
+	    color: #c00;
+	    border-color: #c00;
 
 		&:focus {
 			box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('red'), 0.3);
@@ -180,11 +179,8 @@ $color-border: #c0b0a4;
 	}
 
 	.su-field__suffix {
-		background-color: $su-color--error;
-
-		.su-field__suffix-label {
-			color: white;
-		}
+		border-color: #c00;
+		color: #c00;
 	}
 
 	.su-field__error {
