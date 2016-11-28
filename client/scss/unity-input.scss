@@ -4,10 +4,11 @@
 		//background: #ffcc9a;
 	}
 	.su-field__suffix {
-		border: 0;
+		// border: 0;
 		padding: 0;
 	}
 	.su-btn {
+		// border: 1px solid transparent;
 		background: #23767c;
 		color:#fff;
 		padding: 0 20px;
@@ -41,6 +42,8 @@
 }
 
 #thankYou {
+	position: fixed;
+	top: 50%;
 	text-align: center;
 	a {
 		color: #2e6e9e;
