@@ -32,7 +32,7 @@ class Dropdown extends Toggle {
 		
 // a flag to indicate whether the nested data reaches end.
 // Initailly it should be true. If user switched off the dropdown menu while selection does not reach the end, it is false and prevents submit.
-		this.complete = true;
+		this.isValid = true;
 		this.data = data;
 
 		const list = buildList(this.data, null);
@@ -40,28 +40,31 @@ class Dropdown extends Toggle {
 
 		this.select = this.select.bind(this);
 		this.targetEl.addEventListener('click', this.select);
+		// console.log('add change event');
+		// this.inputEl.addEventListener('change', (e) => {
+		// 	console.log(this.inputEl.value);
+		// });
 
-		this.traverseTree = [];
+		this.onEls = [];
 		this.rootEl.setAttribute('data-dropdown--js', 'true');
 	}
 
 	toggle(e) {
 		super.toggle(e);
-// If data search reaches the end, remove any `data-error` attributes, else add `data-error=imcomplete`.
-		if (this.complete) {
-			this.flagAsValid();
-			return;
-		}
-
 // this.state inherited from Toggle.
 // this.state = true if menu opens. Whatever error message visible should be hidden.
 		if (this.state) {			
 			this.removeValidityFlag();
-			return;		
+		}		
+// If data search reaches the end, remove any `data-error` attributes, else add `data-error=imcomplete`.
+		if (this.isValid) {
+			this.flagAsValid();
+			return;
 		}
-// Only when not complete and dropdown is not open should you proceed here.
 
+// Only when not complete and dropdown is not open should you proceed here.
 		this.flagAsInvalid();
+// What if user opened the dropdown, not complete selection but left?	
 	}
 
 	select(e) {
@@ -73,46 +76,57 @@ class Dropdown extends Toggle {
 		const order = target.getAttribute('data-order').split('-');
 
 		const value = search(this.data, order);
-
+// You should manually dispatch change event to inputEl when value set programaticlly.
 		this.inputEl.value = value.history.join(',');
 		if (value.children) {
 			console.log('selection not complete');
-			this.complete = false;
+			this.isValid = false;
 			this.toggleSubmenu(target, order);
 			return;
 		}
 		console.log('selection complete');
-// select complete, record data.				
-		localStorage.setItem(this.name, this.inputEl.value);
-		console.log('recorded data:');
-		console.log(localStorage.getItem(this.name));
-
-		this.complete = true;
-// selection complete, trigger toggle();		
+// selection complete, dispatching complete event to inputEl, set isValid to true, close dropdown, close all submenu.
+		dispatchChangeEventTo(this.inputEl);
+		this.isValid = true;		
 		this.toggle(e);
 		this.closeSubmenu();
 	}
 
 	toggleSubmenu(target, order) {
 		const index = order.length - 1;
-	//remove all element in traverseTree after `index`, and remove their class name `on`
-		for (let i = this.traverseTree.length; i > order.length ; i--) {
-			const onEl = this.traverseTree.pop();
+//remove all element in onEls after `index`, and remove their class name `on`
+// If selected element on the same level as the previous one, this should not execute;
+		for (let i = this.onEls.length; i > order.length ; i--) {
+			const onEl = this.Els.pop();
 			onEl.classList.remove('on');
 		}
-	// If clicked on the same element, toggle class name, else add `on` on target and replace element on the same index.
-		if (this.traverseTree[index] !== target) {
-			target.classList.add('on');
-			this.traverseTree[index] = target;
-		} else {
+		
+// If clicked on the same element, toggle class name `on`, stops.
+
+		if (this.onEls[index] === target) {
 			target.classList.toggle('on');
-		}	
+			console.log('clicked on the same element');
+			return;
+		}
+// If not the same element, add `on`;
+		target.classList.add('on');
+		console.log('clicked on a different element than the prvious one');
+// If opened another element on the same level, remove `on`. Otherwise it indicate you are clicking element on this level for the first time, it does not exist yet.	
+		if (this.onEls[index]) {
+			console.log('There are old elements on position: ', index, '.hide it.');
+			this.onEls[index].classList.remove('on');
+		}
+
+		console.log('put new element on postion: ', index);
+		this.onEls[index] = target;
+		
+		return;
 	}
 
 	closeSubmenu() {
 		// empty traverseTree and remove `on`.
-		for (let i = this.traverseTree.length; i > 0 ; i--) {
-			const onEl = this.traverseTree.pop();
+		for (let i = this.onEls.length; i > 0 ; i--) {
+			const onEl = this.onEls.pop();
 			onEl.classList.remove('on');
 		}			
 	}
@@ -153,5 +167,13 @@ class Dropdown extends Toggle {
 		return dropdowns;
 	}
 }
+
+function dispatchChangeEventTo(target) {
+	const event = new Event('change', {
+		bubbles: true,
+		cancelable: true
+	});
+	target.dispatchEvent(event);
+};
 
 export default Dropdown;

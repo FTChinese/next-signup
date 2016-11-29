@@ -31,6 +31,11 @@
 	    transition: all .1s ease-in;		
 	}
 
+	&:focus + .su-field__label::before {
+		border: 1px oColorsGetPaletteColor('pink-tint4');
+		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('teal-2'), 0.7);		
+	}
+
 	& + .su-field__label::after {
 		content: '';
 		opacity: 0;
@@ -38,11 +43,6 @@
 		top: 0;
 		left: 0;
 		transition: 0.1s opacity ease-in;		
-	}
-
-	&:focus + .su-field__label::before {
-		border: 1px oColorsGetPaletteColor('pink-tint4');
-		box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('teal-2'), 0.7);		
 	}
 
 	&:checked + .su-field__label::after {
@@ -70,7 +70,7 @@
 		border-radius: 3px;
 	}
 
-	& + .o-forms__label::after {
+	&:checked + .su-field__label::after {
 		background-image: url(https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:tick?source=o-icons&tint=%23333333&format=svg);
 		background-repeat: no-repeat;
 		height: 14px;

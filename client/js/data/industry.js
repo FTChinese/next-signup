@@ -1,4 +1,4 @@
-const sectors = [
+const industry = [
     {
       "name": "金融",
       "children": [
@@ -87,4 +87,4 @@ const sectors = [
     }
 ];
 
-export default sectors;
+export default industry;

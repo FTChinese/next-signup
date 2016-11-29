@@ -1,4 +1,4 @@
-const posts = [
+const position = [
   {"name":"企业主/合伙人"},
   {"name":"主席/总裁/副总裁/CEO/总经理/执行董事"},
   {"name":"CFO"},
@@ -17,4 +17,4 @@ const posts = [
   {"name":"全职主妇"},
   {"name":"其他"}
 ];
-export default posts;
+export default position;

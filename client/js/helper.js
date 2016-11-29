@@ -34,11 +34,17 @@ function buildList(data, prefix) {
 		const dataOrder = (prefix === null) ? i : prefix + '-' + i;
 
 		const liEl = createElement('li', {
-			'data-order': dataOrder,
-		}, item.name);
+			'data-order': dataOrder
+		});
 
 		if (item.children) {
+			const spanEl = createElement('span', {
+				'data-order': dataOrder
+			}, item.name);
+			liEl.appendChild(spanEl);
 			liEl.appendChild(buildList(item.children, dataOrder));
+		} else {
+			liEl.textContent = item.name;
 		}
 		ulEl.appendChild(liEl);
 	}

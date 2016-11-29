@@ -1,4 +1,4 @@
-const departments = [
+const responsibility = [
   {"name":"决策管理/战略/商业发展/公司计划"},
   {"name":"财务会计"},
   {"name":"市场促销/公关关系/广告"},
@@ -14,4 +14,4 @@ const departments = [
   {"name":"其他"}
 ];
 
-export default departments;
+export default responsibility;

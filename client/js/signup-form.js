@@ -164,6 +164,8 @@ function postData(url, data) {
 	})
 	.then((response) => {
 		console.log('Getting response from server');
+		// submitFailed: true;
+		
 		return response.json();
 	});
 }
