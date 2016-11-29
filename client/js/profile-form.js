@@ -4,7 +4,6 @@ import {submitForm} from './helper.js';
 class ProfileForm {
 	static init () {
 		const form = document.getElementById('profileForm');
-		const msgEl = form.querySelector('.o-forms-message');
 
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();

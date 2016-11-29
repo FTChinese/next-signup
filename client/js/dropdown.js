@@ -1,8 +1,8 @@
 import setDefault from './set-default.js';
-import Toggle from 'ftc-toggle';
+import Toggle from './toggle';
 import {buildList, search} from './helper.js'
 
-class Dropdown extends Toggle {
+class Dropdown {
 	constructor(rootEl, data, settings={}) {
 		setDefault(settings).to({
 			fieldInputClass: 'su-field__input',
@@ -17,18 +17,15 @@ class Dropdown extends Toggle {
 			rootEl = document.querySelector(rootEl);
 		}
 
-		const inputEl = rootEl.querySelector(`.${settings.fieldInputClass}`);
-		const dropdownEl = rootEl.querySelector(`.${settings.dropdownClass}`);
+		this.rootEl = rootEl;
+		this.inputEl = rootEl.querySelector(`.${settings.fieldInputClass}`);
+		this.dropdownEl = rootEl.querySelector(`.${settings.dropdownClass}`);
 
-		super(inputEl, {
+		this.toggle = new Toggle(inputEl, {
 			target: dropdownEl
 		});
-		this.rootEl = rootEl;
+	
 		this.settings = settings;
-		this.inputEl = inputEl;
-		this.dropdownEl = dropdownEl;
-
-		this.name = this.inputEl.name;
 		
 // a flag to indicate whether the nested data reaches end.
 // Initailly it should be true. If user switched off the dropdown menu while selection does not reach the end, it is false and prevents submit.
@@ -50,10 +47,10 @@ class Dropdown extends Toggle {
 	}
 
 	toggle(e) {
-		super.toggle(e);
+		this.toggle.toggle();
 // this.state inherited from Toggle.
 // this.state = true if menu opens. Whatever error message visible should be hidden.
-		if (this.state) {			
+		if (this.toggle.state) {			
 			this.removeValidityFlag();
 		}		
 // If data search reaches the end, remove any `data-error` attributes, else add `data-error=imcomplete`.
