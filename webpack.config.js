@@ -4,8 +4,8 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		account: ['promise-polyfill', 'fetch', './client/main-account.js'],
-		profile: ['fetch', './client/main-profile.js']
+		account: ['./client/main-account.js'],
+		profile: ['./client/main-profile.js']
 	},
 	output: {
 		path: path.join(__dirname, 'public/scripts'),

@@ -1,3 +1,4 @@
+import serialize from './serialize.js';
 // It creates an element with the given name and attributes and appends all further arguments it gets as child nodes, automatically converting strings to text nodes.
 function createElement(name, attributes) {
 	var node = document.createElement(name);
@@ -99,5 +100,24 @@ function postData(url, data) {
 	});
 }
 
+function submitForm(form) {
+	const formData = serialize(form, {
+		hash: true,
+		empty: true
+	});
+	const url = form.action;
+	formData.id = form.id;
+	formData.CAPTCHA = window.CAPTCHA;
+// response: {submitFailed: true} or {submitFailed: false}	
+	return postData(url, formData)
+		.then(response => {
+			if(response.submitFailed) {
+				form.qerySelector('.o-forms-message').classList.add('error');
+				return Promise.reject('Submit failed');
+			} else {
+				return Promise.resolve();
+			}
+		});
+}
 
-export {createElement, buildList, search, postData};
+export {createElement, buildList, search, postData, submitForm};

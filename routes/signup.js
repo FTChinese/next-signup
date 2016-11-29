@@ -11,10 +11,14 @@ router.get('/', function *(next) {
 	this.body = yield render('signup.html');
 });
 
+router.get('/register', function *(next) {
+	this.body = yield render('register.html');
+})
+
 router.post('/signup', function *() {
 	console.log(this.request.body);
 
-	this.body = Object.assign({status: 'ok'}, this.request.body);
+	this.body = Object.assign({submitFailed: false}, this.request.body);
 });
 
 app

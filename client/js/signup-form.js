@@ -1,11 +1,11 @@
 import UiItem from './ui-item.js';
 import FormValidator from './form-validator.js';
-import serialize from './serialize.js';
-import {postData} from './helper.js';
+import {postData, submitForm} from './helper.js';
 
 class SignupForm {
 	constructor (selector) {
 		this.form = document.getElementById('signupForm');
+		this.nextForm = document.getElementById('profileForm');
 
 		this.signUpFormValidator = new FormValidator({
 			selector: '#signupForm'
@@ -28,12 +28,12 @@ class SignupForm {
 		});
 		console.log(this.email.input);
 		this.email.input.addEventListener('change', (event) => {
-			this.onEnteringAnEmail();
+			this.onEnterEmail();
 		});
 
 		this.form.addEventListener('submit', (event) => {
 			event.preventDefault();
-			this.onClickingTheSubmitBtn();
+			this.onSubmit();
 		});
 	}
 
@@ -43,101 +43,79 @@ class SignupForm {
 		});
 	}
 
-	onEnteringAnEmail() {
-
+	onEnterEmail() {
 		this.emailExistsStatusBox.removeFromDisplay();
 
-			if(this.emailIsValid()) {
-				const inputEl = this.email.input
-				const url = inputEl.getAttribute('data-checkurl');
-				const data = {};
-				data[inputEl.name] = inputEl.value;
-				console.log('checking remote for', data);
-				postData(url, data)
-				.then((response) => {
-					console.log(response);
-					if (response.emailExists) {
-						this.emailExistsStatusBox.display();
+		if(this.emailIsValid()) {
+			this.ensureEmailNotExist()
+				.catch(error => {
+					if (error) {
+						console.log(error);
 					}
-			});
+				});
 		}
 	}
 
-	onClickingTheSubmitBtn () {
-		const the = {
-			formIsInvalid: false,
-			userExistsAlready: false,
-			userCheckFailed: false,
-			formSubmissionFailed: false
-		};
+	ensureEmailNotExist () {
+		const inputEl = this.email.input
+		const url = inputEl.getAttribute('data-checkurl');
+		const data = {};
+		data[inputEl.name] = inputEl.value;
+
+		return postData(url, data)
+			.then(response => {
+				if (response.emailExists) {
+					this.emailExistsStatusBox.display();
+					return Promise.reject('Email taken');
+				}
+			});
+	}
+
+	onSubmit () {
+
 		const self = this;
 
 		return Promise.resolve()
-		.then(sanitiseUserInput)
-		.then(ensureThatSignupFormIsValid)
-		.then(ensureThatEmailDoesNotAlreadyExist)
-		.then(submitSingupForm)
-		.catch(error => {
-			if (error) {
-				console.log(error);
-			}
-		});
+			.then(sanitiseUserInput)
+			.then(ensureFormIsValid)
+			.then(() => {
+				return this.ensureEmailNotExist();
+			})
+			.catch(error => {
+				if (error) {
+					console.log(error);
+				}
+			})
+			.then(() => {
+				return submitForm(self.form)
+			})
+			.catch(error => {
+				if (error) {console.log(error);}
+			})
+			.then(() => {
+				this.proceedToNext();
+			})
+			.catch(error => {
+				if (error) {
+					console.log(error);
+				}
+			});
 
 		function sanitiseUserInput () {
 			self.signUpFormValidator.sanitiseForm();
 		}
-		function ensureThatSignupFormIsValid () {
+		function ensureFormIsValid () {
 
 			const formIsValid = self.signUpFormValidator.validateForm();
 			if(!formIsValid) {
-				the.formIsInvalid = true;
 				return Promise.reject();
 			}
-		}
-
-		function ensureThatEmailDoesNotAlreadyExist () {
-			const url = self.email.input.getAttribute('data-checkurl');
-			return postData(url, {
-					email: self.email.value
-				})
-				.then(response => {
-					if (response.emailExists) {
-						the.userExistsAlready = true;
-						return Promise.reject();
-					}
-				})
-				.catch(error => {
-					the.userCheckFailed = true;
-					return Promise.reject(error);
-				});
-		}
-
-		function submitSingupForm () {
-			const formData = serialize(self.form, {
-				hash: true,
-				empty: true
-			});
-			const url = self.form.action;
-			formData.id = self.form.id;
-			formData.CAPTCHA = window.CAPTCHA;
-
-			return postData(url, formData)
-				.then(response => {
-					if (response.submitFailed) {
-						the.formSubmissionFailed = true;
-						self.showStatus();
-						return Promise.reject();
-					}
-				})
-				.catch(error => {
-					return Promise.reject(error);
-				});
 		}	
 	}
 
-	showStatus() {
-		const statusBox = document.getElementById('generalStatusBox');
-		statusBox.classList.add('error');
+	proceedToNext() {
+		this.form.classList.add('su-form--not-displayed');
+		this.nextForm.classList.remove('su-form--not-displayed');
 	}
 
 	static init () {

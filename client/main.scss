@@ -27,9 +27,8 @@ body {
 	@include oGridContainer;
 	margin: 0 auto;	
 	h2 {
-		margin: 0 0 oGridGutter() 0;
-		padding: oGridGutter();
-		padding-bottom: 0;
+		margin: 0;
+		padding: 0;
 		border-bottom: 7px solid #E9DECF;
 	}	
 }

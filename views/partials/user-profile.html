@@ -1,94 +1,78 @@
-<script type="text/javascript">
-window.USERIP = '133.133.133.133';
-window.CAPTCHA = (function(){
-	const code = [];
-	const timeString = new Date().getTime().toString();
-	code[3] = timeString.slice(0,5);
-	code[1] = timeString.slice(5,10);
-
-	const userIp = window.USERIP.split('.');
-	code[0] = userIp[userIp.length - 1];
-	code[2] = userIp[0];
-
-	return code.join('');
-})();
-</script>
-<div id="site-content">
-	<form id="profileForm" class="su-form js-validate-form" data-component="profile-form" action="/profile" method="post" enctype="application/x-www-form-urlencoded">
-		<div class="su-header">
-			<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
-			</div>
+<form id="profileForm" class="su-form js-validate-form" data-component="profile-form" action="/profile" method="post" enctype="application/x-www-form-urlencoded">
+	<div class="su-header">
+		<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
 		</div>
-		<fieldset class="su-form__fieldset">
-			<legend class="su-form__header"><span>基本信息</span></legend>
-			<div class="su-field">
-				<label class="su-field__label">称谓：</label>
-				<div class="su-two-column-spacing">
-					<div data-o-grid-colspan="one-half">
-						<input id="genderM" type="radio" name="gender" class="o-forms-radio" value="M">
-						<label class="su-field__label" for="genderM">先生</label>
-					</div>
-					<div data-o-grid-colspan="one-half">
-						<input id="genderF" type="radio" name="gender" class="o-forms-radio"  value="F">
-						<label class="su-field__label" for="genderF">女士</label>
-					</div>
+	</div>
+	<fieldset class="su-form__fieldset">
+		<legend class="su-form__header"><span>基本信息</span></legend>
+		<div class="su-field">
+			<label class="su-field__label">称谓：</label>
+			<div class="su-two-column">
+				<div class="one-half">
+					<input id="genderM" type="radio" name="gender" class="o-forms-radio" value="M">
+					<label class="su-field__label" for="genderM">先生</label>
 				</div>
-			</div>	
-		</fieldset>
-		
-		<fieldset name="professional" class="su-form__fieldset">
-			<legend class="su-form__header"><span>职业信息</span></legend>
-			<div id="industryField" class="o-forms-group su-field" data-component="dropdown">
+				<div class="one-half">
+					<input id="genderF" type="radio" name="gender" class="o-forms-radio"  value="F">
+					<label class="su-field__label" for="genderF">女士</label>
+				</div>
+			</div>
+		</div>	
+	</fieldset>
+	
+	<fieldset name="professional" class="su-form__fieldset">
+		<legend class="su-form__header"><span>职业信息</span></legend>
+		<div id="industryField" class="o-forms-group su-field" data-component="dropdown">
 
-				<label class="su-field__label" for="industry">所处行业</label>
+			<label class="su-field__label" for="industry">所处行业</label>
+			
+			<input id="industry" name="industry" type="text" class="su-field__input" readonly value="" >
+
+			<div class="su-field__dropdown"></div>
+
+			<div class="su-field__additional-info su-field__error">选择不完整</div>
+		</div>
+
+		<div id="responsibilityField" class="o-forms-group su-field" data-component="dropdown">
+			<label class="su-field__label" for="responsibility">工作范畴</label>
+			
+			<input id="responsibility" type="text" name="responsibility" class="o-forms-text su-field__input" value="" readonly>
+			
+			<div class="su-field__dropdown"></div>
+			<div class="su-field__additional-info su-field__error">选择不完整</div>
+		</div>
+
+		<div id="positionField" class="o-forms-group su-field" data-component="dropdown">
+			<label class="su-field__label" for="position">您的职位</label>
+			
+			<input id="position" type="text" name="position" class="su-field__input" value="" readonly>
+
+			<div class="su-field__dropdown"></div>
+			<div class="su-field__additional-info su-field__error">选择不完整</div>
+		</div>			
+	</fieldset>
+
+
+	<fieldset name="subscription" class="su-form__fieldset">
+		<legend class="su-form__header"><span>电邮订阅</span></legend>
+		<div class="o-forms-group">
+			<input id="subscipt-1" type="checkbox" name="mail_today_focus" class="o-forms-checkbox" checked="checked">
+			<label for="subscipt-1" class="su-field__label">《今日焦点》邮件</label>
+		</div>
+		<div class="o-forms-group">
+			<input id="subscipt-2" type="checkbox" name="mail_week_selects" class="o-forms-checkbox" checked="checked">
+			<label for="subscipt-2" class="su-field__label">《一周精选》邮件</label>	
+		</div>
+		<div class="o-forms">
+			<input id="subscipt-3" type="checkbox" name="mail_afternoon_express" class="o-forms-checkbox" checked="checked">
+			<label for="subscipt-3" class="su-field__label">《午后速递》邮件</label>	
+		</div>
+		<div class="o-forms-message">数据提交失败，请重试</div>
 				
-				<input id="industry" name="industry" type="text" class="su-field__input" readonly value="" >
+	</fieldset>
+	<button id="profileSubmitButton" class="su-btn" type="submit"><span>完成</span></button>	
+</form>		
 
-				<div class="su-field__dropdown"></div>
-
-				<div class="su-field__additional-info su-field__error">选择不完整</div>
-			</div>
-
-			<div id="responsibilityField" class="o-forms-group su-field" data-component="dropdown">
-				<label class="su-field__label" for="responsibility">工作范畴</label>
-				
-				<input id="responsibility" type="text" name="responsibility" class="o-forms-text su-field__input" value="" readonly>
-				
-				<div class="su-field__dropdown"></div>
-				<div class="su-field__additional-info su-field__error">选择不完整</div>
-			</div>
-
-			<div id="positionField" class="o-forms-group su-field" data-component="dropdown">
-				<label class="su-field__label" for="position">您的职位</label>
-				
-				<input id="position" type="text" name="position" class="su-field__input" value="" readonly>
-
-				<div class="su-field__dropdown"></div>
-				<div class="su-field__additional-info su-field__error">选择不完整</div>
-			</div>			
-		</fieldset>
-
-
-		<fieldset name="subscription" class="su-form__fieldset">
-			<legend class="su-form__header"><span>电邮订阅</span></legend>
-			<div class="o-forms-group">
-				<input id="subscipt-1" type="checkbox" name="mail_today_focus" class="o-forms-checkbox" checked="checked">
-				<label for="subscipt-1" class="su-field__label">《今日焦点》邮件</label>
-			</div>
-			<div class="o-forms-group">
-				<input id="subscipt-2" type="checkbox" name="mail_week_selects" class="o-forms-checkbox" checked="checked">
-				<label for="subscipt-2" class="su-field__label">《一周精选》邮件</label>	
-			</div>
-			<div class="o-forms">
-				<input id="subscipt-3" type="checkbox" name="mail_afternoon_express" class="o-forms-checkbox" checked="checked">
-				<label for="subscipt-3" class="su-field__label">《午后速递》邮件</label>	
-			</div>
-			<div id="generalStatusBox" class="o-forms-message">数据提交失败，请重试</div>
-					
-		</fieldset>
-		<button id="profileSubmitButton" class="su-btn" type="submit"><span>完成</span></button>	
-	</form>		
-</div>
-
+<div id="formEnd" class="su-form--not-displayed">保存成功！前往<a href="/">FT中文网首页</a></div>
 
 <script type="text/javascript" src="/scripts/main-profile.js"></script>

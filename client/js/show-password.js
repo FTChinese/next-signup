@@ -3,9 +3,8 @@ import setDefault from './set-default.js';
 class ShowPassword {
 	constructor (wrapperEl, settings = {}) {
 		setDefault(settings).to({
-			controlClass		: 'js-show-password',
-			passwordInputClass	: 'js-show-password__password-input',
-			checkboxClass		: 'js-show-password__checkbox'
+			inputClass	: 'js-field__input',
+			checkboxClass		: 'o-forms-checkbox'
 		});
 		
 		this.wrapper = wrapperEl;
@@ -13,8 +12,10 @@ class ShowPassword {
 			this.wrapper = document.querySelector(this.wrapper);
 		}
 
-		this.input = this.wrapper.querySelector(`.${settings.passwordInputClass}`);
+		this.input = this.wrapper.querySelector(`.${settings.inputClass}`);
+
 		this.checkbox = this.wrapper.querySelector(`.${settings.checkboxClass}`);
+		
 		this.checkbox.addEventListener('change', () => {
 			this.checkboxIsChecked() ? this.setInputTypeToText() : this.setInputTypeToPassword();
 		});
@@ -32,17 +33,11 @@ class ShowPassword {
 		this.input.type = 'password';
 	}
 
-	static init (settings = {}) {
-		setDefault(settings).to({
-			controlClass		: 'js-show-password',
-				passwordInputClass	: 'js-show-password__password-input',
-				checkboxClass		: 'js-show-password__checkbox'
-		});
-
+	static init () {
 		const instances = [];
-		const wrapperEls = document.querySelectorAll(`.${settings.controlClass}`);
+		const wrapperEls = document.querySelectorAll('.js-show-password');
 		for (let i = 0; i < wrapperEls.length; i++) {
-			instances.push(new ShowPassword(wrapperEls[i], settings));
+			instances.push(new ShowPassword(wrapperEls[i]));
 		}
 
 		return instances;
