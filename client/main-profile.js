@@ -1,3 +1,6 @@
+import 'promise-polyfill';
+import 'fetch';
+
 import Dropdown from './js/dropdown.js';
 import ProfileForm from './js/profile-form.js';
 

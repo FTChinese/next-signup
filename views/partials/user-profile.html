@@ -1,67 +1,39 @@
+<script type="text/javascript">
+window.USERIP = '133.133.133.133';
+window.CAPTCHA = (function(){
+	const code = [];
+	const timeString = new Date().getTime().toString();
+	code[3] = timeString.slice(0,5);
+	code[1] = timeString.slice(5,10);
+
+	const userIp = window.USERIP.split('.');
+	code[0] = userIp[userIp.length - 1];
+	code[2] = userIp[0];
+
+	return code.join('');
+})();
+</script>
 <div id="site-content">
-	<form novalidate id="profileForm" class="su-form su-panel__contents js-validate-form" data-component="profile-form" action="/profile" method="post" enctype="application/x-www-form-urlencoded">
+	<form id="profileForm" class="su-form js-validate-form" data-component="profile-form" action="/profile" method="post" enctype="application/x-www-form-urlencoded">
 		<div class="su-header">
 			<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
 			</div>
 		</div>
-		<fieldset name="" class="su-form__fieldset">
+		<fieldset class="su-form__fieldset">
 			<legend class="su-form__header"><span>基本信息</span></legend>
 			<div class="su-field">
 				<label class="su-field__label">称谓：</label>
 				<div class="su-two-column-spacing">
 					<div data-o-grid-colspan="one-half">
 						<input id="genderM" type="radio" name="gender" class="o-forms-radio" value="M">
-						<label class="su-field__label" for="gender-m">先生</label>
+						<label class="su-field__label" for="genderM">先生</label>
 					</div>
 					<div data-o-grid-colspan="one-half">
 						<input id="genderF" type="radio" name="gender" class="o-forms-radio"  value="F">
-						<label class="su-field__label" for="gender-f">女士</label>
+						<label class="su-field__label" for="genderF">女士</label>
 					</div>
 				</div>
-			</div>
-
-{#			<div id="nickNameField" class="o-forms-group su-field js-field">
-				<div class="o-grid-row">
-					<label class="su-field__label" for="nickname">用户名：</label>
-					<div class="su-field__instructions su-text">10个字符以内</div>
-				</div>
-				
-				<input id="nickName" name="nickName" class="o-forms-text su-field__input js-field__input js-item__value" type="text">
-				<div class="su-field__additional-info su-field__error"></div>
-			</div>
-
- 			<div class="su-field">
-				<div class="o-grid-row o-grid-row--compact su-two-column-spacing">
-					<div data-o-grid-colspan="one-half">
-						<div id="firstNameField" class="o-forms-group su-field js-field">
-							<label for="firstName" class="su-field__label">姓：</label>
-							<input type="text" id="firstName" name="firstName" class="o-forms-text su-field__input js-field__input js-item__value" placeholder="姓">
-							<div class="su-field__additional-info su-field__error"></div>
-						</div>
-					</div>
-
-					<div data-o-grid-colspan="one-half">
-						<div id="lastNameField" class="o-forms-group su-field js-field">
-							<label for="lastName" class="su-field__label">名：</label>
-							<input type="text" id="lastName" name="lastName" class="o-forms-text su-field__input js-field__input js-item__value" placeholder="名">
-							<div class="su-field__additional-info su-field__error"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="locationField" class="o-forms-group su-field js-field" data-component="dropdown">
-				<div class="o-grid-row">
-					<label class="su-field__label" for="location">居住地</label>
-					<div class="su-field__instructions su-text"></div>	
-				</div>
-				
-				<input id="location" name="location" class="o-forms-text su-field__input js-field__input js-item__value" type="text" value="中国大陆,北京" readonly>
-				
-				<div class="js-field__dropdown"></div>
-
-				<div class="su-field__additional-info su-field__error">选择不完整</div>
-			</div>	 #}		
+			</div>	
 		</fieldset>
 		
 		<fieldset name="professional" class="su-form__fieldset">
@@ -78,7 +50,7 @@
 			</div>
 
 			<div id="responsibilityField" class="o-forms-group su-field" data-component="dropdown">
-				<label class="o-forms__label" for="responsibility">工作范畴</label>
+				<label class="su-field__label" for="responsibility">工作范畴</label>
 				
 				<input id="responsibility" type="text" name="responsibility" class="o-forms-text su-field__input" value="" readonly>
 				
@@ -87,7 +59,7 @@
 			</div>
 
 			<div id="positionField" class="o-forms-group su-field" data-component="dropdown">
-				<label class="o-forms__label" for="position">您的职位</label>
+				<label class="su-field__label" for="position">您的职位</label>
 				
 				<input id="position" type="text" name="position" class="su-field__input" value="" readonly>
 
@@ -101,38 +73,22 @@
 			<legend class="su-form__header"><span>电邮订阅</span></legend>
 			<div class="o-forms-group">
 				<input id="subscipt-1" type="checkbox" name="mail_today_focus" class="o-forms-checkbox" checked="checked">
-				<label for="subscipt-1" class="o-forms-label su-field__label">《今日焦点》邮件</label>
+				<label for="subscipt-1" class="su-field__label">《今日焦点》邮件</label>
 			</div>
 			<div class="o-forms-group">
 				<input id="subscipt-2" type="checkbox" name="mail_week_selects" class="o-forms-checkbox" checked="checked">
-				<label for="subscipt-2" class="o-forms-label su-field__label">《一周精选》邮件</label>	
+				<label for="subscipt-2" class="su-field__label">《一周精选》邮件</label>	
 			</div>
 			<div class="o-forms">
 				<input id="subscipt-3" type="checkbox" name="mail_afternoon_express" class="o-forms-checkbox" checked="checked">
-				<label for="subscipt-3" class="o-forms-label su-field__label">《午后速递》邮件</label>	
+				<label for="subscipt-3" class="su-field__label">《午后速递》邮件</label>	
 			</div>
 			<div id="generalStatusBox" class="o-forms-message">数据提交失败，请重试</div>
-			<button id="profileSubmitButton" class="su-btn" type="submit"><span>完成</span></button>			
+					
 		</fieldset>
-
+		<button id="profileSubmitButton" class="su-btn" type="submit"><span>完成</span></button>	
 	</form>		
 </div>
 
-<!-- 	<div class="o-forms o-forms--privacy">
-		<ul>
-			<li>
-				<input class="o-forms__checkbox" id="privacy-1" type="checkbox" checked="checked" name="service_acceptance"><label class="o-forms__label" for="privacy-1">我愿意接受FT中文网新服务和产品的通知</a>中的条款以及FT中文网向您提供的各项产品服务。</label>
-			</li>
-			<li>
-				<input class="o-forms__checkbox" id="privacy-2" type="checkbox" checked="checked" name="auth_email_sub"><label class="o-forms__label" for="privacy-2">FT中文网及其慎重选择的第三方公司可以向我发送电子邮件</label>
-			</li>
-			<li>
-				<input class="o-forms__checkbox" id="privacy-3" type="checkbox" checked="checked" name="auth_letter_sub"><label class="o-forms__label" for="privacy-3">FT中文网及其慎重选择的第三方公司可以向我寄送信件</label>
-			</li>
-			<li id="agreement-container">
-				<input class="o-forms__checkbox" id="agreement" type="checkbox" checked="checked" name="service" pattern="checked"><label class="o-forms__label" for="agreement">我已阅读并同意FT中文网<a href="http://www.ftchinese.com/m/corp/service.html" target="_blank">用户注册协议</a>和<a href="http://www.ftchinese.com/m/corp/service.html#privacy" target="_blank">隐私权保护政策</a></label>
-				<div class="o-forms__errortext">您需要同意我们的条款和政策才能创建账号</div>
-			</li>
-		</ul>
-	</div> -->
+
 <script type="text/javascript" src="/scripts/main-profile.js"></script>

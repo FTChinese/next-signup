@@ -1,3 +1,18 @@
+<script type="text/javascript">
+window.USERIP = '133.133.133.133';
+window.CAPTCHA = (function(){
+	const code = [];
+	const timeString = new Date().getTime().toString();
+	code[3] = timeString.slice(0,5);
+	code[1] = timeString.slice(5,10);
+
+	const userIp = window.USERIP.split('.');
+	code[0] = userIp[userIp.length - 1];
+	code[2] = userIp[0];
+
+	return code.join('');
+})();
+</script>
 <div id="site-content" data-o-grid-colspan="12 S10 M8 L6 XL5 center">
 	<h2>创建账户</h2>
 	<form id="signupForm" class="su-form js-validate-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
@@ -8,7 +23,7 @@
 				<div class="su-field__instructions su-text">用于登陆FT中文网、找回您遗忘的密码，请正确填写</div>
 			</div>
 			
-			<input id="email" type="email" name="email" class="su-field__input js-field__input js-item__value"  placeholder="请输入电子邮件地址" data-checkurl="/check">
+			<input id="email" type="email" name="email" class="su-field__input js-field__input"  placeholder="请输入电子邮件地址" data-checkurl="/check">
 
 			<div class="su-field__additional-info su-field__error">请输入有效的邮箱</div>
 		</div>
@@ -26,7 +41,7 @@
 			</div>
 			
 			<div class="o-forms-affix-wrapper js-show-password">
-				<input type="password" id="password" name="password" class="o-forms-text su-field__input o-forms-text--suffixed js-field__input js-show-password__password-input js-item__value" placeholder="请输入密码">
+				<input type="password" id="password" name="password" class="o-forms-text su-field__input o-forms-text--suffixed js-field__input js-show-password__password-input" placeholder="请输入密码">
 				<span class="o-forms-suffix su-field__suffix">
 					<input type="checkbox" id="showPassword" name="showPassword" class="o-forms-checkbox js-show-password__checkbox">
 				

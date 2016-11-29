@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		account: ['fetch', './client/main-account.js'],
+		account: ['promise-polyfill', 'fetch', './client/main-account.js'],
 		profile: ['fetch', './client/main-profile.js']
 	},
 	output: {
@@ -32,6 +32,7 @@ module.exports = {
 	plugins: [
 		new BowerWebpackPlugin({
 			includes: /\.js$/
-		})
+		}),
+		new webpack.optimize.UglifyJsPlugin()
 	]
 };

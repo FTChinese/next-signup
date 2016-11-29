@@ -45,6 +45,35 @@ gulp.task('webpack', (done) => {
   });
 });
 
+const rollup = require('rollup').rollup;
+const buble = require('rollup-plugin-buble');
+const bowerResolve = require('rollup-plugin-bower-resolve');
+const uglify = require('rollup-plugin-uglify');
+var cache;
+
+gulp.task('rollup', () => {
+    return rollup({
+        context: 'window',
+        entry: 'client/main-account.js',
+        plugins: [
+            bowerResolve(),
+            buble(),
+            uglify()
+        ],
+        cache: cache,
+    }).then(function(bundle) {
+        cache = bundle;
+        return bundle.write({
+            format: 'iife',
+            dest: 'public/scripts/main-account.js',
+            sourceMap: true,
+        }).then(function() {
+            console.log('done');
+        });
+    });
+});
+
+
 gulp.task('serve', gulp.parallel('styles', 'webpack', () => {
   gulp.watch('client/**/*.scss', gulp.parallel('styles'));
 }));

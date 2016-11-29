@@ -1,7 +1,5 @@
-import Promise from 'promise-polyfill';
-if (!window.Promise) {
-	window.Promise = Promise;
-}
+import 'promise-polyfill';
+import 'fetch';
 
 import FormValidator from './js/form-validator.js';
 import ShowPassword from './js/show-password.js';

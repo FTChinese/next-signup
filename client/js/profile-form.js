@@ -13,6 +13,8 @@ class ProfileForm {
 			});
 			const url = profileForm.action;
 			formData.id = profileForm.id;
+			formData.CAPTCHA = window.CAPTCHA;
+			
 			console.log(formData)
 			postData(url, formData)
 				.then(response => {

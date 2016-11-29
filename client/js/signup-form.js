@@ -11,7 +11,6 @@ class SignupForm {
 			selector: '#signupForm'
 		});
 
-
 		this.emailExistsStatusBox = new UiItem({
 			selector: '#emailExistsStatusBox'
 		});
@@ -27,7 +26,7 @@ class SignupForm {
 		this.submitBtn = new UiItem({
 			selector: '#signUpSubmitButton'
 		});
-
+		console.log(this.email.input);
 		this.email.input.addEventListener('change', (event) => {
 			this.onEnteringAnEmail();
 		});
@@ -49,9 +48,12 @@ class SignupForm {
 		this.emailExistsStatusBox.removeFromDisplay();
 
 			if(this.emailIsValid()) {
-				const url = this.email.input.getAttribute('data-checkurl');
-				console.log('checking remote');
-				postData(url, {email: this.email.value})
+				const inputEl = this.email.input
+				const url = inputEl.getAttribute('data-checkurl');
+				const data = {};
+				data[inputEl.name] = inputEl.value;
+				console.log('checking remote for', data);
+				postData(url, data)
 				.then((response) => {
 					console.log(response);
 					if (response.emailExists) {
@@ -86,7 +88,7 @@ class SignupForm {
 		}
 		function ensureThatSignupFormIsValid () {
 
-			const formIsValid = self.signUpFormValidator.validateForm({silently:true});
+			const formIsValid = self.signUpFormValidator.validateForm();
 			if(!formIsValid) {
 				the.formIsInvalid = true;
 				return Promise.reject();
@@ -117,6 +119,7 @@ class SignupForm {
 			});
 			const url = self.form.action;
 			formData.id = self.form.id;
+			formData.CAPTCHA = window.CAPTCHA;
 
 			return postData(url, formData)
 				.then(response => {
