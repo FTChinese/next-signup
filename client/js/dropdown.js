@@ -5,8 +5,8 @@ import {buildList, search} from './helper.js'
 class Dropdown extends Toggle {
 	constructor(rootEl, data, settings={}) {
 		setDefault(settings).to({
-			fieldInputClass: 'js-field__input',
-			dropdownClass: 'js-field__dropdown',
+			fieldInputClass: 'su-field__input',
+			dropdownClass: 'su-field__dropdown',
 			invalidClass: 'o-forms--error'
 		});
 

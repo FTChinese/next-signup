@@ -82,4 +82,21 @@ function search(data, depth) {
 	return Object.assign({history: history}, result);
 }
 
-export {createElement, buildList, search};
+function postData(url, data) {
+	return 	fetch(url, {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	})
+	.then((response) => {
+		console.log('Getting response from server');
+		// submitFailed: true;
+		
+		return response.json();
+	});
+}
+
+export {createElement, buildList, search, postData};

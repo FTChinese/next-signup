@@ -1,6 +1,6 @@
 <div id="site-content" data-o-grid-colspan="12 S10 M8 L6 XL5 center">
 	<h2>创建账户</h2>
-	<form novalidate id="signupForm" class="su-form su-panel__contents js-validate-form" data-component="singnup-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+	<form id="signupForm" class="su-form js-validate-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
 
 		<div id="emailField" class="o-forms-group su-field js-field" data-validate="required,email">
 			<div class="o-grid-row">
@@ -8,7 +8,7 @@
 				<div class="su-field__instructions su-text">用于登陆FT中文网、找回您遗忘的密码，请正确填写</div>
 			</div>
 			
-			<input id="email" type="email" name="email" class="o-forms-text su-field__input js-field__input js-item__value"  placeholder="请输入电子邮件地址" data-checkurl="/check">
+			<input id="email" type="email" name="email" class="su-field__input js-field__input js-item__value"  placeholder="请输入电子邮件地址" data-checkurl="/check">
 
 			<div class="su-field__additional-info su-field__error">请输入有效的邮箱</div>
 		</div>
@@ -19,28 +19,26 @@
 			</div>
 		</div>
 
-		<div class="registrationFields">
-			<div id="passwordField" class="o-forms-group su-field js-field" data-validate="required,password">
-				<div class="o-grid-row">
-					<label for="password" class="su-field__label" >登陆密码</label>
-					<div class="su-field__instructions su-text">6-20位英文字母和数字组合</div>
-				</div>
+		<div id="passwordField" class="o-forms-group su-field js-field" data-validate="required,password">
+			<div class="o-grid-row">
+				<label for="password" class="su-field__label" >登陆密码</label>
+				<div class="su-field__instructions su-text">6-20位英文字母和数字组合</div>
+			</div>
+			
+			<div class="o-forms-affix-wrapper js-show-password">
+				<input type="password" id="password" name="password" class="o-forms-text su-field__input o-forms-text--suffixed js-field__input js-show-password__password-input js-item__value" placeholder="请输入密码">
+				<span class="o-forms-suffix su-field__suffix">
+					<input type="checkbox" id="showPassword" name="showPassword" class="o-forms-checkbox js-show-password__checkbox">
 				
-				<div class="o-forms-affix-wrapper js-show-password">
-					<input type="password" id="password" name="password" class="o-forms-text su-field__input o-forms-text--suffixed js-field__input js-show-password__password-input js-item__value" placeholder="请输入密码">
-					<span class="o-forms-suffix su-field__suffix">
-						<input type="checkbox" id="showPassword" name="showPassword" class="o-forms-checkbox o-forms-checkbox--small js-show-password__checkbox">
+					<label for="showPassword" class="o-forms-label su-field__suffix-label"></label>
 					
-						<label for="showPassword" class="o-forms-label su-field__suffix-label"></label>
-						
-					</span>
-				</div>
-				<div class="su-field__additional-info su-field__error">请输入有效的密码</div>		
-			</div>	
-		</div>
-		<div id="generalStatusBox" class="o-forms-message js-item__label">数据提交失败，请重试</div>
+				</span>
+			</div>
+			<div class="su-field__additional-info su-field__error">请输入有效的密码</div>		
+		</div>	
+		<div id="generalStatusBox" class="o-forms-message js-item__label">保存失败，请重试</div>
 
-		<button id="signUpSubmitButton" class="su-btn su-btn--primary su-item--full-width js-form__submit-button" type="submit"><span class="qa-submit-btn-label js-item__label">提交</span></button>
+		<button id="signUpSubmitButton" class="su-btn js-form__submit-button" type="submit"><span>提交</span></button>
 	</form>
 
 <!-- 	<div id="unityInput" class="o-forms-group su-field js-field">

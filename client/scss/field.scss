@@ -193,20 +193,9 @@ $color-border: #c0b0a4;
 	}
 }
 
-.o-forms-label.su-field__label--terms { // To increase the specificity
-	font-size: 13px;
-	font-weight: 300;
-	color: getColor('grey-tint5');
-}
-
 .o-forms-message {
 	display: none;
-	&.o-forms-message--error {
+	&.error {
 		display: block;
 	}
-}
-
-.su-field__input--inline {
-	display: inline-block;
-	width: auto;
 }

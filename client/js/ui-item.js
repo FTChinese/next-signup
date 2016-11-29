@@ -16,36 +16,36 @@ class UiItem {
 		this.element.classList.remove('su-item--visible');
 	}
 
-	enable () {
-		const els = elementsThatCanBeDisabled(this);
-		if (els) {
-			for (let i = 0; i < els.length; i++) {
-				els[i].setAttibute('disabled');
-			}
-		}
-	}
+	// enable () {
+	// 	const els = elementsThatCanBeDisabled(this);
+	// 	if (els) {
+	// 		for (let i = 0; i < els.length; i++) {
+	// 			els[i].setAttibute('disabled');
+	// 		}
+	// 	}
+	// }
 
-	disable () {
-		const els = elementsThatCanBeDisabled(this);
-		if (els) {
-			for (let i = 0; i < els.length; i++) {
-				els[i].setAttibute('disabled', 'true');
-			}
-		}
-	}
+	// disable () {
+	// 	const els = elementsThatCanBeDisabled(this);
+	// 	if (els) {
+	// 		for (let i = 0; i < els.length; i++) {
+	// 			els[i].setAttibute('disabled', 'true');
+	// 		}
+	// 	}
+	// }
 
-	setLabelTo (value) {
-		const label = this.element.querySelector(`.${this.labelClass}`);
-		label.innerHTML = value;
-	}
+	// setLabelTo (value) {
+	// 	const label = this.element.querySelector(`.${this.labelClass}`);
+	// 	label.innerHTML = value;
+	// }
 
-	setStatusTo(status) {
-		this.element.classList.add(`is-${status}`);
-	}
+	// setStatusTo(status) {
+	// 	this.element.classList.add(`is-${status}`);
+	// }
 
-	displayIf (_true) {
-		_true ? this.display() : this.removeFromDisplay();
-	}
+	// displayIf (_true) {
+	// 	_true ? this.display() : this.removeFromDisplay();
+	// }
 
 	display () {
 		console.log('display');
@@ -61,33 +61,33 @@ class UiItem {
 		return this.element.querySelector('input');
 	}
 
-	get label () {
-		return this.element.querySelector(`.${this.labelClass}`).innerHTML;
-	}
+	// get label () {
+	// 	return this.element.querySelector(`.${this.labelClass}`).innerHTML;
+	// }
 
-	isVisible () {
-		const styles = window.getComputedStyle(this.element);
-		return styles.getPropertyValue('display') !== 'none' && styles.getPropertyValue('visible') === '';
-	}
+	// isVisible () {
+	// 	const styles = window.getComputedStyle(this.element);
+	// 	return styles.getPropertyValue('display') !== 'none' && styles.getPropertyValue('visible') === '';
+	// }
 
-	displayError(message) {
-		if (message) {
-			this.setStatusTo('error');
-		}
-		this.setLabelTo(message);
-		this.display();
-	}
+	// displayError(message) {
+	// 	if (message) {
+	// 		this.setStatusTo('error');
+	// 	}
+	// 	this.setLabelTo(message);
+	// 	this.display();
+	// }
 
-	onValueChanged (callback) {
-		const fields = this.element.classList.contains(this.valueClass) 
-			? [this.element] 
-			: this.element.querySelectorAll(`.${this.valueClass}`);
-		for (let i = 0; i < fields.length; i++) {
-			fields[i].addEventListener('change', (event) => {
-				callback(event.target.value);
-			});
-		}
-	}
+	// onValueChanged (callback) {
+	// 	const fields = this.element.classList.contains(this.valueClass) 
+	// 		? [this.element] 
+	// 		: this.element.querySelectorAll(`.${this.valueClass}`);
+	// 	for (let i = 0; i < fields.length; i++) {
+	// 		fields[i].addEventListener('change', (event) => {
+	// 			callback(event.target.value);
+	// 		});
+	// 	}
+	// }
 
 	get name() {
 		const elem = this.element.querySelector(`.${this.valueClass}`);
@@ -140,97 +140,97 @@ class UiItem {
 		}
 	}
 
-	hasValue () {
-		return this.value && this.value.length > 0;
-	}
+	// hasValue () {
+	// 	return this.value && this.value.length > 0;
+	// }
 
-	is (something) {
-		const elems = this.valueElements();
-		if (elems.length) {
-			const elem = elems[0];
+	// is (something) {
+	// 	const elems = this.valueElements();
+	// 	if (elems.length) {
+	// 		const elem = elems[0];
 
-			if (something === 'checked') {
-				return elem.checked;
-			}
+	// 		if (something === 'checked') {
+	// 			return elem.checked;
+	// 		}
 
-			return elem.getAttribute(something) !== null;
-		}
-		return false;
-	}
+	// 		return elem.getAttribute(something) !== null;
+	// 	}
+	// 	return false;
+	// }
 
-	valueElements () {
-		return this.element.classList.contains(this.valueClass)
-			? [this.element]
-			: this.element.querySelectorAll(`.${this.valueClass}`);
-	}
+	// valueElements () {
+	// 	return this.element.classList.contains(this.valueClass)
+	// 		? [this.element]
+	// 		: this.element.querySelectorAll(`.${this.valueClass}`);
+	// }
 
-	selectOptionAt (idx) {
-		const selectBox = valueInputElementOf(this);
-		const option = selectBox.getElementByTagName('option')[idx];
-		selectBox.value = option.value;
-		// triggerChangeEventOn(selectBox);
-	}
+	// selectOptionAt (idx) {
+	// 	const selectBox = valueInputElementOf(this);
+	// 	const option = selectBox.getElementByTagName('option')[idx];
+	// 	selectBox.value = option.value;
+	// 	// triggerChangeEventOn(selectBox);
+	// }
 
-	click () {
-		// triggerEventOnDomNode(this.element, 'click');
-	}
+	// click () {
+	// 	// triggerEventOnDomNode(this.element, 'click');
+	// }
 
-	onClick (listener) {
-		this.element.addEventListener('click', listener);
-	}
+	// onClick (listener) {
+	// 	this.element.addEventListener('click', listener);
+	// }
 
-	set checked (value) {
-		const input = valueInputElementOf(this);
-		input.checked = value;
-	}
+	// set checked (value) {
+	// 	const input = valueInputElementOf(this);
+	// 	input.checked = value;
+	// }
 
-	get checked () {
-		return this.is('checked');
-	}
+	// get checked () {
+	// 	return this.is('checked');
+	// }
 }
 
-function valueInputElementOf (item) {
-	return item.element.querySelector(`.${item.valueClass}`);
-}
+// function valueInputElementOf (item) {
+// 	return item.element.querySelector(`.${item.valueClass}`);
+// }
 
-function valueInputElementsOf (item) {
-	return item.element.querySelectorAll(`.${item.valueClass}`);
-}
+// function valueInputElementsOf (item) {
+// 	return item.element.querySelectorAll(`.${item.valueClass}`);
+// }
 
-function elementsThatCanBeDisabled (item) {
-	if (item.element.tagName === 'BUTTON') {
-		return [item.element];
-	} else if (item.valueElements()) {
-		return item.valueElements();
-	} else {
-		return false;
-	}
-}
+// function elementsThatCanBeDisabled (item) {
+// 	if (item.element.tagName === 'BUTTON') {
+// 		return [item.element];
+// 	} else if (item.valueElements()) {
+// 		return item.valueElements();
+// 	} else {
+// 		return false;
+// 	}
+// }
 
-function theseInputsAreCheckable (inputs) {
-	let result = true;
-	for (let i = 0; i < inputs.length; i++) {
-		const type = inputs[i].type;
-		if(type !== 'radio' && type !== 'checkbox') {
-			result = false;
-			break;
-		}
-	}
-	return result;
-}
+// function theseInputsAreCheckable (inputs) {
+// 	let result = true;
+// 	for (let i = 0; i < inputs.length; i++) {
+// 		const type = inputs[i].type;
+// 		if(type !== 'radio' && type !== 'checkbox') {
+// 			result = false;
+// 			break;
+// 		}
+// 	}
+// 	return result;
+// }
 
-function setCheckableInputGroupValueTo (inputs, val) {
-	for (let i = 0; i < inputs.length; i++) {
-		const input = inputs[i];
-		if(input.value === val && !input.checked) {
-			input.checked = true;
-			// triggerChangeEventOn(input);
-		} else if(input.value !== val && input.checked) {
-			input.checked = false;
-			// triggerChangeEventOn(input);
-		}
-	}
-}
+// function setCheckableInputGroupValueTo (inputs, val) {
+// 	for (let i = 0; i < inputs.length; i++) {
+// 		const input = inputs[i];
+// 		if(input.value === val && !input.checked) {
+// 			input.checked = true;
+// 			// triggerChangeEventOn(input);
+// 		} else if(input.value !== val && input.checked) {
+// 			input.checked = false;
+// 			// triggerChangeEventOn(input);
+// 		}
+// 	}
+// }
 // function triggerChangeEventOn (element) {
 // 	if ('createEvent' in document) {
 // 		const evt = document.createEvent('HTMLEvents');

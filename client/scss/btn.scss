@@ -21,28 +21,9 @@
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 18px;
 	width: 100%;
-	color: #000;
-	background-color:#ffcc9a;
-}
-
-.su-btn--primary {
 	background-color: oColorsGetPaletteColor('teal-1');
 	color: white;
 
 	min-width: 280px;
     max-width: 100%;
-
-	// overwrite hover styles on links styled as buttons
-	// not sure where the unqualified `a` selector is coming from
-	&:hover,
-	&:focus {
-		color: white;
-	}
-}
-
-.su-btn--primary:disabled {
-	background-color: oColorsGetPaletteColor('grey-tint1');
-	color: white;
-	padding-left: 30px;
-	padding-right: 30px;
 }

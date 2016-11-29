@@ -1,10 +1,7 @@
 import UiItem from './ui-item.js';
 import FormValidator from './form-validator.js';
 import serialize from './serialize.js';
-
-const store = {
-	nextPageUrl: '/thank-you'
-};
+import {postData} from './helper.js';
 
 class SignupForm {
 	constructor (selector) {
@@ -29,10 +26,6 @@ class SignupForm {
 
 		this.submitBtn = new UiItem({
 			selector: '#signUpSubmitButton'
-		});
-
-		this.generalStatusBox = new UiItem({
-			selector: '#generalStatusBox'
 		});
 
 		this.email.input.addEventListener('change', (event) => {
@@ -78,19 +71,16 @@ class SignupForm {
 		const self = this;
 
 		return Promise.resolve()
-		.then(hideAllStatusMessages)
 		.then(sanitiseUserInput)
 		.then(ensureThatSignupFormIsValid)
 		.then(ensureThatEmailDoesNotAlreadyExist)
 		.then(submitSingupForm)
-		.then(showThankYou)
 		.catch(error => {
-			console.log(error);
+			if (error) {
+				console.log(error);
+			}
 		});
 
-		function hideAllStatusMessages () {
-			self.hideGeneralErrorMessage();
-		}
 		function sanitiseUserInput () {
 			self.signUpFormValidator.sanitiseForm();
 		}
@@ -119,9 +109,6 @@ class SignupForm {
 					return Promise.reject(error);
 				});
 		}
-		function showAllValidationErrorsOnForm () {
-			self.signUpFormValidator.validateForm();
-		}
 
 		function submitSingupForm () {
 			const formData = serialize(self.form, {
@@ -131,21 +118,23 @@ class SignupForm {
 			const url = self.form.action;
 			formData.id = self.form.id;
 
-			return postData(url, formData);
-		}
-
-		function showThankYou() {
-			document.getElementById('thankYou').setAttribute('aria-hidden', 'false');
-			self.form.setAttribute('aria-hidden', 'true');
-		}		
+			return postData(url, formData)
+				.then(response => {
+					if (response.submitFailed) {
+						the.formSubmissionFailed = true;
+						self.showStatus();
+						return Promise.reject();
+					}
+				})
+				.catch(error => {
+					return Promise.reject(error);
+				});
+		}	
 	}
 
-	showGeneralErrorMessage (message) {
-		this.generalStatusBox.displayError(message);
-	}
-
-	hideGeneralErrorMessage () {
-		this.generalStatusBox.removeFromDisplay();
+	showStatus() {
+		const statusBox = document.getElementById('generalStatusBox');
+		statusBox.classList.add('error');
 	}
 
 	static init () {
@@ -153,20 +142,4 @@ class SignupForm {
 	}
 }
 
-function postData(url, data) {
-	return 	fetch(url, {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-	})
-	.then((response) => {
-		console.log('Getting response from server');
-		// submitFailed: true;
-		
-		return response.json();
-	});
-}
 export default SignupForm;

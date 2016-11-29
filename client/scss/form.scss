@@ -9,6 +9,13 @@
 	&[aria-hidden=true] {
 		display: none;
 	}
+
+	padding: 12px 0;
+
+	@include oGridRespondTo(L) {
+		padding-top: 37px;
+		padding-bottom: 37px;
+	}
 }
 
 .su-form__fieldset {
