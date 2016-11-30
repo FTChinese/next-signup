@@ -86,6 +86,7 @@ $color-border: #c0b0a4;
 
 // wyc add
 #showPassword {
+	display: none;
 	&+label:after{
 		content:"显示密码";
 	}
@@ -131,7 +132,9 @@ $color-border: #c0b0a4;
     width: 1%;
     white-space: nowrap;
 
-    padding: 9px 5px 9px;//wyc modify
+    // padding: 9px 5px 9px;//wyc modify
+    line-height: normal;
+    padding: 0 5px;
     font-size: 14px;
     text-align: center;
     background-color: #f7e9d9;

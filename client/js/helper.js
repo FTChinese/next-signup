@@ -34,18 +34,18 @@ function buildList(data, prefix) {
 */
 		const dataOrder = (prefix === null) ? i : prefix + '-' + i;
 
-		const liEl = createElement('li', {
+		const liEl = createElement('li', null);
+		const spanEl = createElement('span', {
 			'data-order': dataOrder
-		});
+		}, item.name);
+		liEl.appendChild(spanEl);
 
 		if (item.children) {
-			const spanEl = createElement('span', {
-				'data-order': dataOrder
-			}, item.name);
-			liEl.appendChild(spanEl);
+			// const spanEl = createElement('span', {
+			// 	'data-order': dataOrder
+			// }, item.name);
+			// liEl.appendChild(spanEl);
 			liEl.appendChild(buildList(item.children, dataOrder));
-		} else {
-			liEl.textContent = item.name;
 		}
 		ulEl.appendChild(liEl);
 	}
@@ -116,7 +116,7 @@ function submitForm(form) {
 				return Promise.resolve();
 			} else {
 				form.querySelector('.o-forms-message').classList.add('error');
-				return Promise.reject('Submit failed');
+				return Promise.reject();
 			}
 		});
 }

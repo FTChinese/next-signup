@@ -83,19 +83,20 @@ class SignupForm {
 		return Promise.resolve()
 			.then(sanitiseUserInput)
 			.then(ensureFormIsValid)
+			.catch(error => {
+				return Promise.reject('form is not valid');
+			})
 			.then(() => {
 				return this.ensureEmailNotExist();
 			})
 			.catch(error => {
-				if (error) {
-					console.log(error);
-				}
+				return Promise.reject('email taken');
 			})
 			.then(() => {
 				return submitForm(self.form.element)
 			})
 			.catch(error => {
-				if (error) {console.log(error);}
+				return Promise.reject('Submit failed');
 			})
 			.then(() => {
 				this.form.removeFromDisplay();
@@ -118,11 +119,6 @@ class SignupForm {
 			}
 		}	
 	}
-
-	// proceedToNext() {
-	// 	this.form.classList.add('su-form--not-displayed');
-	// 	this.nextForm.classList.remove('su-form--not-displayed');
-	// }
 
 	static init () {
 		new SignupForm();

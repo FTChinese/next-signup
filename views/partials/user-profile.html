@@ -1,4 +1,4 @@
-<form id="profileForm" class="su-form su-item--not-displayed js-validate-form" data-component="profile-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+<form id="profileForm" class="su-form {% if not dev %}su-item--not-displayed{% endif %} js-validate-form" data-component="profile-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
 	<div class="su-header">
 		<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
 		</div>
@@ -67,7 +67,7 @@
 			<input id="subscipt-3" type="checkbox" name="mail_afternoon_express" class="o-forms-checkbox" checked="checked">
 			<label for="subscipt-3" class="su-field__label">《午后速递》邮件</label>	
 		</div>
-		<div class="o-forms-message">数据提交失败，请重试</div>
+		<div class="o-forms-message">保存失败，请重试</div>
 				
 	</fieldset>
 	<button id="profileSubmitBtn" class="su-btn" type="submit"><span>完成</span></button>	
