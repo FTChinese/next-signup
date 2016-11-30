@@ -13,13 +13,7 @@ new Tracker({
 	selector: '#signupForm'
 });
 
-// function recordAction(type, category) {
-// 	try {
-// 		ga('send', 'event', type, category, window.FTStoryid);
-// 	} catch(err) {
-// 		console.log('send', 'event', type, category)
-// 	}
-// }
+
 // Submit Registration
 // Select Gender
 // Select Industry
@@ -29,9 +23,3 @@ new Tracker({
 // Unckeck mail_week_selects
 // Unckeck mial_afternoon_express
 // Save Profile
-// ga('send', {
-// 	hitType: 'event',
-// 	eventCategory: 'signup',
-// 	eventAction: 'Select Gender'
-
-// })

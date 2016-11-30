@@ -83,42 +83,4 @@ function search(data, depth) {
 	return Object.assign({history: history}, result);
 }
 
-function postData(url, data) {
-	return 	fetch(url, {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-	})
-	.then((response) => {
-		console.log('Getting response from server');
-		// submitFailed: true;
-		
-		return response.json();
-	});
-}
-
-function submitForm(form) {
-	const formData = serialize(form, {
-		hash: true,
-		empty: true
-	});
-	const url = form.action;
-	formData.id = form.id;
-	formData.CAPTCHA = window.CAPTCHA;
-// response: {submitSucceeds: true} or {submitSucceds: false}	
-	return postData(url, formData)
-		.then(response => {
-			console.log(response);
-			if(response.submitSucceeds) {
-				return Promise.resolve();
-			} else {
-				form.querySelector('.o-forms-message').classList.add('error');
-				return Promise.reject();
-			}
-		});
-}
-
-export {createElement, buildList, search, postData, submitForm};
+export {createElement, buildList, search};
