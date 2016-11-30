@@ -111,10 +111,11 @@ function submitForm(form) {
 // response: {submitSucceeds: true} or {submitSucceds: false}	
 	return postData(url, formData)
 		.then(response => {
+			console.log(response);
 			if(response.submitSucceeds) {
 				return Promise.resolve();
 			} else {
-				form.qerySelector('.o-forms-message').classList.add('error');
+				form.querySelector('.o-forms-message').classList.add('error');
 				return Promise.reject('Submit failed');
 			}
 		});

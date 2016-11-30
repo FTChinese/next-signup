@@ -11,6 +11,10 @@ class SignupForm {
 			selector: '#signupForm'
 		});
 
+		this.ui = new UiItem({
+			selector: '#signupForm'
+		})
+
 		this.emailExistsStatusBox = new UiItem({
 			selector: '#emailExistsStatusBox'
 		});
@@ -99,6 +103,7 @@ class SignupForm {
 			})
 			.then(() => {
 				this.profileForm.display();
+				this.ui.removeFromDisplay();
 			})
 			.catch(error => {
 				if (error) {

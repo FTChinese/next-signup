@@ -1,20 +1,30 @@
-// import serialize from './serialize.js';
+import UiItem from './ui-item.js';
 import {submitForm} from './helper.js';
 
 class ProfileForm {
-	static init () {
-		const form = document.getElementById('profileForm');
-
-		form.addEventListener('submit', (e) => {
+	constructor(selector) {
+		this.form = document.getElementById('profileForm');
+		console.log(this.form);
+		this.successBox = new UiItem({
+			selector: '#formEnd'
+		});
+		
+		this.form.addEventListener('submit', (e) => {
 			e.preventDefault();
-			submitForm(form)
+			submitForm(this.form)
+				.catch(error => {
+					if (error) {console.log(error);}
+				})
 				.then(() => {
-					document.getElementById('formEnd').classList.remove('su-form--not-displayed')
+					this.successBox.display();
 				})
 				.catch(error => {
-					return Promise.reject(error);
+					if (error) {console.log(error);}
 				});
-		});			
+		});
+	}
+	static init () {
+		new ProfileForm();		
 	}
 }
 
