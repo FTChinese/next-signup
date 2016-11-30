@@ -21,8 +21,8 @@ class Dropdown {
 		this.inputEl = rootEl.querySelector(`.${settings.fieldInputClass}`);
 		this.dropdownEl = rootEl.querySelector(`.${settings.dropdownClass}`);
 
-		this.toggle = new Toggle(inputEl, {
-			target: dropdownEl
+		this.toggle = new Toggle(this.inputEl, {
+			target: this.dropdownEl
 		});
 	
 		this.settings = settings;
@@ -36,11 +36,7 @@ class Dropdown {
 		this.dropdownEl.appendChild(list);
 
 		this.select = this.select.bind(this);
-		this.targetEl.addEventListener('click', this.select);
-		// console.log('add change event');
-		// this.inputEl.addEventListener('change', (e) => {
-		// 	console.log(this.inputEl.value);
-		// });
+		this.inputEl.addEventListener('click', this.select);
 
 		this.onEls = [];
 		this.rootEl.setAttribute('data-dropdown--js', 'true');

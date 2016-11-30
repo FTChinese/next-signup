@@ -13,7 +13,6 @@ class ShowPassword {
 		}
 
 		this.input = this.wrapper.querySelector(`.${settings.inputClass}`);
-
 		this.checkbox = this.wrapper.querySelector(`.${settings.checkboxClass}`);
 		
 		this.checkbox.addEventListener('change', () => {

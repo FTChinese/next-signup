@@ -26,6 +26,11 @@ class SignupForm {
 		this.submitBtn = new UiItem({
 			selector: '#signUpSubmitButton'
 		});
+
+		this.profileForm = new UiItem({
+			selector: '#profileForm'
+		});
+
 		console.log(this.email.input);
 		this.email.input.addEventListener('change', (event) => {
 			this.onEnterEmail();
@@ -93,7 +98,7 @@ class SignupForm {
 				if (error) {console.log(error);}
 			})
 			.then(() => {
-				this.proceedToNext();
+				this.profileForm.display();
 			})
 			.catch(error => {
 				if (error) {
@@ -113,10 +118,10 @@ class SignupForm {
 		}	
 	}
 
-	proceedToNext() {
-		this.form.classList.add('su-form--not-displayed');
-		this.nextForm.classList.remove('su-form--not-displayed');
-	}
+	// proceedToNext() {
+	// 	this.form.classList.add('su-form--not-displayed');
+	// 	this.nextForm.classList.remove('su-form--not-displayed');
+	// }
 
 	static init () {
 		new SignupForm();

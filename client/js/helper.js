@@ -108,14 +108,14 @@ function submitForm(form) {
 	const url = form.action;
 	formData.id = form.id;
 	formData.CAPTCHA = window.CAPTCHA;
-// response: {submitFailed: true} or {submitFailed: false}	
+// response: {submitSucceeds: true} or {submitSucceds: false}	
 	return postData(url, formData)
 		.then(response => {
-			if(response.submitFailed) {
+			if(response.submitSucceeds) {
+				return Promise.resolve();
+			} else {
 				form.qerySelector('.o-forms-message').classList.add('error');
 				return Promise.reject('Submit failed');
-			} else {
-				return Promise.resolve();
 			}
 		});
 }
