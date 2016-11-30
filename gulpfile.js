@@ -76,18 +76,7 @@ gulp.task('serve', gulp.parallel('styles', 'webpack', () => {
   gulp.watch('client/**/*.scss', gulp.parallel('styles'));
 }));
 
-gulp.task('html', () => {
-  return co(function *() {
-    if (!isThere(destDir)) {
-      mkdirp(destDir, (err) => {
-        if (err) console.log(err);
-      });
-    }
 
-    const reuslt = yield render('register.html');
-    yield fs.writeFile('public/', result, 'utf8');
-  });
-});
 
 gulp.task('rollup', () => {
   return rollup({
@@ -109,4 +98,42 @@ gulp.task('rollup', () => {
         console.log('done');
     });
   });
+});
+
+gulp.task('html', () => {
+  return co(function *() {
+    const context = {
+      dev: false
+    };
+
+    if (process.env.NODE_ENV === 'dev') {
+      context.dev = true;
+    }
+
+    const result = yield render('register-new.html', context);
+
+    yield fs.writeFile('public/register.html', result, 'utf8');
+  });
+});
+
+gulp.task('build', gulp.series('prod', gulp.parallel('html', 'styles', 'rollup'), 'dev'));
+
+gulp.task('deploy', function() {
+  const DEST = path.resolve(__dirname, `../phone`);
+
+  console.log(`Deploying HTML file to: ${DEST}`);
+
+  return gulp.src(`public/register.html`)
+    .pipe($.smoosher({
+      ignoreFilesNotFound: true
+    }))
+    .pipe($.htmlmin({
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true
+    }))
+    .pipe($.rename('register-new.html'))
+    .pipe(gulp.dest(DEST));
 });

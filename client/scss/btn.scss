@@ -26,4 +26,11 @@
 
 	min-width: 280px;
     max-width: 100%;
+
+    &:disabled {
+    	background-color: #e9decf;
+	    border-color: #e9decf;
+	    cursor: default;
+	    color: #afafaf;
+    }
 }

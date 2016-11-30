@@ -3,7 +3,7 @@ class DataStore {
 	constructor(settings={}) {
 		setDefault(settings).to({
 			selector: '',
-			forClass: 'js-validate-form',
+			formClass: 'js-validate-form',
 			fieldInputClass: 'js-field__input'
 		});
 

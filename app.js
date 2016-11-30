@@ -8,7 +8,6 @@ const bodyParser = require('koa-bodyparser');
 const render = require('./helper/render.js');
 
 const signup = require('./routes/signup.js');
-const profile = require('./routes/profile.js');
 const check = require('./routes/check.js')
 
 app.use(serve('public', {
@@ -19,7 +18,6 @@ app.use(logger());
 app.use(bodyParser());
 
 app.use(mount('/', signup));
-app.use(mount('/profile', profile));
 app.use(mount('/check', check));
 
 const server = app.listen(process.env.PORT || 3000)

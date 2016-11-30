@@ -4,16 +4,17 @@ import {postData, submitForm} from './helper.js';
 
 class SignupForm {
 	constructor (selector) {
-		this.form = document.getElementById('signupForm');
-		this.nextForm = document.getElementById('profileForm');
-
 		this.signUpFormValidator = new FormValidator({
 			selector: '#signupForm'
 		});
 
-		this.ui = new UiItem({
+		this.form = new UiItem({
 			selector: '#signupForm'
-		})
+		});
+
+		this.profileForm = new UiItem({
+			selector: '#profileForm'
+		});
 
 		this.emailExistsStatusBox = new UiItem({
 			selector: '#emailExistsStatusBox'
@@ -31,16 +32,11 @@ class SignupForm {
 			selector: '#signUpSubmitButton'
 		});
 
-		this.profileForm = new UiItem({
-			selector: '#profileForm'
-		});
-
-		console.log(this.email.input);
 		this.email.input.addEventListener('change', (event) => {
 			this.onEnterEmail();
 		});
 
-		this.form.addEventListener('submit', (event) => {
+		this.form.element.addEventListener('submit', (event) => {
 			event.preventDefault();
 			this.onSubmit();
 		});
@@ -96,14 +92,14 @@ class SignupForm {
 				}
 			})
 			.then(() => {
-				return submitForm(self.form)
+				return submitForm(self.form.element)
 			})
 			.catch(error => {
 				if (error) {console.log(error);}
 			})
 			.then(() => {
+				this.form.removeFromDisplay();
 				this.profileForm.display();
-				this.ui.removeFromDisplay();
 			})
 			.catch(error => {
 				if (error) {

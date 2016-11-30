@@ -39,7 +39,7 @@
 
 	<button id="signUpSubmitButton" class="su-btn js-form__submit-button" type="submit"><span>提交</span></button>
 </form>
-<form id="profileForm" class="su-item--not-displayed">Next</form>
+
 <!-- 	<div id="unityInput" class="o-forms-group su-field js-field">
 		<div class="o-grid-row">
 			<label class="su-field__label"></label>
@@ -57,5 +57,6 @@
 		</div>
 	</div> -->
 
-
-<script type="text/javascript" src="/scripts/main-account.js"></script>
+{% if dev %}
+<script type="text/javascript" src="scripts/main-account.js"></script>
+{% endif %}

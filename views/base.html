@@ -28,20 +28,28 @@
 	<link rel="apple-touch-icon" sizes="120x120" href="{{iconsPath}}/favicons/apple-touch-icon-120x120.png">
 	<link rel="apple-touch-icon" sizes="76x76" href="{{iconsPath}}/favicons/apple-touch-icon-76x76.png">
 	<link href="{{iconsPath}}/favicons/favicon.ico" type="image/x-icon" rel="shortcut icon" />
-{% block css %}
-	<link rel="stylesheet" type="text/css" href="/styles/main.css">
-{% endblock %}
+
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-1608715-1', 'auto');
+  })(window,document,'script','https://www.google-analytics.com/analytics_debug.js','ga');
+window.ga_debug = {trace: true};
+  ga('create', 'UA-1608715-1', 'www.ftchinese.com');
+// if (location.hostname == 'localhost') {
+//   ga('set', 'sendHitTask', null);
+// } 
   ga('send', 'pageview');
 
 </script>
+
+{% block css %}
+<!-- smoosh-->
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+<!-- endsmoosh -->
+{% endblock %}
+
 	<title>Next Singup - FT中文网</title>
 </head>
 <body>
@@ -52,8 +60,8 @@
   </div>
 {% block body %}{% endblock %}
 
-{% block js %}
+
 <!-- <script type="text/javascript" src="/scripts/main.js"></script> -->
-{% endblock %}
+
 </body>
 </html>

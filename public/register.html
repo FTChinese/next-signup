@@ -1,4 +1,69 @@
-<form id="profileForm" class="su-form su-item--not-displayed js-validate-form" data-component="profile-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+<!-- smoosh-->
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+<!-- endsmoosh -->
+
+<div id="site-content">
+	<form id="signupForm" class="su-form js-validate-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
+	<h2>创建账户</h2>
+	<div id="emailField" class="o-forms-group su-field js-field" data-validate="required,email">
+		<div class="o-grid-row">
+			<label class="su-field__label" for="email">电子邮箱</label>
+			<div class="su-field__instructions su-text">用于登陆FT中文网、找回您遗忘的密码，请正确填写</div>
+		</div>
+		
+		<input id="email" type="email" name="email" class="su-field__input js-field__input"  placeholder="请输入电子邮件地址" data-checkurl="/check">
+
+		<div class="su-field__additional-info su-field__error">请输入有效的邮箱</div>
+	</div>
+
+	<div id="emailExistsStatusBox" class="su-status-box su-item--not-displayed">
+		<div class="su-status-box__description">
+			此邮箱已经注册，您可以<a href="http://user.ftchinese.com/login">登录</a>或<a href="http://www.ftchinese.com/users/findpassword">找回密码</a>
+		</div>
+	</div>
+
+	<div id="passwordField" class="o-forms-group su-field js-field" data-validate="required,password">
+		<div class="o-grid-row">
+			<label for="password" class="su-field__label" >登陆密码</label>
+			<div class="su-field__instructions su-text">6-20位英文字母和数字组合</div>
+		</div>
+		
+		<div class="o-forms-affix-wrapper js-show-password">
+			<input type="password" id="password" name="password" class="su-field__input js-field__input" placeholder="请输入密码">
+
+			<span class="su-field__suffix">
+				<input type="checkbox" id="showPassword" class="o-forms-checkbox">
+			
+				<label for="showPassword" class="su-field__suffix-label"></label>
+				
+			</span>
+		</div>
+		<div class="su-field__additional-info su-field__error">请输入有效的密码</div>		
+	</div>	
+	<div class="o-forms-message">保存失败，请重试</div>
+
+	<button id="signUpSubmitButton" class="su-btn js-form__submit-button" type="submit"><span>提交</span></button>
+</form>
+
+<!-- 	<div id="unityInput" class="o-forms-group su-field js-field">
+		<div class="o-grid-row">
+			<label class="su-field__label"></label>
+			<div class="su-field__instructions su-text"></div>
+		</div>
+		
+		<div class="su-field__additional-info su-field__error"></div>
+
+		<div class="o-forms-affix-wrapper">
+			<input class="o-forms-text su-field__input o-forms-text--suffixed js-field__input" type="hidden">
+			
+			<span class="o-forms-suffix su-field__suffix">
+				<button class="su-btn" type="button">发送</button>	
+			</span>			
+		</div>
+	</div> -->
+
+
+	<form id="profileForm" class="su-form su-item--not-displayed js-validate-form" data-component="profile-form" action="/signup" method="post" enctype="application/x-www-form-urlencoded">
 	<div class="su-header">
 		<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
 		</div>
@@ -75,6 +140,10 @@
 
 <div id="formEnd" class="su-item--not-displayed">保存成功！</div>
 
-{% if dev %}
-<script type="text/javascript" src="scripts/main-profile.js"></script>
-{% endif %}
+	
+</div>
+
+<!-- smoosh-->
+<script type="text/javascript" src="scripts/main.js"></script>
+<!-- endsmoosh -->
+	

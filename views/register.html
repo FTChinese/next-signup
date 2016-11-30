@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
+{% set single = "true" %}
 	<div id="site-content">
 		{% include "partials/create-account.html"%}
-		{% include "partials/user-profile.html" %}		
+		{% include "partials/user-profile.html" %}	
 	</div>
+{% block js %}
+<!-- smoosh-->
+<script type="text/javascript" src="scripts/main.js"></script>
+<!-- endsmoosh -->
+{% endblock %}	
 
 {% endblock%}

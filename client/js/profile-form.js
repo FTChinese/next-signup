@@ -8,7 +8,20 @@ class ProfileForm {
 		this.successBox = new UiItem({
 			selector: '#formEnd'
 		});
-		
+		this.btn = new UiItem({
+			selector: '#profileSubmitBtn'
+		});
+// enable submit button if clicked on input element
+		this.form.addEventListener('click', (e) => {
+			if (e.target.tagName !== 'INPUT') {
+				return;
+			}
+			if (this.btn.isDisabled) {
+				this.successBox.removeFromDisplay();
+				this.btn.enable();
+			}
+		});
+
 		this.form.addEventListener('submit', (e) => {
 			e.preventDefault();
 			submitForm(this.form)
@@ -17,6 +30,8 @@ class ProfileForm {
 				})
 				.then(() => {
 					this.successBox.display();
+					// disable submit button after succeed.
+					this.btn.disable();
 				})
 				.catch(error => {
 					if (error) {console.log(error);}

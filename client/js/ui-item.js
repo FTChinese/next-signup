@@ -6,13 +6,23 @@ class UiItem {
 	}
 
 	display () {
-		console.log('display');
 		this.element.classList.remove('su-item--not-displayed');
 	}
 
 	removeFromDisplay () {
-		console.log('not display');
 		this.element.classList.add('su-item--not-displayed');
+	}
+
+	isDisabled() {
+		return this.element.disabled;
+	}
+	
+	disable() {
+		this.element.disabled = true;
+	}
+
+	enable() {
+		this.element.disabled = false;
 	}
 
 	get input () {

@@ -8,12 +8,22 @@ const render = require('../helper/render');
 
 router.get('/', function *(next) {
 
-	this.body = yield render('signup.html');
+	this.body = yield render('signup.html', {
+		dev: true
+	});
+});
+
+router.get('/profile', function *(next) {
+	this.body = yield render('profile.html', {
+		dev: true
+	});
 });
 
 router.get('/register', function *(next) {
-	this.body = yield render('register.html');
-})
+	this.body = yield render('register.html', {
+		dev: false
+	});
+});
 
 router.post('/signup', function *() {
 	console.log(this.request.body);
