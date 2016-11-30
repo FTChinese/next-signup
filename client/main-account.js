@@ -8,3 +8,11 @@ import SignupForm from './js/signup-form.js';
 FormValidator.init();
 ShowPassword.init();
 SignupForm.init();
+
+function recordAction(type, category) {
+	try {
+		ga('send', 'event', type, category, window.FTStoryid);
+	} catch(err) {
+		console.log('send', 'event', type, category)
+	}
+}
