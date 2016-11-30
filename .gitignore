@@ -38,5 +38,4 @@ jspm_packages
 bower_components
 .DS_Store
 .tmp
-public/scripts
-public/styles
+public
