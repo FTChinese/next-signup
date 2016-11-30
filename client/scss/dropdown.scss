@@ -5,6 +5,9 @@
 	
 	&[aria-hidden=false] {
 		display: block;
+		border: 1px solid #cec6b9;//wyc add
+		background-color:#fff;//wyc add
+
 	}
 	ul {
 		list-style-type: none;
@@ -13,6 +16,9 @@
 	}
 	li {
 		cursor: pointer;
+		padding:5px; //wyc add
+		border-bottom:1px dotted #333;//wyc add
+
 	}
 	span + ul {
 		display: none;
