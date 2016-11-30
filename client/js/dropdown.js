@@ -150,16 +150,6 @@ class Dropdown {
 		this.rootEl.classList.remove(this.settings.validClass);
 	}
 
-	removeValidityFlag() {
-		console.log(this.rootEl);
-		this.rootEl.classList.remove(this.settings.invalidClass);
-		this.rootEl.classList.remove(this.settings.validClass);
-	}
-
-	static validateCompletion() {
-
-	}
-
 	static init(dataArr, el=document.body) {
 		const dropdowns = [];
 		if (!(el instanceof HTMLElement)) {
