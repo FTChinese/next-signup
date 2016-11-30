@@ -1,5 +1,5 @@
 import setDefault from './set-default.js';
-import Toggle from './toggle';
+// import Toggle from './toggle';
 import {buildList, search} from './helper.js'
 
 class Dropdown {
@@ -7,7 +7,8 @@ class Dropdown {
 		setDefault(settings).to({
 			fieldInputClass: 'su-field__input',
 			dropdownClass: 'su-field__dropdown',
-			invalidClass: 'o-forms--error'
+			invalidClass: 'o-forms--error',
+			validClass: 'o-forms--valid'
 		});
 
 		if (!rootEl) {
@@ -18,36 +19,47 @@ class Dropdown {
 		}
 
 		this.rootEl = rootEl;
+		this.settings = settings;
+		this.isValid = true;
+		this.data = data;
+
 		this.inputEl = rootEl.querySelector(`.${settings.fieldInputClass}`);
 		this.dropdownEl = rootEl.querySelector(`.${settings.dropdownClass}`);
 
-		this.toggle = new Toggle(this.inputEl, {
-			target: this.dropdownEl
-		});
-	
-		this.settings = settings;
 		
+		// new Toggle(this.inputEl, {
+		// 	target: this.dropdownEl,
+		// 	callback: this.toggle
+		// });	
+		this.toggle = this.toggle.bind(this);
+		this.inputEl.setAttribute('aria-expanded', 'false');
+		this.inputEl.addEventListener('click', this.toggle);
 // a flag to indicate whether the nested data reaches end.
 // Initailly it should be true. If user switched off the dropdown menu while selection does not reach the end, it is false and prevents submit.
-		this.isValid = true;
-		this.data = data;
 
 		const list = buildList(this.data, null);
 		this.dropdownEl.appendChild(list);
 
+		this.dropdownEl.setAttribute('aria-hidden', 'true');
 		this.select = this.select.bind(this);
-		this.inputEl.addEventListener('click', this.select);
+		this.dropdownEl.addEventListener('click', this.select);
 
 		this.onEls = [];
 		this.rootEl.setAttribute('data-dropdown--js', 'true');
 	}
 
 	toggle(e) {
-		this.toggle.toggle();
-// this.state inherited from Toggle.
-// this.state = true if menu opens. Whatever error message visible should be hidden.
-		if (this.toggle.state) {			
-			this.removeValidityFlag();
+		const state = this.dropdownEl.classList.toggle('o-toggle--active');
+		this.inputEl.setAttribute('aria-expanded', state);
+		this.dropdownEl.setAttribute('aria-hidden', !state);
+		e && e.preventDefault();
+// state  from Toggle.
+// state = true if menu opens. Whatever error message visible should be hidden.
+		console.log(state);
+		if (state) {
+			this.flagAsValid();
+// You must stop here if the dropdown opens.
+			return;
 		}		
 // If data search reaches the end, remove any `data-error` attributes, else add `data-error=imcomplete`.
 		if (this.isValid) {
@@ -61,9 +73,11 @@ class Dropdown {
 	}
 
 	select(e) {
+		console.log(e.target);
 		if (!e.target.hasAttribute('data-order')) {
 			return;
 		}
+
 
 		const target = e.target;
 		const order = target.getAttribute('data-order').split('-');
@@ -81,7 +95,7 @@ class Dropdown {
 // selection complete, dispatching complete event to inputEl, set isValid to true, close dropdown, close all submenu.
 		dispatchChangeEventTo(this.inputEl);
 		this.isValid = true;		
-		this.toggle(e);
+		this.toggle();
 		this.closeSubmenu();
 	}
 
@@ -126,21 +140,14 @@ class Dropdown {
 
 	flagAsValid () {
 		this.rootEl.classList.add(this.settings.validClass);
+		console.log('removing class ', this.settings.invalidClass);
+		console.log(this.rootEl.className);
 		this.rootEl.classList.remove(this.settings.invalidClass);
 	}
 
 	flagAsInvalid () {
 		this.rootEl.classList.add(this.settings.invalidClass);
 		this.rootEl.classList.remove(this.settings.validClass);
-	}
-
-	removeValidityFlag() {
-		this.rootEl.classList.remove(this.settings.invalidClass);
-		this.rootEl.classList.remove(this.settings.validClass);
-	}
-
-	static validateCompletion() {
-
 	}
 
 	static init(dataArr, el=document.body) {

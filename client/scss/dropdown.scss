@@ -20,6 +20,9 @@
 		border-bottom:1px dotted #333;//wyc add
 
 	}
+	span[data-order] {
+		display: block;
+	}
 	span + ul {
 		display: none;
 		padding-left: 2em;

@@ -189,6 +189,8 @@ $color-border: #c0b0a4;
 
 .o-forms-message {
 	display: none;
+	text-align: center;
+	color: oColorsGetPaletteColor('red');
 	&.error {
 		display: block;
 	}
