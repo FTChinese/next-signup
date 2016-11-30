@@ -1,4 +1,6 @@
 .su-field__dropdown {
+	font-size: 1.2em;
+	color: #74736c;
 	&[aria-hidden=true] {
 		display: none;
 	}
@@ -14,18 +16,39 @@
 		margin: 0;
 		padding: 0;
 	}
-	li {
-		cursor: pointer;
-		padding:5px; //wyc add
-		border-bottom:1px dotted #333;//wyc add
 
-	}
-	span[data-order] {
+	span,
+	li {
 		display: block;
+		cursor: pointer;
+		padding:0; //wyc add
+		//wyc add
 	}
+
+	li:last-child {
+		border-bottom: 0;
+	}
+
+	li ul li {
+		padding-left: 2em;
+		line-height: 1.75;
+	}
+
+	span {
+		line-height: 1.75;
+		padding-left: 0.5em;
+	}
+	span.on {
+		background: #598caf;
+		color: #fff;
+	}
+	span.on, li {
+		border-bottom:1px dotted #333;
+	}
+
 	span + ul {
 		display: none;
-		padding-left: 2em;
+		// padding-left: 2em;
 	}
 
 	span.on + ul {
