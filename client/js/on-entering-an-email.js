@@ -7,7 +7,6 @@ function onEnteringAnEmail () {
 	return Promise.resolve()
 		.then(() => {
 			if (emailIsValid()) {
-				console.log('email is valid');
 
 				return checkIfEmailExists(view.email.input);
 			}

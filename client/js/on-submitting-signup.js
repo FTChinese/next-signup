@@ -69,8 +69,11 @@ function onSubmittingSignup () {
 			view.signUpFormValidator.flagFieldAsInvalidByFieldName('email');
 			view.emailExistsStatusBox.display();
 		}else if (the.userCheckFailed) {
+			console.log('user check failed.');
+			view.showGeneralErrorMessage();
 
 		} else if (the.formSubmissionFailed) {
+			console.log('submit failed');
 			view.form.element.querySelector('.o-forms-message').classList.add('error');
 		}
 		return Promise.reject(error);

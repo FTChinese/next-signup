@@ -9,14 +9,14 @@ class SignupForm {
 
 	static init () {
 		view.onEnteringAnEmail((target) => {
-			console.log(target);
 			onEnteringAnEmail();
 		});
 
-		view.onSubmitting((target) => {
-			console.log(target);
+		view.onClickingSubmitBtn((target) => {
 			onSubmittingSignup();
-		});
+		})
+
+		view.onSubmitting();
 	}
 }
 

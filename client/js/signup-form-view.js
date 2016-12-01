@@ -1,6 +1,8 @@
 import UiItem from './ui-item.js';
 import FormValidator from './form-validator.js';
 
+const SYSTEM_DOWN = '很抱歉，服务器遇到一些技术问题，请稍后再试';
+
 class SignupFormView {
 	constructor (selector) {
 		this.signUpFormValidator = new FormValidator({
@@ -30,6 +32,10 @@ class SignupFormView {
 		this.submitBtn = new UiItem({
 			selector: '#signUpSubmitBtn'
 		});
+
+		this.generalStatusBox = new UiItem({
+			selector: '#generalStatusBox'
+		});
 	}
 
 	onEnteringAnEmail (callback) {
@@ -38,15 +44,19 @@ class SignupFormView {
 		});
 	}
 
-	onSubmitting(callback) {
-		this.form.onSubmit((target) => {
-			callback(target);
+	onClickingSubmitBtn(callback) {
+		this.submitBtn.onClick((e) => {
+			callback(e.target);
 		});
 	}
 
-	static init () {
-		new SignupForm();
+	onSubmitting() {
+		this.form.onSubmit();
+	}
+
+	showGeneralErrorMessage () {
+		this.generalStatusBox.displayError(SYSTEM_DOWN);
 	}
 }
 
-export default  new SignupFormView();
+export default new SignupFormView();

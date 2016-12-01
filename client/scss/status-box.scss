@@ -18,3 +18,14 @@
 		padding-right: 3px;
 	}
 }
+
+#generalStatusBox {
+	margin-top: 1em;
+
+	&.is-error {
+		border-color: $su-color--error;
+		background-color: $su-color--error;
+		color: white;
+		word-wrap: break-word;
+	}
+}

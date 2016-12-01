@@ -11,17 +11,15 @@ function postData(url, data) {
 	})
 	.then((response) => {
 		console.log('Getting response from server');
-		
 		return response.json();
 	});
 }
 
 function checkIfEmailExists(inputEl) {
-	console.log(inputEl);
 	const url = inputEl.getAttribute('data-checkurl');
 	const data = {};
 	data[inputEl.name] = inputEl.value;
-	console.log(data);
+
 	return postData(url, data);
 }
 
