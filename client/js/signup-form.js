@@ -8,11 +8,11 @@ import onSubmittingSignup from './on-submitting-signup.js';
 class SignupForm {
 
 	static init () {
-		view.onEnteringAnEmail((target) => {
+		view.onEnteringAnEmail(() => {
 			onEnteringAnEmail();
 		});
 
-		view.onClickingSubmitBtn((target) => {
+		view.onClickingSubmitBtn(() => {
 			onSubmittingSignup();
 		})
 

@@ -12,6 +12,8 @@ class SignupFormView {
 		this.form = new UiItem({
 			selector: '#signupForm'
 		});
+// Should never get the url in event callback. Get it as early as possible, as static as possible.
+		this.url = this.form.element.action;
 
 		this.profileForm = new UiItem({
 			selector: '#profileForm'

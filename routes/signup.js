@@ -37,7 +37,7 @@ router.get('/index.php/users//checkemailexists', function *(next) {
 	}	
 });
 
-router.post('/signup', function *() {
+router.post('/index.php/users/registeruser/ajax', function *() {
 	console.log(this.request.body);
 
 	this.body = Object.assign({submitSucceeds: true}, this.request.body);

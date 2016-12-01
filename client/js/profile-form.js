@@ -6,6 +6,8 @@ class ProfileForm {
 		this.form = new UiItem({
 			selector: '#profileForm'
 		});
+		this.url = this.form.element.action;
+
 		this.successBox = new UiItem({
 			selector: '#savedProfile'
 		});
@@ -28,7 +30,7 @@ class ProfileForm {
 
 		this.btn.onClick((e) => {
 			this.removeError();
-			submitUserData(this.form.element)
+			submitUserData(this.url, this.form.element)
 				.then((response) => {
 					if (response.submitSucceeds) {
 						this.successBox.display();

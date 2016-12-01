@@ -24,12 +24,11 @@ function checkIfEmailExists(inputEl) {
 	});
 }
 
-function submitUserData(form) {
+function submitUserData(url, form) {
 	const formData = serialize(form, {
 		hash: true,
 		empty: true
 	});
-	const url = form.action;
 	formData.id = form.id;
 	formData.CAPTCHA = window.CAPTCHA;
 	return postData(url, formData);

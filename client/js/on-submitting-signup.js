@@ -1,7 +1,7 @@
 import view from './signup-form-view.js';
 import {checkIfEmailExists, submitUserData} from './user-api.js';
 
-function onSubmittingSignup () {
+function onSubmittingSignup (url) {
 	const the = {
 		formIsInvalid: false,
 		userExistsAlready: false,
@@ -45,7 +45,7 @@ function onSubmittingSignup () {
 	}
 
 	function submitForm() {
-		return submitUserData(view.form.element)
+		return submitUserData(view.url, view.form.element)
 			.then((response) => {
 				if (response.submitSucceeds) {
 					view.form.removeFromDisplay();
@@ -69,10 +69,8 @@ function onSubmittingSignup () {
 			view.signUpFormValidator.flagFieldAsInvalidByFieldName('email');
 			view.emailExistsStatusBox.display();
 		}else if (the.userCheckFailed) {
-			console.log('user check failed.');
 			view.showGeneralErrorMessage();
 		} else if (the.formSubmissionFailed) {
-			console.log('submit failed');
 			view.showGeneralErrorMessage();
 		}
 		// return Promise.reject(error);
