@@ -59,6 +59,25 @@ window.CAPTCHA = (function(){
 })();
 </script>
 {% block css %}
+<style type="text/css">
+.o-header {
+	height: 44px;
+	text-align: center;
+	background-color: #fff1e0;
+    color: #505050;
+    box-shadow: 0 1px 3px rgba(80, 80, 80, 0.2), 0 6px 10px rgba(80, 80, 80, 0.15);
+}
+.o-header__logo {
+	padding: 11.5px 0;
+}
+.o-header span {
+	display: none;
+}
+.o-header img {
+	height: 21px;
+	object-fit: contain;
+}	
+</style>
 <link rel="stylesheet" type="text/css" href="styles/main.css">
 {% endblock %}
 

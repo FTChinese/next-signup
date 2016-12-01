@@ -1,8 +1,13 @@
+.su-btn__wrapper {
+	text-align: center;
+}
 .su-btn {
 	display: inline-block;
 	box-sizing: border-box;
 	vertical-align: top;
-	margin: 0;
+	min-width: 280px;
+    max-width: 100%;
+	margin: 0 auto;
 	padding: 8px 20px 10px;
 	outline: 0;
 	border: 0;
@@ -20,12 +25,8 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 18px;
-	width: 100%;
 	background-color: oColorsGetPaletteColor('teal-1');
 	color: white;
-
-	min-width: 280px;
-    max-width: 100%;
 
     &:disabled {
     	background-color: #e9decf;

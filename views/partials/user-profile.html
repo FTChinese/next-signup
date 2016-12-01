@@ -1,4 +1,5 @@
 <form id="profileForm" class="su-form {% if not dev %}su-item--not-displayed{% endif %} js-validate-form" data-component="profile-form" action="/index.php/users/registeruser/ajax" method="post" enctype="application/x-www-form-urlencoded">
+	<h2>完善资料</h2>
 	<div class="su-header">
 		<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
 		</div>
@@ -6,7 +7,7 @@
 	<fieldset class="su-form__fieldset">
 		<legend class="su-form__header"><span>基本信息</span></legend>
 		<div class="su-field">
-			<label class="su-field__label">称谓：</label>
+			<label class="su-field__label">称谓</label>
 			<div class="su-two-column">
 				<div class="one-half">
 					<input id="genderM" type="radio" name="gender" class="o-forms-radio" value="M">
@@ -55,22 +56,25 @@
 
 	<fieldset name="subscription" class="su-form__fieldset">
 		<legend class="su-form__header"><span>电邮订阅</span></legend>
-		<div class="o-forms-group">
+		<div class="su-field">
 			<input id="subscipt-1" type="checkbox" name="mail_today_focus" class="o-forms-checkbox" checked="checked">
 			<label for="subscipt-1" class="su-field__label">《今日焦点》邮件</label>
 		</div>
-		<div class="o-forms-group">
+		<div class="su-field">
 			<input id="subscipt-2" type="checkbox" name="mail_week_selects" class="o-forms-checkbox" checked="checked">
 			<label for="subscipt-2" class="su-field__label">《一周精选》邮件</label>	
 		</div>
-		<div class="o-forms">
+		<div class="su-field">
 			<input id="subscipt-3" type="checkbox" name="mail_afternoon_express" class="o-forms-checkbox" checked="checked">
 			<label for="subscipt-3" class="su-field__label">《午后速递》邮件</label>	
 		</div>			
 	</fieldset>
-	<div class="o-forms-message">保存失败，请重试</div>
-	<div id="savedProfile" class="su-item--not-displayed">保存成功</div>
-	<button id="profileSubmitBtn" class="su-btn" type="submit"><span>完成</span></button>	
+	
+	<div class="su-btn__wrapper">
+		<div class="o-forms-message">保存失败，请重试</div>
+		<div id="savedProfile" class="su-item--not-displayed">保存成功</div>
+		<button id="profileSubmitBtn" class="su-btn" type="submit"><span class="js-item__label">完成</span></button>
+	</div>	
 </form>		
 
 

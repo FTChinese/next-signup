@@ -1,6 +1,24 @@
 $color-text: #4a4a4a;
 $color-border: #c0b0a4;
 
+// #emailField {
+// 	margin-top: 20px;
+// 	margin-bottom: 0;
+// }
+
+// #passwordField {
+// 	margin-top:26px; 
+// }
+#savedProfile {
+	text-align: center;
+	margin-bottom: 0;
+	a {
+		color: #2e6e9e;
+	    text-decoration: none;
+	    cursor: pointer;
+	    padding-left: 3px;
+	}
+}
 
 .su-field {
 	margin: 10px 0;
@@ -55,7 +73,7 @@ $color-border: #c0b0a4;
 	background-color: oColorsGetPaletteColor('white');
 	background-clip: padding-box;
 	color: oColorsGetPaletteColor('grey-tint5');
-	font-size: 14px;
+	font-size: 16px;
 	outline: none;
 	&:focus {
 		outline: none;

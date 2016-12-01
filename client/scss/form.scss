@@ -1,6 +1,6 @@
 .su-form {
 	> *:not(:last-child) {
-		margin-bottom: 20px;
+		margin-bottom: 26px;
 	}
 	position: relative;
 	margin-bottom:0;
@@ -17,18 +17,11 @@
 		padding-bottom: 37px;
 	}
 }
-#emailField {
-	margin-top: 20px;
-	margin-bottom: 0;
-}
 
-#passwordField {
-	margin-top:20px; 
-}
 .su-form__fieldset {
 	border: 0;
 	padding: 0;
-	margin: 0 0 20px;
+	// margin: 0 0 20px;
 }
 
 .su-form__header {
@@ -39,7 +32,8 @@
 
 	span {
 		background-color: oColorsGetColorFor(page, background);
-		padding-right: 3px;
+	    font-size: 16px;
+	    padding-right: 3px;
 	}
 	&:after {
 		position: absolute;
@@ -51,16 +45,5 @@
 		border-bottom: 6px solid #E9DECF;
 		margin-top: -3px;
 		z-index: -1;
-	}
-}
-
-#savedProfile {
-	text-align: center;
-	margin-bottom: 0;
-	a {
-		color: #2e6e9e;
-	    text-decoration: none;
-	    cursor: pointer;
-	    padding-left: 3px;
 	}
 }
