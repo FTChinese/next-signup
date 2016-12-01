@@ -1,5 +1,5 @@
 import UiItem from './ui-item.js';
-import {submitForm} from './helper.js';
+import {submitUserData} from './user-api.js';
 
 class ProfileForm {
 	constructor(selector) {
