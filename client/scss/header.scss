@@ -4,27 +4,6 @@
 		margin-top: 10px;
 	}
 }
-
-.su-header__title {
-	font-weight: 600;
-	font-size: 22px;
-	margin: 0;
-	text-transform: uppercase;
-	display: inline-block;
-
-	&--light {
-		font-weight: 500;
-	}
-}
-
-.su-header__title--no-caps {
-	font-weight: 600;
-	font-size: 22px;
-	margin: 0;
-	display: inline-block;
-	text-transform: none;
-}
-
 .su-header__description {
 	font-size: 16px; //13
 	font-weight: 300;
@@ -33,6 +12,3 @@
 	padding: 0 24px;
 }
 
-.su-header__image {
-	width: 230px;
-}
