@@ -28,7 +28,6 @@ class Tracker {
 		}
 		let eventAction = '';
 		const target = event.target;
-		console.log(target);
 		switch (target.type) {
 			case 'text':
 			case 'radio':

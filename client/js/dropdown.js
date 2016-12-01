@@ -12,7 +12,6 @@ class Dropdown {
 		});
 
 		if (!rootEl) {
-			console.log('No root element!');
 			return;
 		} else if (!(rootEl instanceof HTMLElement)) {
 			rootEl = document.querySelector(rootEl);
@@ -55,7 +54,6 @@ class Dropdown {
 		e && e.preventDefault();
 // state  from Toggle.
 // state = true if menu opens. Whatever error message visible should be hidden.
-		console.log(state);
 		if (state) {
 			this.flagAsValid();
 // You must stop here if the dropdown opens.
@@ -73,7 +71,6 @@ class Dropdown {
 	}
 
 	select(e) {
-		console.log(e.target);
 		if (!e.target.hasAttribute('data-order')) {
 			return;
 		}
@@ -86,12 +83,10 @@ class Dropdown {
 // You should manually dispatch change event to inputEl when value set programaticlly.
 		this.inputEl.value = value.history.join(',');
 		if (value.children) {
-			console.log('selection not complete');
 			this.isValid = false;
 			this.toggleSubmenu(target, order);
 			return;
 		}
-		console.log('selection complete');
 // selection complete, dispatching complete event to inputEl, set isValid to true, close dropdown, close all submenu.
 		dispatchChangeEventTo(this.inputEl);
 		this.isValid = true;		
@@ -112,19 +107,15 @@ class Dropdown {
 
 		if (this.onEls[index] === target) {
 			target.classList.toggle('on');
-			console.log('clicked on the same element');
 			return;
 		}
 // If not the same element, add `on`;
 		target.classList.add('on');
-		console.log('clicked on a different element than the prvious one');
 // If opened another element on the same level, remove `on`. Otherwise it indicate you are clicking element on this level for the first time, it does not exist yet.	
 		if (this.onEls[index]) {
-			console.log('There are old elements on position: ', index, '.hide it.');
 			this.onEls[index].classList.remove('on');
 		}
 
-		console.log('put new element on postion: ', index);
 		this.onEls[index] = target;
 		
 		return;
@@ -140,8 +131,6 @@ class Dropdown {
 
 	flagAsValid () {
 		this.rootEl.classList.add(this.settings.validClass);
-		console.log('removing class ', this.settings.invalidClass);
-		console.log(this.rootEl.className);
 		this.rootEl.classList.remove(this.settings.invalidClass);
 	}
 
