@@ -178,7 +178,6 @@ class FormValidator {
 	static updateInput (input, val) {
 //`input.value !== val` does not work. Browser simply ignore any whitespace.	
 		if (/\s/g.test(input.value)) {
-			console.log('updating value');
 			input.value = val;
 		}
 	}

@@ -10,7 +10,6 @@ function postData(url, data) {
 		body: JSON.stringify(data)
 	})
 	.then((response) => {
-		console.log('Getting response from server');
 		return response.json();
 	});
 }
@@ -33,9 +32,6 @@ function submitUserData(form) {
 	const url = form.action;
 	formData.id = form.id;
 	formData.CAPTCHA = window.CAPTCHA;
-// response: {submitSucceeds: true} or {submitSucceds: false}	
-	console.log('submiting data:');
-	console.log(formData);
 	return postData(url, formData);
 }
 

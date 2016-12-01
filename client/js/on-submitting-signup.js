@@ -74,9 +74,8 @@ function onSubmittingSignup () {
 		} else if (the.formSubmissionFailed) {
 			console.log('submit failed');
 			view.showGeneralErrorMessage();
-			// view.form.element.querySelector('.o-forms-message').classList.add('error');
 		}
-		return Promise.reject(error);
+		// return Promise.reject(error);
 	} 
 }
 

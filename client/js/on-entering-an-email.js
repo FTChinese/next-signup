@@ -15,10 +15,9 @@ function onEnteringAnEmail () {
 			return false;
 		})
 		.then((result) => {
-			console.log(result);
 			if(result === 'yes') {
 				view.emailExistsStatusBox.display();
-				Promise.reject('email exists');
+				return Promise.reject('email exists');
 			}
 		})
 		.catch(error => {

@@ -38,7 +38,6 @@ class UiItem {
 
 	setLabelTo (value) {
 		const label = this.element.querySelector(`.${this.labelClass}`);
-		console.log(this.element);
 		label.innerHTML = value;
 	}
 

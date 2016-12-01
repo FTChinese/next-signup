@@ -68,8 +68,6 @@ function search(data, depth) {
 	function getData(data, index) {
 		const currentLevel = data[index];
 		history.push(currentLevel.name);
-		// console.log(history);
-		// console.log(currentLevel);
 		
 		if (position === depth.length -1) {
 			return currentLevel;

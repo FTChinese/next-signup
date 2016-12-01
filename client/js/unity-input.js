@@ -29,7 +29,6 @@ class UnityInput {
 		this.progress =  0;
 
 		this.steps = getUnityComponents(['emailField', 'passwordField']);
-		console.log(this.steps);
 
 		this.currentStep = this.steps[this.progress];
 
@@ -44,7 +43,6 @@ class UnityInput {
 
 	handleClick() {	
 		if (!this.validate()) {
-			console.log('invalid pattern');
 
 			return;
 		}
@@ -72,7 +70,6 @@ class UnityInput {
 			return false;
 		})
 		.then((response) => {
-			console.log('Getting response from server');
 			return response.json();
 		})
 		.then((json) => {
@@ -80,13 +77,11 @@ class UnityInput {
 				const emailExistsStatusBox = document.getElementById('emailExistsStatusBox');
 
 				this.flagAsInvalid(emailExistsStatusBox.innerHTML);
-				console.log('email taken');
 			} else {
 				this.advance();
 			}
 		})
 		.catch(error => {
-			console.log(error);
 			return false;
 		});
 	}
@@ -106,7 +101,6 @@ class UnityInput {
 				const pattern = self.patterns[i];
 				if (!validators[pattern](self.inputEl.value)) {
 					isValid = false;
-					console.log(isValid, ' for ', pattern);
 					break;
 				}
 			}			
@@ -143,17 +137,14 @@ class UnityInput {
 		this.patterns = this.currentStep.patterns;
 		this.checkurl = this.currentStep.checkurl;
 		this.name = this.currentStep.name;
-		console.log(this.patterns);
 	}
 
 	flagAsInvalid (msg) {
-		console.log('flag as invalid');
 		this.rootEl.classList.add('o-forms--error');
 		this.rootEl.classList.remove('o-forms--valid');
 		
 		if (!msg) {
 			this.errorEl.innerHTML = this.currentStep.errorText;
-			console.log(this.errorEl.textContent);
 		} else {
 			this.errorEl.innerHTML = msg;
 		}

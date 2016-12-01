@@ -40,7 +40,6 @@ class ProfileForm {
 				.catch(error => {
 					if (error) {
 						this.showError()
-						console.log(error);
 					}
 				});			
 		});
