@@ -1,6 +1,5 @@
 import UiItem from './ui-item.js';
 import FormValidator from './form-validator.js';
-import {postData, submitForm} from './helper.js';
 
 class SignupFormView {
 	constructor (selector) {

@@ -53,6 +53,10 @@ class UiItem {
 			callback(event.target);
 		});
 	}
+	
+	onClick (listener) {
+		this.element.addEventListener('click', listener);
+	}
 
 	hasValue () {
 		return this.value && this.value.length > 0;
@@ -77,10 +81,6 @@ class UiItem {
 		return this.element.classList.contains(this.valueClass)
 			? [this.element]
 			: this.element.querySelectorAll(`.${this.valueClass}`);
-	}
-
-	onClick (listener) {
-		this.element.addEventListener('click', listener);
 	}
 }
 

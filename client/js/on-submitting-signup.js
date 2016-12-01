@@ -63,7 +63,6 @@ function onSubmittingSignup () {
 	}
 
 	function reportError (error) {
-		let errorMessage;
 		if (the.formIsInvalid) {
 			showAllValidationErrors()
 		} else if (the.userExistsAlready) {

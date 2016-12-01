@@ -4,12 +4,13 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
+		main: './client/main.js',
 		account: ['./client/main-account.js'],
 		profile: ['./client/main-profile.js']
 	},
 	output: {
 		path: path.join(__dirname, 'public/scripts'),
-		filename: 'main-[name].js',
+		filename: '[name].js',
 		sourceMapFilename: '[file].map'
 	},
 	watch: true,
@@ -32,7 +33,7 @@ module.exports = {
 	plugins: [
 		new BowerWebpackPlugin({
 			includes: /\.js$/
-		}),
-		new webpack.optimize.UglifyJsPlugin()
+		})/*,
+		new webpack.optimize.UglifyJsPlugin()*/
 	]
 };
