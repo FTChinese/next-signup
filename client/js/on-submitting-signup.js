@@ -8,7 +8,7 @@ function onSubmittingSignup () {
 		userCheckFailed: false,
 		formSubmissionFailed: false
 	}
-	console.log('try submtting');
+	view.hideAllStatusMessage();
 	return Promise.resolve()
 		.then(sanitiseUserInput)
 		.then(ensureFormIsValid)
@@ -33,7 +33,7 @@ function onSubmittingSignup () {
 	function ensureEmailDoesNotExist () {
 		return checkIfEmailExists(view.email.input)
 			.then(result => {
-				if (result.emailExists) {
+				if (result === 'yes') {
 					the.userExistsAlready = true;
 					return Promise.reject()
 				}
@@ -71,10 +71,10 @@ function onSubmittingSignup () {
 		}else if (the.userCheckFailed) {
 			console.log('user check failed.');
 			view.showGeneralErrorMessage();
-
 		} else if (the.formSubmissionFailed) {
 			console.log('submit failed');
-			view.form.element.querySelector('.o-forms-message').classList.add('error');
+			view.showGeneralErrorMessage();
+			// view.form.element.querySelector('.o-forms-message').classList.add('error');
 		}
 		return Promise.reject(error);
 	} 

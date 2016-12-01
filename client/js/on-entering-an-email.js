@@ -15,12 +15,14 @@ function onEnteringAnEmail () {
 			return false;
 		})
 		.then((result) => {
-			if(result.emailExists) {
+			console.log(result);
+			if(result === 'yes') {
 				view.emailExistsStatusBox.display();
+				Promise.reject('email exists');
 			}
 		})
 		.catch(error => {
-
+			console.log(error);
 		});
 
 	function emailIsValid() {

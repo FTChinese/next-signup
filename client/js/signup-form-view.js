@@ -57,6 +57,10 @@ class SignupFormView {
 	showGeneralErrorMessage () {
 		this.generalStatusBox.displayError(SYSTEM_DOWN);
 	}
+
+	hideAllStatusMessage() {
+		this.generalStatusBox.removeFromDisplay();
+	}
 }
 
 export default new SignupFormView();

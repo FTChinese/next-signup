@@ -12,6 +12,9 @@ class ProfileForm {
 		this.btn = new UiItem({
 			selector: '#profileSubmitBtn'
 		});
+		this.generalStatusBox = new UiItem({
+			selector: '#generalStatusBox'
+		});
 // enable submit button if clicked on input element
 		this.form.onClick((e) => {
 			if (e.target.tagName !== 'INPUT') {
@@ -23,22 +26,36 @@ class ProfileForm {
 			}
 		});
 
-		this.form.onSubmit((target) => {
-			submitUserData(target)
+		this.btn.onClick((e) => {
+			this.removeError();
+			submitUserData(this.form.element)
 				.then((response) => {
 					if (response.submitSucceeds) {
 						this.successBox.display();
 						this.btn.disable();
 					} else {
-						this.form.element.querySelector('.o-forms-message').classList.add('error');
 						return Promise.reject('Submit Failed');
 					}					
 				})
 				.catch(error => {
-					if (error) {console.log(error);}
-				});
+					if (error) {
+						this.showError()
+						console.log(error);
+					}
+				});			
 		});
+
+		this.form.onSubmit();
 	}
+
+	showError() {
+		this.form.element.querySelector('.o-forms-message').classList.add('error');
+	}
+
+	removeError() {
+		this.form.element.querySelector('.o-forms-message').classList.remove('error');
+	}
+
 	static init () {
 		new ProfileForm();		
 	}

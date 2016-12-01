@@ -17,10 +17,12 @@ function postData(url, data) {
 
 function checkIfEmailExists(inputEl) {
 	const url = inputEl.getAttribute('data-checkurl');
-	const data = {};
-	data[inputEl.name] = inputEl.value;
-
-	return postData(url, data);
+	return fetch(`${url}?e=${inputEl.value}`, {
+		method: 'GET',
+	})
+	.then((response) => {
+		return response.text();
+	});
 }
 
 function submitUserData(form) {

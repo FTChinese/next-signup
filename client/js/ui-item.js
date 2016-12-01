@@ -51,7 +51,8 @@ class UiItem {
 			this.setStatusTo('error');
 		}
 		this.setLabelTo(message);
-		this.display()
+		this.display();
+		this.element.scrollIntoView();
 	}
 	onValueChanged (callback) {
 		this.element.addEventListener('change', (event) => {

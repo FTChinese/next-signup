@@ -2,9 +2,13 @@
 @import "o-grid/main";
 @import "o-colors/main";
 
+html {
+	height: 100%;
+}
 body {
 	margin: 0;
 	padding: 0;
+	height: 100%;
 	@include oColorsFor(page);
 }
 .o-header {
@@ -25,7 +29,8 @@ body {
 }
 #site-content {
 	@include oGridContainer;
-	margin: 0 auto;	
+	margin: 0 auto;
+	height: 100%;
 	h2 {
 		margin: 0;
 		padding: 0;
