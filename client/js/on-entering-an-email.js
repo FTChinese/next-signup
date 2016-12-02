@@ -17,7 +17,7 @@ function onEnteringAnEmail () {
 		.then((result) => {
 			if(result === 'yes') {
 				view.emailExistsStatusBox.display();
-				return Promise.reject('email exists');
+				return Promise.reject('emailExists');
 			}
 		})
 		.catch(error => {
