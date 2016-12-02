@@ -30,6 +30,7 @@ router.get('/profile', function *(next) {
 
 router.get('/index.php/users//checkemailexists', function *(next) {
 	const query = querystring.parse(this.querystring);
+
 	if (query.e === 'test@example.org') {
 		this.body = 'yes';
 	} else {
@@ -39,7 +40,7 @@ router.get('/index.php/users//checkemailexists', function *(next) {
 
 router.post('/index.php/users/registeruser/ajax', function *() {
 	console.log(this.request.body);
-
+	this.cookies.set('userId','aldsfjalje9ruupadfsu302');
 	this.body = Object.assign({
 		submitSucceeds: true,
 		userId: 'aldsfjalje9ruupadfsu302'

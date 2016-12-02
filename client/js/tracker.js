@@ -31,29 +31,26 @@ class Tracker {
 		switch (target.type) {
 			case 'text':
 			case 'radio':
-				eventAction = 'Select ' + target.name;
+				eventAction = '/Register/Select/' + target.name;
 				break;
 
 			case 'checkbox':
 				target.checked 
-				? eventAction = 'Check ' + target.name
-				: eventAction = 'Uncheck ' + target.name;
+				? eventAction = '/Register/Check/' + target.name
+				: eventAction = '/Register/Uncheck/' + target.name;
 				break;
 		}
-		ga('send', {
-			hitType: 'event',
-			eventCategory: 'signup',
-			eventAction: eventAction
-		});
+		// ga('send', {
+		// 	hitType: 'event',
+		// 	eventCategory: 'signup',
+		// 	eventAction: eventAction
+		// });
+		ga('send', 'pageview', eventAction);
 	}
 
 	handleSubmit(event) {
-		const eventAction = 'Submit ' + this.form.id;
-		ga('send', {
-			hitType: 'event',
-			eventCategory: 'signup',
-			eventAction: eventAction
-		});
+		const eventAction = '/Register/Submit/' + this.form.id;
+		ga('send', 'pageview', eventAction);
 	}
 }
 export default Tracker;
