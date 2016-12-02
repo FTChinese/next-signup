@@ -45,12 +45,14 @@ class Tracker {
 		// 	eventCategory: 'signup',
 		// 	eventAction: eventAction
 		// });
-		ga('send', 'pageview', eventAction);
+		ga('set', 'page', eventAction);
+		ga('send', 'pageview');
 	}
 
 	handleSubmit(event) {
 		const eventAction = '/Register/Submit/' + this.form.id;
-		ga('send', 'pageview', eventAction);
+		ga('set', 'page', eventAction);
+		ga('send', 'pageview');
 	}
 }
 export default Tracker;
