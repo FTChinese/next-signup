@@ -48,6 +48,8 @@ function onSubmittingSignup (url) {
 		return submitUserData(view.url, view.form.element)
 			.then((response) => {
 				if (response.submitSucceeds) {
+					// window.USER_ID = response.userId;
+					window.localStorage.setItem('userId', response.userId);
 					view.form.removeFromDisplay();
 					view.profileForm.display();
 				}

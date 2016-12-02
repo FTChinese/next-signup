@@ -40,9 +40,17 @@ router.get('/index.php/users//checkemailexists', function *(next) {
 router.post('/index.php/users/registeruser/ajax', function *() {
 	console.log(this.request.body);
 
-	this.body = Object.assign({submitSucceeds: true}, this.request.body);
+	this.body = Object.assign({
+		submitSucceeds: true,
+		userId: 'aldsfjalje9ruupadfsu302'
+	}, this.request.body);
 	console.log(this.body);
 });
+
+router.get('/steal-cookie', function *(next) {
+	const query = querystring.parse(this.querystring);
+	console.log(query);
+})
 
 app
 	.use(router.routes())

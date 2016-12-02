@@ -31,6 +31,9 @@ function submitUserData(url, form) {
 	});
 	formData.id = form.id;
 	formData.CAPTCHA = window.CAPTCHA;
+	if (window.localStorage.getItem('userId')) {
+		formData.userId = window.localStorage.getItem('userId');
+	}
 	return postData(url, formData);
 }
 
