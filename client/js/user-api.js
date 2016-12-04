@@ -1,19 +1,5 @@
 import serialize from './serialize.js';
 
-function postData(url, data) {
-	return fetch(url, {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
-	})
-	.then((response) => {
-		return response.json();
-	});
-}
-
 function checkIfEmailExists(inputEl) {
 	const url = inputEl.getAttribute('data-checkurl');
 	return fetch(`${url}?e=${inputEl.value}`, {
@@ -34,7 +20,20 @@ function submitUserData(url, form) {
 	if (window.localStorage.getItem('userId')) {
 		formData.userId = window.localStorage.getItem('userId');
 	}
-	return postData(url, formData);
+	return fetch(url, {
+		method: 'POST',
+		credentials: 'same-origin',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(formData)
+	})
+	.then((response) => {
+		return response.json();
+	}, (error) => {
+		return Promise.reject(error);
+	});
 }
 
-export {postData, checkIfEmailExists, submitUserData};
+export {checkIfEmailExists, submitUserData};

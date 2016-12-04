@@ -2,6 +2,13 @@
 @import "o-grid/main";
 @import "o-colors/main";
 
+$su-border-color: #efdaca;
+$su-border-color--darker: #c0b0a4;
+$su-color--error: #d0021b;
+$su-color--success: #64ac11;
+$border-radius: 3px;
+$link-color: #27757b;
+
 html {
 	min-height: 100%;
 }
@@ -59,11 +66,7 @@ body {
 	}	
 }
 
-$su-border-color: #efdaca;
-$su-border-color--darker: #c0b0a4;
-$su-color--error: #d0021b;
-$su-color--success: #64ac11;
-$border-radius: 3px;
+
 
 @import "scss/btn";
 @import "scss/form";

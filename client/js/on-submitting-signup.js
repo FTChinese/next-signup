@@ -52,6 +52,7 @@ function onSubmittingSignup (url) {
 					window.localStorage.setItem('userId', response.userId);
 					view.form.removeFromDisplay();
 					view.profileForm.display();
+					checkLogin();
 				}
 			})
 			.catch(error => {

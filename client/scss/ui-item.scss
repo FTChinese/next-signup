@@ -1,11 +1,14 @@
-.su-item--not-displayed {
-	display: none;
-}
-
-.su-item--invisible {
+.is-invisible {
 	visibility: hidden;
 }
 
-.su-item--visible {
+.is-visible {
 	visibility: visible;
+}
+
+.is-hidden {
+	height: 0;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
 }

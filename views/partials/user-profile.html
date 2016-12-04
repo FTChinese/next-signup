@@ -1,4 +1,4 @@
-<form id="profileForm" class="su-form {% if not dev %}su-item--not-displayed{% endif %} js-validate-form" data-component="profile-form" action="/index.php/users/registeruser/ajax" method="post" enctype="application/x-www-form-urlencoded">
+<form id="profileForm" class="su-form {% if not dev %}is-hidden{% endif %}" data-component="profile-form" action="/index.php/users/registeruser/ajax" method="post" enctype="application/x-www-form-urlencoded">
 	<h2>完善资料</h2>
 	<div class="su-header">
 		<div class="su-header__description">感谢您注册FT中文网！您可以告诉我们更多关于您的信息，以便我们为您提供更好的服务。
@@ -23,7 +23,7 @@
 	
 	<fieldset name="professional" class="su-form__fieldset">
 		<legend class="su-form__header"><span>职业信息</span></legend>
-		<div id="industryField" class="o-forms-group su-field" data-component="dropdown">
+		<div id="industryField" class="su-field" data-component="dropdown">
 
 			<label class="su-field__label" for="industry">所处行业</label>
 			
@@ -31,25 +31,25 @@
 
 			<div class="su-field__dropdown"></div>
 
-			<div class="su-field__additional-info su-field__error">选择不完整</div>
+			<div class="su-field__error">选择不完整</div>
 		</div>
 
-		<div id="responsibilityField" class="o-forms-group su-field" data-component="dropdown">
+		<div id="responsibilityField" class="su-field" data-component="dropdown">
 			<label class="su-field__label" for="responsibility">工作范畴</label>
 			
-			<input id="responsibility" type="text" name="responsibility" class="o-forms-text su-field__input" value="" readonly>
+			<input id="responsibility" type="text" name="responsibility" class="su-field__input" value="" readonly>
 			
 			<div class="su-field__dropdown"></div>
 			<div class="su-field__additional-info su-field__error">选择不完整</div>
 		</div>
 
-		<div id="positionField" class="o-forms-group su-field" data-component="dropdown">
+		<div id="positionField" class="su-field" data-component="dropdown">
 			<label class="su-field__label" for="position">您的职位</label>
 			
 			<input id="position" type="text" name="position" class="su-field__input" value="" readonly>
 
 			<div class="su-field__dropdown"></div>
-			<div class="su-field__additional-info su-field__error">选择不完整</div>
+			<div class="su-field__error">选择不完整</div>
 		</div>			
 	</fieldset>
 
@@ -71,10 +71,9 @@
 	</fieldset>
 	
 	<div class="su-btn__wrapper">
-		<div class="o-forms-message">保存失败，请重试</div>
-		<div id="savedProfile" class="su-item--not-displayed">保存成功</div>
 		<button id="profileSubmitBtn" class="su-btn" type="submit"><span class="js-item__label">完成</span></button>
-	</div>	
+	</div>
+	<div class="backhome" onclick="backhome();">返回FT中文网首页</div>		
 </form>		
 
 

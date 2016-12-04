@@ -5,6 +5,7 @@
 	position: relative;
 	margin-bottom:0;
 	border: 0;
+	// transition: height 1s;
 
 	&[aria-hidden=true] {
 		display: none;
@@ -16,6 +17,8 @@
 		padding-top: 37px;
 		padding-bottom: 37px;
 	}
+
+
 }
 
 .su-form__fieldset {
@@ -46,4 +49,23 @@
 		margin-top: -3px;
 		z-index: -1;
 	}
+}
+
+.agreement-tip {
+    margin-top: 21px;
+    font-size: 13px;
+    text-align: center;
+    color: #999;
+    
+	a {
+		text-decoration: none;
+		color: $link-color;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+}
+.backhome {
+	text-align: center;
+	text-decoration: none;
+	color: $link-color;
 }

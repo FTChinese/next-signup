@@ -3,8 +3,8 @@ import setDefault from './set-default.js';
 class ShowPassword {
 	constructor (wrapperEl, settings = {}) {
 		setDefault(settings).to({
-			inputClass	: 'js-field__input',
-			checkboxClass		: 'o-forms-checkbox'
+			inputClass	: 'su-field__input',
+			checkboxClass		: 'show-password__checkbox'
 		});
 		
 		this.wrapper = wrapperEl;
@@ -14,9 +14,12 @@ class ShowPassword {
 
 		this.input = this.wrapper.querySelector(`.${settings.inputClass}`);
 		this.checkbox = this.wrapper.querySelector(`.${settings.checkboxClass}`);
-		
+
 		this.checkbox.addEventListener('change', () => {
 			this.checkboxIsChecked() ? this.setInputTypeToText() : this.setInputTypeToPassword();
+// hide error when show password
+			const event = new Event('focus');
+			this.input.dispatchEvent(event);
 		});
 	}
 
@@ -34,7 +37,7 @@ class ShowPassword {
 
 	static init () {
 		const instances = [];
-		const wrapperEls = document.querySelectorAll('.js-show-password');
+		const wrapperEls = document.querySelectorAll('.show-password');
 		for (let i = 0; i < wrapperEls.length; i++) {
 			instances.push(new ShowPassword(wrapperEls[i]));
 		}

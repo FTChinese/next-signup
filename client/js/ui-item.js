@@ -1,9 +1,19 @@
+const statusMessage = {
+	'emailExists': '请检查您输入的邮箱',
+	'submitting': '正在提交...',
+	'submitted': '注册成功！',
+	'saving': '正在保存...',
+	'saved': '保存成功！',
+	'email-checking': '检测邮箱是否可用',
+	'email-valid': '邮箱可用',
+	'email-exists': '该邮箱已注册 <a href="http://user.ftchinese.com/login">直接登录</a>'
+};
+
 class UiItem {
 	constructor ({selector, labelClass='js-item__label', valueClass='js-field__input'}={}) {
 		this.valueClass = valueClass;
 		this.labelClass = labelClass;
-		this.selector = selector;
-		this.element = document.querySelector(selector);
+		this.element = (selector instanceof HTMLElement) ? selector : document.querySelector(selector);
 	}
 
 	enable() {
@@ -24,12 +34,22 @@ class UiItem {
 		}
 	}
 
+	show () {
+		this.element.classList.remove('is-invisible');
+		this.element.classList.add('is-visible');
+	}
+
+	hide() {
+		this.element.classList.add('is-invisible');
+		this.element.classList.remove('is-visible');
+	}
+	
 	display () {
-		this.element.classList.remove('su-item--not-displayed');
+		this.element.classList.remove('is-hidden');
 	}
 
 	removeFromDisplay () {
-		this.element.classList.add('su-item--not-displayed');
+		this.element.classList.add('is-hidden');
 	}
 	
 	get input () {
@@ -38,7 +58,11 @@ class UiItem {
 
 	setLabelTo (value) {
 		const label = this.element.querySelector(`.${this.labelClass}`);
-		label.innerHTML = value;
+		label.innerHTML = statusMessage[value] || value;
+	}
+
+	getDefaultLabel() {
+		return this.element.querySelector(`.${this.labelClass}`).innerHTML;
 	}
 
 	setStatusTo (status) {
@@ -53,18 +77,12 @@ class UiItem {
 		this.display();
 		this.element.scrollIntoView();
 	}
+
 	onValueChanged (callback) {
 		this.element.addEventListener('change', (event) => {
 			if (event.target.classList.contains(this.valueClass)) {
 				callback(event.target);
 			}
-		});
-	}
-
-	onSubmit(callback) {
-		this.element.addEventListener('submit', (event) => {
-			event.preventDefault();
-			 callback && callback(event.target);
 		});
 	}
 	
@@ -88,7 +106,7 @@ class UiItem {
 			}
 			return elem.getAttribute(state) !== null;
 		}
-		return
+		return null;
 	}
 
 	valueElements () {

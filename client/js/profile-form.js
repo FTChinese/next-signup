@@ -1,16 +1,14 @@
 import UiItem from './ui-item.js';
 import {submitUserData} from './user-api.js';
 
+const SYSTEM_DOWN = '很抱歉，服务器遇到一些技术问题，请稍后再试';
+
 class ProfileForm {
 	constructor(selector) {
-		this.form = new UiItem({
-			selector: '#profileForm'
-		});
-		this.url = this.form.element.action;
+		this.form = (selector instanceof HTMLElement) ? selector : document.querySelector(selector);
 
-		this.successBox = new UiItem({
-			selector: '#savedProfile'
-		});
+		this.url = this.form.action;
+
 		this.btn = new UiItem({
 			selector: '#profileSubmitBtn'
 		});
@@ -18,47 +16,47 @@ class ProfileForm {
 			selector: '#generalStatusBox'
 		});
 // enable submit button if clicked on input element
-		this.form.onClick((e) => {
+		this.form.addEventListener('click', (e) => {
 			if (e.target.tagName !== 'INPUT') {
 				return;
 			}
 			if (this.btn.is('disabled')) {
-				this.successBox.removeFromDisplay();
 				this.btn.enable();
 			}
 		});
 
 		this.btn.onClick((e) => {
-			this.removeError();
-			submitUserData(this.url, this.form.element)
+			// this.removeError();
+			this.btn.setLabelTo('saving');
+			submitUserData(this.url, this.form)
 				.then((response) => {
 					if (response.submitSucceeds) {
-						this.successBox.display();
+						this.btn.setLabelTo('saved');
 						this.btn.disable();
 					} else {
 						return Promise.reject('Submit Failed');
 					}					
 				})
-				.catch(error => {
-					if (error) {
-						this.showError()
-					}
+				.then(null, (error) => {
+
 				});			
 		});
-
-		this.form.onSubmit();
+		
+		this.form.addEventListener('submit', (e) => {
+			e.preventDefault();
+		});
 	}
 
-	showError() {
-		this.form.element.querySelector('.o-forms-message').classList.add('error');
+	showGeneralErrorMessage () {
+		this.generalStatusBox.displayError(SYSTEM_DOWN);
 	}
 
-	removeError() {
-		this.form.element.querySelector('.o-forms-message').classList.remove('error');
+	hideAllStatusMessage() {
+		this.generalStatusBox.removeFromDisplay();
 	}
 
 	static init () {
-		new ProfileForm();		
+		new ProfileForm('#profileForm');		
 	}
 }
 

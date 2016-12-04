@@ -16,7 +16,7 @@ router.get('/', function *(next) {
 });
 
 router.get('/signup', function *(next) {
-
+	this.cookies.set('user_id', 'aldjfqelwrou90dpdjlarj');
 	this.body = yield render('signup.html', {
 		dev: true
 	});
@@ -41,6 +41,12 @@ router.get('/index.php/users//checkemailexists', function *(next) {
 router.post('/index.php/users/registeruser/ajax', function *() {
 	console.log(this.request.body);
 	this.cookies.set('userId','aldsfjalje9ruupadfsu302');
+	this.cookies.set('USER_NAME', 'test@exampl.org', {
+		maxAge: 30 * 60 * 1000,
+		path: '/',
+		overwrite: true,
+		httpOnly: false
+	});
 	this.body = Object.assign({
 		submitSucceeds: true,
 		userId: 'aldsfjalje9ruupadfsu302'

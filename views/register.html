@@ -14,7 +14,27 @@ window.CAPTCHA = (function(){
 
 	return code.join('');
 })();
+var username;
+function checkLogin() {
+	console.log('check longin');
+}
+function backhome() {
+	console.log('backhome');
+}
 </script>
+<style type="text/css">
+#indicator {
+	width: 100%;
+	height: 2em;
+	background-color: silver;
+}
+#progress {
+	display: block;
+	width: 0;
+	height: 100%;
+	background-color: red;
+}	
+</style>
 <div class="o-grid-container">
 	<div id="site-content">
 		{% include "partials/create-account.html"%}

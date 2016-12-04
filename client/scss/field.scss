@@ -1,36 +1,18 @@
 $color-text: #4a4a4a;
 $color-border: #c0b0a4;
-
-// #emailField {
-// 	margin-top: 20px;
-// 	margin-bottom: 0;
-// }
-
-// #passwordField {
-// 	margin-top:26px; 
-// }
-#savedProfile {
-	text-align: center;
-	margin-bottom: 0;
-	a {
-		color: #2e6e9e;
-	    text-decoration: none;
-	    cursor: pointer;
-	    padding-left: 3px;
-	}
-}
+$input-height: 40px;
 
 .su-field {
 	margin: 10px 0;
 	padding: 0;
+}
+/* label wrapper */
+.su-field__instructions,
+.su-field__error {
+	display: block;
+	font-size: 14px;
 
-	.registrationFields > & {
-		margin-top: 20px;
-	}
-
-	.su-form__fieldset > & {
-		// margin-bottom: 20px;
-	}
+	color: oColorsGetPaletteColor('grey-tint5');
 }
 
 .su-field__label {
@@ -38,11 +20,7 @@ $color-border: #c0b0a4;
 	margin-bottom: 4px;
 	margin-right:10px;
 	font-size: 18px;
-	// line-height: 40px;
 	font-weight: 600;
-	// height:40px;
-	// padding-left:5px;
-	// border-radius:5px;
 	position: relative;
 }
 
@@ -59,12 +37,17 @@ $color-border: #c0b0a4;
 	}
 }
 
+/* input wrapper */
+.input-wrapper {
+	position: relative;
+}
+
 .su-field__input {
 	box-sizing: border-box;
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	width: 100%;
-	height: 40px;
+	height: $input-height;
 	margin: 0;
 	padding: 10px 5px 10px;
 	border: 1px solid #cec6b9;
@@ -102,30 +85,31 @@ $color-border: #c0b0a4;
 	}
 }
 
-// wyc add
-#showPassword {
-	display: none;
-	&+label:after{
-		content:"显示密码";
-	}
-	&:checked+label:after{
-		content:"隐藏密码";
+// #email {
+// 	background-image: url("/pic/spinner.svg");
+// 	background-repeat: no-repeat;
+// 	background-position: right center;
+// }
+
+.remote-validating .input-wrapper {
+	&:after {
+		content: '检测邮箱是否可用';
+		display: inline-block;
+		height: 30px;
+		padding-right: 30px;
+		line-height: 30px;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		margin-top: -15px;
+		background-image: url("http://static.ftchinese.com/ftc-icons/svg/spinner.svg");
+		background-repeat: no-repeat;
+		background-position: right center;
 	}
 }
 
-.su-field__instructions,
-.su-field__additional-info {
-	display: block;
-	// margin-top: -2px;
-	// margin-bottom: 4px;
-	font-size: 14px;
-	// line-height: 14px;
-
-	color: oColorsGetPaletteColor('grey-tint5');
-}
-
-// .o-forms-affix-wrapper
-.o-forms-affix-wrapper {
+/* Suffix */
+.show-password {
 	display: table;
 	width: 100%;
 	box-sizing: border-box;
@@ -136,9 +120,7 @@ $color-border: #c0b0a4;
 	}
 }	
 
-
-
-.su-field__suffix {
+.show-password__suffix {
 	border-top-right-radius: $border-radius;
 	border-bottom-right-radius: $border-radius;
 	border: 1px solid #cec6b9;
@@ -150,38 +132,47 @@ $color-border: #c0b0a4;
     width: 1%;
     white-space: nowrap;
 
-    // padding: 9px 5px 9px;//wyc modify
     line-height: normal;
     padding: 0 5px;
     font-size: 14px;
     text-align: center;
     background-color: #f7e9d9;
     color: #333;
-    button {
-    	border-width: 0;
-    	border-top-left-radius: 0;
-    	border-bottom-left-radius: 0;
-    	border-top-right-radius: $border-radius;
-		border-bottom-right-radius: $border-radius;
-    }
 }
 
-.su-field__suffix-label {
+.show-password__label {
 	color: #27747a;
 	font-size: 12px;
 	font-weight: 300;
 }
 
-.su-field__error {
+.show-password__checkbox {
 	display: none;
+	&+label:after{
+		content:"显示";
+	}
+	&:checked+label:after{
+		content:"隐藏";
+	}
 }
 
-.o-forms--error {
+
+
+/* Error */
+.su-field__error {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	transition: .25s ease-out;	
+}
+
+.su-field--error {
 	// .su-field__label,
 	// .su-field__instructions,
-	.su-field__additional-info {
-		color: oColorsGetPaletteColor('red');
-	}
+	// .su-field__additional-info {
+	// 	color: oColorsGetPaletteColor('red');
+	// }
 
 	.su-field__input {
 		background-color: #fff;
@@ -193,28 +184,9 @@ $color-border: #c0b0a4;
 		}
 	}
 
-	.su-field__suffix {
-		border-color: #c00;
-		color: #c00;
-	}
-
 	.su-field__error {
-		clear: both;
-		display: block;
-		margin-top: -1px;
-		padding: 3px 0;
-		font-size: 14px;
-		color: #c00;
-	}
-}
-
-.o-forms-message {
-	display: none;
-
-	text-align: center;
-	color: oColorsGetPaletteColor('red');
-	&.error {
-		display: block;
-		margin-bottom: 0;
+		color: oColorsGetPaletteColor('red');
+		visibility: visible;
+		opacity: 1;
 	}
 }
