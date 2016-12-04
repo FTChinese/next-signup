@@ -141,13 +141,6 @@ class InputValidator {
 		this.field.classList.remove(this.settings.invalidClass);
 	}
 
-	hideAllStatusMessage() {
-		this.removeFlag();
-		if (this.emailExistsStatusBox) {
-			this.emailExistsStatusBox.hide();
-		}
-	}
-
 	static init (el, settings = {}) {
 		const instances = [];
 		if (!el) {
