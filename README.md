@@ -19,6 +19,12 @@ Use [livereload](http://feedback.livereload.com/knowledgebase/articles/67441-how
 `views/register.html` is used for Node server.
 `views/register-new.html` is only used for deploying an imcomplete static html file to current online server.
 
+### Build static html only
+`gulp build`
+`gulp deploy`
+
+By default, it deploys to a folder `phone` which is in the same level with the current project.
+
 ## Track order
 ```
 /Register/Loaded
