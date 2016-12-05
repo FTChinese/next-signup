@@ -1,4 +1,6 @@
 # next-signup
+node version >= 7.0
+
 ## Run
 ```
 node app.js
@@ -12,6 +14,10 @@ gulp serve
 
 ## Liverealod
 Use [livereload](http://feedback.livereload.com/knowledgebase/articles/67441-how-do-i-start-using-livereload-) to refesh static assets.
+
+## HTML files
+`views/register.html` is used for Node server.
+`views/register-new.html` is only used for deploying an imcomplete static html file to current online server.
 
 ## Track order
 ```
