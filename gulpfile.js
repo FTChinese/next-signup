@@ -4,7 +4,6 @@ const path = require('path');
 const isThere = require('is-there');
 const co = require('co');
 const mkdirp = require('mkdirp');
-const render = require('./helper/render.js');
 
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')();
@@ -17,7 +16,26 @@ const rollup = require('rollup').rollup;
 const buble = require('rollup-plugin-buble');
 const bowerResolve = require('rollup-plugin-bower-resolve');
 const uglify = require('rollup-plugin-uglify');
-var cache;
+let cache;
+
+const nunjucks = require('nunjucks');
+
+nunjucks.configure('views', {
+  noCache: true,
+  watch: false
+});
+
+function render(view, context) {
+  return new Promise(function(resolve, reject) {
+    nunjucks.render(view, context, function(err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
 
 process.env.NODE_ENV = 'dev';
 
