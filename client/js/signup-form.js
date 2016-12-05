@@ -95,7 +95,6 @@ class SignupForm {
 			return submitUserData(self.url, self.form)
 				.then((response) => {
 					if (response.submitSucceeds) {
-						console.log('success');
 						window.localStorage.setItem('userId', response.userId);
 // `username` defined in global by external code.
 // See https://github.com/FTChinese/webapp/blob/master/app/scripts/main.js				
@@ -107,6 +106,11 @@ class SignupForm {
 						self.submitBtn.setLabelTo('submitted');
 // update cookie						
 						checkLogin();
+						ga('send', 'pageview', '/Register/Submit/' + self.form.id);
+					} else {
+						self.submitBtn.setLabelTo(response.msg);
+						ga('send', 'pageview', '/Register/Submit/Failure/' + self.form.id + '/' + response.msg);
+						return Promise.reject(response.msg);
 					}
 				}, (error) => {
 					the.formSubmissionFailed = true;

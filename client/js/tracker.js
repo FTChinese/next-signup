@@ -13,12 +13,6 @@ class Tracker {
 		this.btn = this.form.querySelector(`.${settings.btnClass}`);
 
 		this.handleInput = this.handleInput.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-
-		this.btn.addEventListener('click', this.handleSubmit);
-	}
-
-	uponInput() {
 		this.form.addEventListener('change', this.handleInput);
 	}
 
@@ -40,19 +34,8 @@ class Tracker {
 				: eventAction = '/Register/Uncheck/' + target.name;
 				break;
 		}
-		// ga('send', {
-		// 	hitType: 'event',
-		// 	eventCategory: 'signup',
-		// 	eventAction: eventAction
-		// });
-		ga('set', 'page', eventAction);
-		ga('send', 'pageview');
-	}
 
-	handleSubmit(event) {
-		const eventAction = '/Register/Submit/' + this.form.id;
-		ga('set', 'page', eventAction);
-		ga('send', 'pageview');
+		ga('send', 'pageview', eventAction);
 	}
 }
 export default Tracker;

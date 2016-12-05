@@ -6,7 +6,8 @@ const validators = {
 
 	'email': function (value) {
 		const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return pattern.test(value);
+		const lengthOk = value.length > 0 && value.length <= 40;
+		return pattern.test(value) && lengthOk;
 	},
 
 	'password': function (value) {

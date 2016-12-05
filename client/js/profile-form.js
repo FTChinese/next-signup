@@ -33,8 +33,10 @@ class ProfileForm {
 					if (response.submitSucceeds) {
 						this.btn.setLabelTo('saved');
 						this.btn.disable();
+						ga('send', 'pageview', '/Register/Submit/' + this.form.id);
 					} else {
-						return Promise.reject('Submit Failed');
+						ga('send', 'pageview', '/Register/Submit/Failure/' + this.form.id + '/' + response.msg);
+						return Promise.reject(response.msg);
 					}					
 				})
 				.then(null, (error) => {

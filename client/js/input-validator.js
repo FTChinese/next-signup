@@ -18,6 +18,7 @@ class InputValidator {
 		this.settings = settings;
 		this.field = field;
 		this.validators = getValidators();
+		console.log(this.validators);
 		this.input = this.field.querySelector(`.${settings.inputClass}`);
 		this.remoteUrl = this.field.getAttribute('data-remote-validate');
 		if (this.remoteUrl) {

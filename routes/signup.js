@@ -49,6 +49,7 @@ router.post('/index.php/users/registeruser/ajax', function *() {
 	});
 	this.body = Object.assign({
 		submitSucceeds: true,
+		msg: 'failed',
 		userId: 'aldsfjalje9ruupadfsu302'
 	}, this.request.body);
 	console.log(this.body);

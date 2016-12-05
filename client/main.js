@@ -11,15 +11,16 @@ import Dropdown from './js/dropdown.js';
 import ProfileForm from './js/profile-form.js';
 import Tracker from './js/tracker.js';
 
+window.addEventListener('load', function() {
+  ga('set', 'page', '/Register/Loaded');
+  ga('send', 'pageview');
+});
+
 ShowPassword.init();
 SignupForm.init();
 Dropdown.init([industry, responsibility, position]);
 ProfileForm.init();
 
 new Tracker({
-  selector: '#signupForm'
-});
-
-new Tracker({
   selector: '#profileForm'
-}).uponInput();
+});
