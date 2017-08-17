@@ -4,7 +4,7 @@
 	// border: 1px solid transparent;
 	border-radius: 3px;
 	padding: 12px;
-	background-color: oColorsGetPaletteColor('warm-2');
+	background-color: $warm-2;
 	span {
 		font-size: 15px;
 		font-weight: 300;
@@ -19,7 +19,7 @@
 }
 
 #emailExistsStatusBox {
-	color: oColorsGetPaletteColor('red');
+	color: $red;
 }
 
 #generalStatusBox {

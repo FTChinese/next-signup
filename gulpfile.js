@@ -1,157 +1,100 @@
-const promisify = require('promisify-node')
-const fs = promisify('fs');
+const pify = require('pify');
 const path = require('path');
-const isThere = require('is-there');
-const co = require('co');
-const mkdirp = require('mkdirp');
-
 const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
 const cssnext = require('postcss-cssnext');
-
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss')
+const sourcemaps = require('gulp-sourcemaps');
 
 const rollup = require('rollup').rollup;
-const buble = require('rollup-plugin-buble');
+const minify = require('rollup-plugin-babel-minify');
+const babel = require('rollup-plugin-babel');
 const bowerResolve = require('rollup-plugin-bower-resolve');
-const uglify = require('rollup-plugin-uglify');
-let cache;
 
-const nunjucks = require('nunjucks');
+const buildPage = require('./utils/build-page.js');
 
-nunjucks.configure('views', {
-  noCache: true,
-  watch: false
-});
-
-function render(view, context) {
-  return new Promise(function(resolve, reject) {
-    nunjucks.render(view, context, function(err, result) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-}
-
-process.env.NODE_ENV = 'dev';
+const publicDir = 'public';
 
 // change NODE_ENV between tasks.
-gulp.task('prod', function(done) {
-  process.env.NODE_ENV = 'prod';
-  done();
+gulp.task('prod', function() {
+  return Promise.resolve(process.env.NODE_ENV = 'production');
 });
 
-gulp.task('dev', function(done) {
-  process.env.NODE_ENV = 'dev';
-  done();
+gulp.task('dev', function() {
+  return Promise.resolve(process.env.NODE_ENV = 'development');
+});
+
+
+gulp.task('html', () => {
+  return buildPage()
+    .catch(err => {
+      console.log(err);
+    });  
 });
 
 gulp.task('styles', function styles() {
-  const DEST = 'public/styles';
-
+  const dest = `${publicDir}/styles`;
+  const isProduction = process.env.NODE_ENV === 'production'
+  
   return gulp.src('client/main.scss')
-    .pipe($.changed(DEST))
-    .pipe($.plumber())
-    .pipe($.sourcemaps.init({loadMaps:true}))
-    .pipe($.sass({
-      outputStyle: 'expanded',
+    .pipe(sourcemaps.init({loadMaps:true}))
+    .pipe(sass({
+      outputStyle: isProduction ? 'compressed' : 'expanded',
       precision: 10,
       includePaths: ['bower_components']
-    }).on('error', $.sass.logError))
-    .pipe($.postcss([
+    }).on('error', (err) => {
+      console.log(err);
+    }))
+    .pipe(postcss([
       cssnext({
         features: {
           colorRgba: false
         }
       })
     ]))
-    .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest(DEST));
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest(dest));
 });
 
-gulp.task('webpack', (done) => {
-  if (process.env.NODE_ENV === 'prod') {
-    delete webpackConfig.watch;
-  }
-
-  webpack(webpackConfig, function(err, stats) {
-    if (err) throw new $.util.PluginError('webpack', err);
-    $.util.log('[webpack]', stats.toString({
-      colors: $.util.colors.supportsColor,
-      chunks: false,
-      hash: false,
-      version: false
-    }));
-    done();
-  });
-});
-
-gulp.task('serve', gulp.parallel('styles', 'webpack', () => {
-  gulp.watch('client/**/*.scss', gulp.parallel('styles'));
-}));
-
-
-
-gulp.task('rollup', () => {
-  return rollup({
+let cache;
+gulp.task('scripts', () => {
+  const config = {
     context: 'window',
     entry: 'client/main.js',
     plugins: [
         bowerResolve(),
-        buble(),
-        uglify()
+        babel({
+          exclude: 'node_modules/**'
+        })
     ],
     cache: cache,
-  }).then(function(bundle) {
+  }
+  if (process.env.NODE_ENV === 'production') {
+    config.plugins.push(minify());
+  }
+  return rollup(config).then(bundle => {
     cache = bundle;
     return bundle.write({
         format: 'iife',
         dest: 'public/scripts/main.js',
         sourceMap: true,
-    }).then(function() {
-        console.log('done');
-    });
+    })
+  })
+  .catch(err => {
+    console.log(err);
   });
 });
 
-gulp.task('html', () => {
-  return co(function *() {
-    const context = {
-      dev: false
-    };
+gulp.task('serve', gulp.parallel('styles', 'scripts', () => {
+  gulp.watch('client/**/*.js', gulp.parallel('scripts'));
+  gulp.watch('client/**/*.scss', gulp.parallel('styles'));
+}));
 
-    if (process.env.NODE_ENV === 'dev') {
-      context.dev = true;
-    }
+gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'html', () => {
+  const dest = path.resolve(process.env.HOME, 'svnonline/dev_www/frontend/tpl/phone');
+  console.log(`Copy to ${dest}`);
+  return gulp.src('public/*.html')
+    .pipe(gulp.dest(dest));
+}));
 
-    const result = yield render('register-new.html', context);
 
-    yield fs.writeFile('public/register.html', result, 'utf8');
-  });
-});
-
-gulp.task('build', gulp.series('prod', gulp.parallel('html', 'styles', 'rollup'), 'dev'));
-
-gulp.task('deploy', function() {
-  const DEST = path.resolve(__dirname, `../phone`);
-
-  console.log(`Deploying HTML file to: ${DEST}`);
-
-  return gulp.src(`public/register.html`)
-    .pipe($.smoosher({
-      ignoreFilesNotFound: true
-    }))
-    .pipe($.htmlmin({
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true
-    }))
-    .pipe($.rename('register-new.html'))
-    .pipe(gulp.dest(DEST));
-});

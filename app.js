@@ -1,26 +1,46 @@
-const serve = require('koa-static');
-const koa = require('koa');
-const app = koa();
+const debug = require('debug')('signup:home');
+const path = require('path');
+const Koa = require('koa');
+const Router = require('koa-router');
 const logger = require('koa-logger');
-const mount = require('koa-mount');
-const error = require('koa-error');
 const bodyParser = require('koa-bodyparser');
-const render = require('./helper/render.js');
 
-const signup = require('./routes/signup.js');
-const check = require('./routes/check.js')
+const signup = require('./server/signup.js');
+const check = require('./server/check.js');
 
-app.use(serve('public', {
-	index: false
-}));
+// Listen on process error
+process.on('warning', (warning) => {
+  debug(`Warning name: ${warning.name}`);
+  debug(`Warning message: ${warning.message}`);
+  debug(`Warning stack: ${warning.stack}`);
+  process.exit(1);
+});
 
+// Create variables
+const app = new Koa()
+const router = new Router();
+const appName = 'Next Signup';
+debug('booting %s', appName);
+const port = process.env.PORT || 3000;
+
+// Add middleware
 app.use(logger());
+if (process.env.NODE_ENV === 'development') {
+  const serve = require('koa-static');
+  app.use(serve(path.resolve(process.cwd(), 'public')));
+}
 app.use(bodyParser());
 
-app.use(mount('/', signup));
-app.use(mount('/check', check));
+// Routers
+router.use('/signup', signup.routes());
+router.use('/index.php/users', check.routes());
+app.use(router.routes());
 
-const server = app.listen(process.env.PORT || 3000)
+// Startup
+const server = app.listen(port)
+server.on('error', (error) => {
+  debug(`Server error: %O`, error);
+});
 server.on('listening', () => {
-	console.log(`Client listening on port ${process.env.PORT || 3000}`);
+  debug(`${appName} running on %o`, server.address());
 });

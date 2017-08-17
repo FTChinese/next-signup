@@ -1,48 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
-<script type="text/javascript">
-window.USERIP = '133.133.133.133';
-window.CAPTCHA = (function(){
-	const code = [];
-	const timeString = new Date().getTime().toString();
-	code[3] = timeString.slice(0,5);
-	code[1] = timeString.slice(5,10);
-
-	const userIp = window.USERIP.split('.');
-	code[0] = userIp[userIp.length - 1];
-	code[2] = userIp[0];
-
-	return code.join('');
-})();
-var username;
-function checkLogin() {
-	console.log('check longin');
-}
-function backhome() {
-	console.log('backhome');
-}
-</script>
-<style type="text/css">
-#indicator {
-	width: 100%;
-	height: 2em;
-	background-color: silver;
-}
-#progress {
-	display: block;
-	width: 0;
-	height: 100%;
-	background-color: red;
-}	
-</style>
 <div class="o-grid-container">
 	<div id="site-content">
 		{% include "partials/create-account.html"%}
 		{% include "partials/user-profile.html" %}	
 	</div>		
 </div>
-
-<!-- smoosh-->
-<script type="text/javascript" src="scripts/main.js"></script>
-<!-- endsmoosh -->
 {% endblock%}

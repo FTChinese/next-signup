@@ -94,18 +94,29 @@ class SignupForm {
 			self.submitBtn.setLabelTo('submitting');
 			return submitUserData(self.url, self.form)
 				.then((response) => {
+					console.log(response);
+// response will set cookie:
+// USER_NAME
+// ft
+// USER_ID
 					if (response.submitSucceeds) {
+
 						window.localStorage.setItem('userId', response.userId);
+						
 // `username` defined in global by external code.
 // See https://github.com/FTChinese/webapp/blob/master/app/scripts/main.js				
-						username = docCookie.getItem('USER_NAME');
-// hide signup form. show profile form						
+						// username = docCookie.getItem('USER_NAME');
+						// console.log(username)
+						
+// hide signup form. show profile form
+						console.log('submit succeeds. signup form should hide.');
 						self.formUi.removeFromDisplay();
 						self.nextForm.display();
 // change text on button						
 						self.submitBtn.setLabelTo('submitted');
-// update cookie						
-						checkLogin();
+// update cookie
+// this is golobal function from somewher else.
+						// checkLogin();
 						ga('send', 'pageview', '/Register/Submit/' + self.form.id);
 					} else {
 						self.submitBtn.setLabelTo(response.msg);

@@ -12,7 +12,7 @@ $input-height: 40px;
 	display: block;
 	font-size: 14px;
 
-	color: oColorsGetPaletteColor('grey-tint5');
+	color: $grey-tint5;
 }
 
 .su-field__label {
@@ -53,16 +53,16 @@ $input-height: 40px;
 	border: 1px solid #cec6b9;
 
 	border-radius: $border-radius;
-	background-color: oColorsGetPaletteColor('white');
+	background-color: #fff;
 	background-clip: padding-box;
-	color: oColorsGetPaletteColor('grey-tint5');
+	color: $grey-tint5;
 	font-size: 16px;
 	outline: none;
 	&:focus {
 		outline: none;
 	}
 	&:disabled {
-		border: 1px oColorsGetPaletteColor('pink-tint2');
+		border: $pink-tint2;
 		cursor: default;
 		color: #afafaf;
 	}
@@ -176,16 +176,16 @@ $input-height: 40px;
 
 	.su-field__input {
 		background-color: #fff;
-	    color: #c00;
-	    border-color: #c00;
+	    color: $red;
+	    border-color: $red;
 
 		&:focus {
-			box-shadow: inset 0 0 4px 1px rgba(oColorsGetPaletteColor('red'), 0.3);
+			box-shadow: inset 0 0 4px 1px rgba($red, 0.3);
 		}
 	}
 
 	.su-field__error {
-		color: oColorsGetPaletteColor('red');
+		color: $red;
 		visibility: visible;
 		opacity: 1;
 	}

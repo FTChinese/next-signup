@@ -4,6 +4,11 @@
     "test/**",
     "client/**"
   ],
+  "env": {
+    "PORT": 3000,
+    "NODE_ENV": "development",
+    "DEBUG": "signup*"
+  },
   "verbose": true,
   "ext": "js json"
 }

@@ -34,7 +34,7 @@
 	position: relative;
 
 	span {
-		background-color: oColorsGetColorFor(page, background);
+		background-color: $pink;
 	    font-size: 16px;
 	    padding-right: 3px;
 	}
