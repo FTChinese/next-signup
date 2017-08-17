@@ -90,11 +90,15 @@ gulp.task('serve', gulp.parallel('styles', 'scripts', () => {
   gulp.watch('client/**/*.scss', gulp.parallel('styles'));
 }));
 
-gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'html', () => {
+gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'html'));
+
+gulp.task('copy', () => {
   const dest = path.resolve(process.env.HOME, 'svnonline/dev_www/frontend/tpl/phone');
   console.log(`Copy to ${dest}`);
   return gulp.src('public/*.html')
     .pipe(gulp.dest(dest));
-}));
+});
+
+gulp.task('deploy', gulp.series('build', 'copy'));
 
 

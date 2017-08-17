@@ -3,14 +3,20 @@ node version >= 7.0
 
 ## Run
 ```
-node app.js
+nodemon app.js
 ```
-or `nodemon app.js`, or whatever similar commands.
 
 Open another terminal, run
 ```
 gulp serve
 ```
+
+## Deploy Static HTML
+```
+npm run build
+```
+
+Copyt file `public/register-native-app` to online directory.
 
 ## Liverealod
 Use [livereload](http://feedback.livereload.com/knowledgebase/articles/67441-how-do-i-start-using-livereload-) to refesh static assets.
