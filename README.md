@@ -1,46 +1,11 @@
-# next-signup
-node version >= 7.0
+This is is backend-centered signup page built on `Koa.js`.
 
-## Run
-```
-nodemon app.js
-```
+If you need the static HTML for legacy webapp, refer to branch `legacy`.
 
-Open another terminal, run
-```
-gulp serve
-```
+This version has no plan to follow origami in terms of:
 
-## Deploy Static HTML
-```
-npm run build
-```
+* Sass. We plan to use postcss as bower is being deprecated, and since bower is the pillar of origami we shall use alternatives to bower and node-sass. Another reason is the c-binding for node-sass fails too often upon installation, which is not inducive to continuous integration.
 
-Copyt file `public/register-native-app` to online directory.
+* Front-end should be as simple as possible, because both css and js are hard to develop when logic becomes complex.
 
-## Liverealod
-Use [livereload](http://feedback.livereload.com/knowledgebase/articles/67441-how-do-i-start-using-livereload-) to refesh static assets.
-
-## HTML files
-`views/register.html` is used for Node server.
-`views/register-new.html` is only used for deploying an imcomplete static html file to current online server.
-
-### Build static html only
-`gulp build`
-`gulp deploy`
-
-By default, it deploys to a folder `phone` which is in the same level with the current project.
-
-## Track order
-```
-/Register/Loaded
-/Register/Submit/signupForm
-/Register/Select/gender
-/Register/Select/industry
-/Register/Select/responsibility
-/Register/Select/position
-/Register/Uncheck/mail_today_focus
-/Register/Uncheck/mail_week_selects
-/Register/Uncheck/mail_afternoon_express
-/Register/Submit/profileForm
-```
+* Put most of login to backend.

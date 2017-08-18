@@ -32,8 +32,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use(bodyParser());
 
 // Routers
-router.use('/signup', signup.routes());
-router.use('/index.php/users', check.routes());
+router.use('/', signup.routes());
+router.use('/email', check.routes());
 app.use(router.routes());
 
 // Startup

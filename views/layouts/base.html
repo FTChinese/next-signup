@@ -9,38 +9,23 @@
 	<meta name="robots" content="index,follow">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-<script>
+{# <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-1608715-1', 'www.ftchinese.com');
   ga('send', 'pageview');
-</script>
-<script type="text/javascript">
-window.USERIP = '{{"<% $user_ip %>" if isProduction else "133.133.133.133" }}';
-window.CAPTCHA = (function(){
-	const code = [];
-	const timeString = new Date().getTime().toString();
-	code[3] = timeString.slice(0,5);
-	code[1] = timeString.slice(5,10);
-
-	const userIp = window.USERIP.split('.');
-	code[0] = userIp[userIp.length - 1];
-	code[2] = userIp[0];
-
-	return code.join('');
-})();
-</script>
+</script> #}
 
 	<link inline rel="stylesheet" type="text/css" href="styles/main.css">
 
-	<title>Singup - FT中文网</title>
+	<title>新用户注册 - FT中文网</title>
 </head>
 <body>
 
 	{% block body %}{% endblock %}
 
-	<script inline type="text/javascript" src="scripts/main.js"></script>
+	{# <script inline type="text/javascript" src="scripts/main.js"></script> #}
 </body>
 </html>
