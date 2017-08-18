@@ -5,7 +5,7 @@ class Template {
   constructor() {
     this.watch = false;
     this.noCache = process.env.NODE_ENV === 'production' ? false : true;
-    this.autoescape = true;
+    this.autoescape = false;
     this.throwOnUndefined = false;
     this.trimBlocks = false;
     this.lstripBlocks = false;
