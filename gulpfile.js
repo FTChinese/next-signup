@@ -11,8 +11,6 @@ const minify = require('rollup-plugin-babel-minify');
 const babel = require('rollup-plugin-babel');
 const bowerResolve = require('rollup-plugin-bower-resolve');
 
-const buildPage = require('./utils/build-page.js');
-
 const publicDir = 'public';
 
 // change NODE_ENV between tasks.
@@ -22,14 +20,6 @@ gulp.task('prod', function() {
 
 gulp.task('dev', function() {
   return Promise.resolve(process.env.NODE_ENV = 'development');
-});
-
-
-gulp.task('html', () => {
-  return buildPage()
-    .catch(err => {
-      console.log(err);
-    });  
 });
 
 gulp.task('styles', function styles() {
@@ -45,60 +35,47 @@ gulp.task('styles', function styles() {
     }).on('error', (err) => {
       console.log(err);
     }))
-    .pipe(postcss([
-      cssnext({
-        features: {
-          colorRgba: false
-        }
-      })
-    ]))
+    // .pipe(postcss([
+    //   cssnext({
+    //     features: {
+    //       colorRgba: false
+    //     }
+    //   })
+    // ]))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(dest));
 });
 
 let cache;
-gulp.task('scripts', () => {
-  const config = {
+gulp.task('scripts', async () => {
+  const inputOptions = {
     context: 'window',
-    entry: 'client/main.js',
+    input: 'client/main.js',
     plugins: [
-        bowerResolve(),
-        babel({
-          exclude: 'node_modules/**'
-        })
+      bowerResolve(),
+      babel({
+        exclude: 'node_modules/**'
+      })
     ],
-    cache: cache,
-  }
+    cache: cache
+  };
+  const outputOptions = {
+    file: 'public/scripts/main.js',
+    format: 'iife',
+    sourcemap: true
+  };
+
   if (process.env.NODE_ENV === 'production') {
-    config.plugins.push(minify());
+    inputOptions.plugins.push(minify());
   }
-  return rollup(config).then(bundle => {
-    cache = bundle;
-    return bundle.write({
-        format: 'iife',
-        dest: 'public/scripts/main.js',
-        sourceMap: true,
-    })
-  })
-  .catch(err => {
-    console.log(err);
-  });
+
+  const bundle = await rollup(inputOptions);
+  console.log('Bundle modules:\n' +bundle.modules.map(m => m.id).join('\n'));
+
+  return bundle.write(outputOptions);
 });
 
 gulp.task('serve', gulp.parallel('styles', 'scripts', () => {
   gulp.watch('client/**/*.js', gulp.parallel('scripts'));
   gulp.watch('client/**/*.scss', gulp.parallel('styles'));
 }));
-
-gulp.task('build', gulp.series('prod', 'styles', 'scripts', 'html'));
-
-gulp.task('copy', () => {
-  const dest = path.resolve(process.env.HOME, 'svnonline/dev_www/frontend/tpl/phone');
-  console.log(`Copy to ${dest}`);
-  return gulp.src('public/*.html')
-    .pipe(gulp.dest(dest));
-});
-
-gulp.task('deploy', gulp.series('build', 'copy'));
-
-

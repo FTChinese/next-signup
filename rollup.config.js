@@ -4,7 +4,7 @@ const bowerResolve = require('rollup-plugin-bower-resolve');
 
 export default {
   context: 'window',
-  entry: 'client/main.js',
+  input: 'client/main.js',
   plugins: [
     bowerResolve(),
     babel({
@@ -12,10 +12,8 @@ export default {
     }),
     minify()
   ],
-  targets: [
-    {
-      dest: 'public/scripts/main.js',
-      format: 'iife',
-    }
-  ]
+  output:{
+    file: 'public/scripts/main.js',
+    format: 'iife',
+  }
 };

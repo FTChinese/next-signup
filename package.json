@@ -2,9 +2,9 @@
   "name": "koa-demo",
   "version": "1.0.0",
   "description": "Next Signup",
-  "main": "index.js",
+  "main": "app.js",
   "engines": {
-    "node": ">=7.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
